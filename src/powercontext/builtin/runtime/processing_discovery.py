@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Bounded reconciliation of Source-driven Family progress at startup."""
+"""Bounded reconciliation and admission of Source-driven Family progress."""
 
 from __future__ import annotations
 
@@ -24,6 +24,35 @@ from powercontext.builtin.persistence.database import AsyncDatabase
 from powercontext.builtin.persistence.processing_intents import ArtifactProcessingIntentRepository
 from powercontext.builtin.persistence.supervision import ArtifactProcessingFence, ArtifactProcessingLeaseRepository
 from powercontext.builtin.persistence.tables import PROFILE_POLICIES_TABLE, SOURCE_JOURNAL_HEADS_TABLE
+
+
+class SourceCountAdmissionProvider:
+    """Read a bounded page of persisted, scope-local journal progress."""
+
+    def __init__(self, binding_name: str, threshold: int) -> None:
+        self._binding = binding_name
+        self._threshold = threshold
+
+    async def __call__(
+        self, connection: AsyncConnection, after_scope_id: str | None, limit: int
+    ) -> tuple[str | None, tuple[str, ...]]:
+        heads = SOURCE_JOURNAL_HEADS_TABLE
+        statement = select(heads.c.scope_id, heads.c.position).order_by(heads.c.scope_id).limit(limit)
+        if after_scope_id is not None:
+            statement = statement.where(heads.c.scope_id > after_scope_id)
+        rows = (await connection.execute(statement)).all()
+        cursors = await SourceCursorRepository().load_many(
+            connection, tuple(str(row[0]) for row in rows), self._binding
+        )
+        # Positions are allocated contiguously per scope, once per journal
+        # identity, in the same transaction as insertion. Replays and receipt
+        # upgrades retain their position; lineage-only identities get one too.
+        eligible = tuple(
+            str(scope)
+            for scope, high in rows
+            if int(high) - (cursors[str(scope)].cursor.sequence if str(scope) in cursors else 0) >= self._threshold
+        )
+        return (str(rows[-1][0]) if len(rows) == limit else None), eligible
 
 
 async def enabled_profile_scopes(connection: AsyncConnection, scope_ids: tuple[str, ...]) -> frozenset[str]:
