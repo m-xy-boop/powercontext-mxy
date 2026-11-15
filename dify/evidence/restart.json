@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "method": "Stopped every service started by native.py, then ran python3 scripts/native.py up with no configuration overrides",
+  "player_id": "accept-4d7ac85b11-other",
+  "result": {
+    "story": "### 回声当铺 · 第 2 次来访\n\n旅人，你记不记得你来过回声当铺？\n\n**账本裁定**：这是第 2 次进店。店主认出你，翻开旧账：没有未赎回的记忆；余额 0 枚回声币。\n\n---\n回声币：**0** ｜ 柜中记忆：**无** ｜ 线索：**未获得**\n\n继续：典当记忆 / 花 2 币问线索 / 原价赎回 / 走向终局。\n\n<small>账本回执：txn-4e1a486b0dd2365c · 状态版本 2 · 叙事：qwen2.5-1.5b-instruct</small>",
+    "workflow_run_id": "4ae70869-395c-4250-96f9-fd9e766a67b7"
+  }
+}

@@ -1,0 +1,280 @@
+{
+  "status": "passed",
+  "time_utc": "2026-11-15T20:11:12.833766+00:00",
+  "run_id": "accept-4d7ac85b11",
+  "environment": {
+    "os": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.12.16",
+    "dify": "1.9.2",
+    "powercontext": "1.5.0",
+    "model": "Qwen2.5-1.5B-Instruct Q4_K_M",
+    "model_runtime": "llama.cpp b7132 CPU"
+  },
+  "assertion_groups": 17,
+  "steps": [
+    {
+      "label": "01 初次进店",
+      "input": {
+        "player_id": "accept-4d7ac85b11",
+        "session_id": "visit-1",
+        "request_id": "38b64f5cd31a4347938b17cc7566709e",
+        "action": "enter",
+        "memory": "umbrella",
+        "words": "我想找妹妹。她说过：\"别忘了带伞。\"\n你见过她吗？"
+      },
+      "result": {
+        "story": "### 回声当铺 · 第 1 次来访\n\n我见过她，但她的脸在雨中模糊不清。伞下，她是否能听见我的呼唤？\n\n**账本裁定**：你为寻找失踪的妹妹阿棠来到回声当铺。店主乌有说：记忆有价，后果自负。\n\n---\n回声币：**0** ｜ 柜中记忆：**无** ｜ 线索：**未获得**\n\n继续：典当记忆 / 花 2 币问线索 / 原价赎回 / 走向终局。\n\n<small>账本回执：txn-858a2348101994a1 · 状态版本 1 · 叙事：qwen2.5-1.5b-instruct</small>",
+        "workflow_run_id": "2827ec75-6ff4-4073-a37c-083c3390c182"
+      },
+      "elapsed_seconds": 4.256
+    },
+    {
+      "label": "02 典当红伞",
+      "input": {
+        "player_id": "accept-4d7ac85b11",
+        "session_id": "visit-1",
+        "request_id": "d5291d8cffbd4c618dda34bf142cc270",
+        "action": "pawn",
+        "memory": "umbrella",
+        "words": ""
+      },
+      "result": {
+        "story": "### 回声当铺 · 第 1 次来访\n\n店主乌有微微一笑，语气中带点神秘色彩：“看来，这把红伞是你妹妹阿棠的杰作，价值不菲。”他顿了顿，继续道：“不过，既然你典当了它，这枚回声币也就属于你了。不过，我想问问，你打算如何使用它？在雨里使用它，它或许能保护你免受雨水的侵袭，但你是否也想用它来保护你的心灵不受雨水的侵蚀？”\n\n**账本裁定**：你典当了妹妹阿棠在雨里递给你的红伞，得到 3 枚回声币。它仍在店主的账里，却暂时不属于你。\n\n---\n回声币：**3** ｜ 柜中记忆：**红伞** ｜ 线索：**未获得**\n\n继续：典当记忆 / 花 2 币问线索 / 原价赎回 / 走向终局。\n\n<small>账本回执：txn-f262e1cbe9b020e8 · 状态版本 2 · 叙事：qwen2.5-1.5b-instruct</small>",
+        "workflow_run_id": "0c8633a7-1c9c-4594-b964-f4fe6064e3b3"
+      },
+      "elapsed_seconds": 5.86
+    },
+    {
+      "label": "03 同一请求安全重试",
+      "input": {
+        "player_id": "accept-4d7ac85b11",
+        "session_id": "visit-1",
+        "request_id": "d5291d8cffbd4c618dda34bf142cc270",
+        "action": "pawn",
+        "memory": "umbrella",
+        "words": ""
+      },
+      "result": {
+        "story": "### 回声当铺 · 第 1 次来访\n\n店主乌有微微一笑，语气中带点神秘色彩：“看来，这把红伞是你妹妹阿棠的杰作，价值不菲。”他顿了顿，继续道：“不过，既然你典当了它，这枚回声币也就属于你了。不过，我想问问，你打算如何使用它？在雨里使用它，它或许能保护你免受雨水的侵袭，但你是否也想用它来保护你的心灵不受雨水的侵蚀？”\n\n**账本裁定**：你典当了妹妹阿棠在雨里递给你的红伞，得到 3 枚回声币。它仍在店主的账里，却暂时不属于你。\n\n---\n回声币：**3** ｜ 柜中记忆：**红伞** ｜ 线索：**未获得**\n\n继续：典当记忆 / 花 2 币问线索 / 原价赎回 / 走向终局。\n\n<small>账本回执：txn-f262e1cbe9b020e8 · 状态版本 2 · 叙事：qwen2.5-1.5b-instruct</small>",
+        "workflow_run_id": "ee5358e1-a0aa-4683-bbb8-fafdf5923236"
+      },
+      "elapsed_seconds": 0.502
+    },
+    {
+      "label": "04 拒绝重复典当",
+      "input": {
+        "player_id": "accept-4d7ac85b11",
+        "session_id": "visit-1",
+        "request_id": "d602ad788b1445e788167e14d03d88ad",
+        "action": "pawn",
+        "memory": "umbrella",
+        "words": ""
+      },
+      "result": {
+        "story": "### 回声当铺 · 第 1 次来访\n\n店主乌有缓缓起身，目光在红伞上停留片刻，然后轻轻一笑：“阿棠，你的伞已归你，但若你再典当它，你将失去它。”\n\n**账本裁定**：红伞已经在柜里，不能重复典当。\n\n---\n回声币：**3** ｜ 柜中记忆：**红伞** ｜ 线索：**未获得**\n\n继续：典当记忆 / 花 2 币问线索 / 原价赎回 / 走向终局。\n\n<small>账本回执：src_b25156b6df4e4479b511989ddc45ebf3 · 状态版本 2 · 叙事：qwen2.5-1.5b-instruct</small>",
+        "workflow_run_id": "ab2a6949-22b8-4ebd-b6a7-3ced6e38b007"
+      },
+      "elapsed_seconds": 5.397
+    },
+    {
+      "label": "05 新会话记住旧交易",
+      "input": {
+        "player_id": "accept-4d7ac85b11",
+        "session_id": "visit-2",
+        "request_id": "2a59b60c120341199855d00c320f3bb3",
+        "action": "enter",
+        "memory": "umbrella",
+        "words": ""
+      },
+      "result": {
+        "story": "### 回声当铺 · 第 2 次来访\n\n店主乌有微微一笑，轻声道：\"看来我们又见面了。\"\n\n**账本裁定**：这是第 2 次进店。店主认出你，翻开旧账：红伞；余额 3 枚回声币。\n\n---\n回声币：**3** ｜ 柜中记忆：**红伞** ｜ 线索：**未获得**\n\n继续：典当记忆 / 花 2 币问线索 / 原价赎回 / 走向终局。\n\n<small>账本回执：txn-4877c43572714b6e · 状态版本 3 · 叙事：qwen2.5-1.5b-instruct</small>",
+        "workflow_run_id": "aa2a71b2-b173-47b4-b3c5-9406f056437a"
+      },
+      "elapsed_seconds": 2.101
+    },
+    {
+      "label": "06 玩家隔离",
+      "input": {
+        "player_id": "accept-4d7ac85b11-other",
+        "session_id": "visit-1",
+        "request_id": "267487cf208c40b694645daf690adeea",
+        "action": "enter",
+        "memory": "umbrella",
+        "words": ""
+      },
+      "result": {
+        "story": "### 回声当铺 · 第 1 次来访\n\n记忆有价，后果自负，这事儿我可得查清楚。\n\n**账本裁定**：你为寻找失踪的妹妹阿棠来到回声当铺。店主乌有说：记忆有价，后果自负。\n\n---\n回声币：**0** ｜ 柜中记忆：**无** ｜ 线索：**未获得**\n\n继续：典当记忆 / 花 2 币问线索 / 原价赎回 / 走向终局。\n\n<small>账本回执：txn-921baa90b10a1919 · 状态版本 1 · 叙事：qwen2.5-1.5b-instruct</small>",
+        "workflow_run_id": "b2c64e9c-aad5-4bf7-ab3e-d8976e3948dc"
+      },
+      "elapsed_seconds": 0.892
+    },
+    {
+      "label": "07 买线索并承受遗忘",
+      "input": {
+        "player_id": "accept-4d7ac85b11",
+        "session_id": "visit-2",
+        "request_id": "6091bf5727bc45609a35934308777f59",
+        "action": "ask",
+        "memory": "umbrella",
+        "words": ""
+      },
+      "result": {
+        "story": "### 回声当铺 · 第 2 次来访\n\n店主乌有冷笑着点点头，说道：“看来你今天运气不错，捡到了我的账本。不过，我可不会像你一样，把它们当作宝。”\n店主乌有接着说：“记住，这世上最珍贵的，不是金银，而是那些让你记住某个人的回忆。”\n店主乌有继续说：“但是，如果你真的想找回你妹妹，就快点赎回你的那把红伞吧。”\n店主乌有最后说：“毕竟，雨巷尽头，等你的是一个美丽的传说，而你的妹妹，也许，正等着你。”\n\n**账本裁定**：你花 2 枚回声币买到线索：妹妹阿棠在雨巷尽头，只认你们共有的红伞。但你已典当红伞，无法记起她的模样；需要赎回它，才能相认。\n\n---\n回声币：**1** ｜ 柜中记忆：**红伞** ｜ 线索：**已获得**\n\n继续：典当记忆 / 花 2 币问线索 / 原价赎回 / 走向终局。\n\n<small>账本回执：txn-f6d58eb57c9a8a57 · 状态版本 4 · 叙事：qwen2.5-1.5b-instruct</small>",
+        "workflow_run_id": "966dac3e-82a8-4e93-9421-22ed94ed4bef"
+      },
+      "elapsed_seconds": 7.229
+    },
+    {
+      "label": "08 余额不足不能赎回",
+      "input": {
+        "player_id": "accept-4d7ac85b11",
+        "session_id": "visit-2",
+        "request_id": "2949a571bf8d462c9a102f06b182d996",
+        "action": "redeem",
+        "memory": "umbrella",
+        "words": ""
+      },
+      "result": {
+        "story": "### 回声当铺 · 第 2 次来访\n\n\"看来我得回到雨巷，找回那把红伞，才能解开心中的谜团。不过，现在余额不足，这回我得再典当点什么了。\"\n\n**账本裁定**：赎回红伞需要 3 枚回声币，余额不足。\n\n---\n回声币：**1** ｜ 柜中记忆：**红伞** ｜ 线索：**已获得**\n\n继续：典当记忆 / 花 2 币问线索 / 原价赎回 / 走向终局。\n\n<small>账本回执：src_95c4945177e94da9b1bee0abf738d90d · 状态版本 4 · 叙事：qwen2.5-1.5b-instruct</small>",
+        "workflow_run_id": "23230e6f-e7ff-4bc1-a606-49f6a3acfb11"
+      },
+      "elapsed_seconds": 2.732
+    },
+    {
+      "label": "09 典当摇篮曲筹钱",
+      "input": {
+        "player_id": "accept-4d7ac85b11",
+        "session_id": "visit-2",
+        "request_id": "806b3a9542e94475825c3d82dafe74c4",
+        "action": "pawn",
+        "memory": "song",
+        "words": ""
+      },
+      "result": {
+        "story": "### 回声当铺 · 第 2 次来访\n\n店主乌有，您真是个神秘的家伙，不过，我倒是很欣赏您那份不计回报的坚持。那首走调的摇篮曲，虽然不讨巧，但或许能帮我们找到阿棠小姐。接下来，我需要把这把摇篮曲卖了，买回红伞。\n\n**账本裁定**：你典当了父亲哼过的那首走调的摇篮曲，得到 2 枚回声币。它仍在店主的账里，却暂时不属于你。\n\n---\n回声币：**3** ｜ 柜中记忆：**红伞、摇篮曲** ｜ 线索：**已获得**\n\n继续：典当记忆 / 花 2 币问线索 / 原价赎回 / 走向终局。\n\n<small>账本回执：txn-5d6c8e6197f9b07e · 状态版本 5 · 叙事：qwen2.5-1.5b-instruct</small>",
+        "workflow_run_id": "d02562aa-6015-45bf-b64f-39d41f497877"
+      },
+      "elapsed_seconds": 8.65
+    },
+    {
+      "label": "10 赎回红伞",
+      "input": {
+        "player_id": "accept-4d7ac85b11",
+        "session_id": "visit-2",
+        "request_id": "abd61217ee4643c2aab7af8c8bd6ef7b",
+        "action": "redeem",
+        "memory": "umbrella",
+        "words": ""
+      },
+      "result": {
+        "story": "### 回声当铺 · 第 2 次来访\n\n\"哎呀，看来这把红伞的回忆还是一直留在你的心里，看来你打算找回它，是不是？不过，既然它在你的眼前，那它就不再是记忆中的遗憾了，对不对？\"\n\n**账本裁定**：你付出 3 枚回声币，赎回妹妹阿棠在雨里递给你的红伞。失去的画面重新有了颜色。\n\n---\n回声币：**0** ｜ 柜中记忆：**摇篮曲** ｜ 线索：**已获得**\n\n继续：典当记忆 / 花 2 币问线索 / 原价赎回 / 走向终局。\n\n<small>账本回执：txn-106969d66a4f8dbf · 状态版本 6 · 叙事：qwen2.5-1.5b-instruct</small>",
+        "workflow_run_id": "f740bf99-4ce4-4564-be21-6fb7416e2b9f"
+      },
+      "elapsed_seconds": 6.701
+    },
+    {
+      "label": "11 重逢结局",
+      "input": {
+        "player_id": "accept-4d7ac85b11",
+        "session_id": "visit-2",
+        "request_id": "38055cf036754483a24b055c7f56487a",
+        "action": "finish",
+        "memory": "umbrella",
+        "words": ""
+      },
+      "result": {
+        "story": "### 回声当铺 · 第 2 次来访\n\n你和妹妹在红伞下相认，一起走出雨巷。\n\n**账本裁定**：【带伞的人】你和妹妹在红伞下相认，一起走出雨巷。\n\n【带伞的人】你和妹妹在红伞下相认，一起走出雨巷。\n\n---\n回声币：**0** ｜ 柜中记忆：**摇篮曲** ｜ 线索：**已获得**\n\n故事已结束。更换旅人编号可开启新故事。\n\n<small>账本回执：txn-037762c04e5c1af3 · 状态版本 7 · 叙事：qwen2.5-1.5b-instruct</small>",
+        "workflow_run_id": "b18fafa2-beac-4804-b16b-c81738af9f38"
+      },
+      "elapsed_seconds": 5.153
+    },
+    {
+      "label": "12 对照故事进店",
+      "input": {
+        "player_id": "accept-4d7ac85b11-lost",
+        "session_id": "visit-1",
+        "request_id": "73dcfa5ce4fb4c9db6cf2da69b5ef7c8",
+        "action": "enter",
+        "memory": "umbrella",
+        "words": ""
+      },
+      "result": {
+        "story": "### 回声当铺 · 第 1 次来访\n\n“我来找她，找我失踪的妹妹阿棠。她是不是已经找到了？或者她还在那片森林里，等着我？”我问道，眼神中闪烁着一丝焦急和期待。\n\n乌有微微一笑：“那么，你的妹妹现在还在你身边，只是你还没找到她。记住，所有的记忆都有代价，后果自负。”\n\n**账本裁定**：你为寻找失踪的妹妹阿棠来到回声当铺。店主乌有说：记忆有价，后果自负。\n\n---\n回声币：**0** ｜ 柜中记忆：**无** ｜ 线索：**未获得**\n\n继续：典当记忆 / 花 2 币问线索 / 原价赎回 / 走向终局。\n\n<small>账本回执：txn-7bb42c6216667829 · 状态版本 1 · 叙事：qwen2.5-1.5b-instruct</small>",
+        "workflow_run_id": "30c15dbc-e7d4-49e3-8fb1-15ad36725fcf"
+      },
+      "elapsed_seconds": 4.662
+    },
+    {
+      "label": "13 对照故事典当红伞",
+      "input": {
+        "player_id": "accept-4d7ac85b11-lost",
+        "session_id": "visit-1",
+        "request_id": "3fcbf7c268834a968d9900cb1d6961d1",
+        "action": "pawn",
+        "memory": "umbrella",
+        "words": ""
+      },
+      "result": {
+        "story": "### 回声当铺 · 第 1 次来访\n\n\"哦，看来我的雨伞真的值不少回声币呢。不过，这可真是个意外的好运气，我得小心点，避免把这把伞给丢了吧。\"\n\n**账本裁定**：你典当了妹妹阿棠在雨里递给你的红伞，得到 3 枚回声币。它仍在店主的账里，却暂时不属于你。\n\n---\n回声币：**3** ｜ 柜中记忆：**红伞** ｜ 线索：**未获得**\n\n继续：典当记忆 / 花 2 币问线索 / 原价赎回 / 走向终局。\n\n<small>账本回执：txn-15cb14e5d48fdb53 · 状态版本 2 · 叙事：qwen2.5-1.5b-instruct</small>",
+        "workflow_run_id": "ce55fd3b-1a5e-45b0-b298-82924c7ff7aa"
+      },
+      "elapsed_seconds": 3.964
+    },
+    {
+      "label": "14 对照故事买线索",
+      "input": {
+        "player_id": "accept-4d7ac85b11-lost",
+        "session_id": "visit-1",
+        "request_id": "e84924b7c40449a3bb61ca625901c459",
+        "action": "ask",
+        "memory": "umbrella",
+        "words": ""
+      },
+      "result": {
+        "story": "### 回声当铺 · 第 1 次来访\n\n店主乌有微微一笑，说道：“看来我们还得走一趟，红伞虽典当了，但红伞下的影子不会离去。回去看看，或许能找回一些记忆。”\n\n**账本裁定**：你花 2 枚回声币买到线索：妹妹阿棠在雨巷尽头，只认你们共有的红伞。但你已典当红伞，无法记起她的模样；需要赎回它，才能相认。\n\n---\n回声币：**1** ｜ 柜中记忆：**红伞** ｜ 线索：**已获得**\n\n继续：典当记忆 / 花 2 币问线索 / 原价赎回 / 走向终局。\n\n<small>账本回执：txn-b98a2d20f52f61e2 · 状态版本 3 · 叙事：qwen2.5-1.5b-instruct</small>",
+        "workflow_run_id": "90a87b31-863f-40b5-8044-c3a939610e01"
+      },
+      "elapsed_seconds": 4.983
+    },
+    {
+      "label": "15 未赎回导致擦肩结局",
+      "input": {
+        "player_id": "accept-4d7ac85b11-lost",
+        "session_id": "visit-1",
+        "request_id": "d41c8686d142489485546e3a641043f3",
+        "action": "finish",
+        "memory": "umbrella",
+        "words": ""
+      },
+      "result": {
+        "story": "### 回声当铺 · 第 1 次来访\n\n【擦肩】你找到雨巷，却认不出撑红伞的妹妹。她从你身边走过。店主乌有：你这人真是个怪胎，居然连自己都不认识。旅人：哈哈，这回我可是彻底回声了。\n\n**账本裁定**：【擦肩】你找到雨巷，却认不出撑红伞的妹妹。她从你身边走过。\n\n【擦肩】你找到雨巷，却认不出撑红伞的妹妹。她从你身边走过。\n\n---\n回声币：**1** ｜ 柜中记忆：**红伞** ｜ 线索：**已获得**\n\n故事已结束。更换旅人编号可开启新故事。\n\n<small>账本回执：txn-3f64a098a7d0e575 · 状态版本 4 · 叙事：qwen2.5-1.5b-instruct</small>",
+        "workflow_run_id": "8254afd5-2c96-4d90-84b5-871644c43dd1"
+      },
+      "elapsed_seconds": 4.674
+    },
+    {
+      "label": "16 请求编号冲突不会交易成功",
+      "input": {
+        "player_id": "accept-4d7ac85b11",
+        "session_id": "visit-1",
+        "request_id": "d5291d8cffbd4c618dda34bf142cc270",
+        "action": "finish",
+        "memory": "umbrella",
+        "words": ""
+      },
+      "http_status": 502,
+      "result": {
+        "detail": "Dify 流程未完成，本次行动可能未生效；使用相同请求编号重试。"
+      }
+    },
+    {
+      "label": "17 拒绝非法玩家编号",
+      "http_status": 422
+    }
+  ],
+  "powercontext": {
+    "writes": 12,
+    "reads": 15,
+    "replays": 1
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "models/qwen2.5-1.5b-instruct-q4_k_m.gguf": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+  "llama/build/bin/llama-server": "397bbd3f9f9bad8a681a8a257c27730564e8e6b5264a3c4380f9b698e3b0cf6a"
+}

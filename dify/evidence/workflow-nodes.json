@@ -1,0 +1,938 @@
+[
+  {
+    "workflow_run_id": "2827ec75-6ff4-4073-a37c-083c3390c182",
+    "node_id": "start",
+    "node_type": "start",
+    "title": "旅人行动",
+    "status": "succeeded",
+    "elapsed_time": 0.019719,
+    "error": null
+  },
+  {
+    "workflow_run_id": "2827ec75-6ff4-4073-a37c-083c3390c182",
+    "node_id": "recall",
+    "node_type": "http-request",
+    "title": "PowerContext 读账本与行动预检",
+    "status": "succeeded",
+    "elapsed_time": 0.05569,
+    "error": null
+  },
+  {
+    "workflow_run_id": "2827ec75-6ff4-4073-a37c-083c3390c182",
+    "node_id": "route",
+    "node_type": "http-request",
+    "title": "提取回执状态",
+    "status": "succeeded",
+    "elapsed_time": 0.033924,
+    "error": null
+  },
+  {
+    "workflow_run_id": "2827ec75-6ff4-4073-a37c-083c3390c182",
+    "node_id": "branch",
+    "node_type": "if-else",
+    "title": "是否需要生成新剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.02023,
+    "error": null
+  },
+  {
+    "workflow_run_id": "2827ec75-6ff4-4073-a37c-083c3390c182",
+    "node_id": "narrate",
+    "node_type": "http-request",
+    "title": "本地 Qwen 根据记忆生成对白",
+    "status": "succeeded",
+    "elapsed_time": 3.65212,
+    "error": null
+  },
+  {
+    "workflow_run_id": "2827ec75-6ff4-4073-a37c-083c3390c182",
+    "node_id": "commit",
+    "node_type": "http-request",
+    "title": "PowerContext 写交易与剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.06431,
+    "error": null
+  },
+  {
+    "workflow_run_id": "2827ec75-6ff4-4073-a37c-083c3390c182",
+    "node_id": "end",
+    "node_type": "end",
+    "title": "返回剧情与账本",
+    "status": "succeeded",
+    "elapsed_time": 0.028285,
+    "error": null
+  },
+  {
+    "workflow_run_id": "0c8633a7-1c9c-4594-b964-f4fe6064e3b3",
+    "node_id": "start",
+    "node_type": "start",
+    "title": "旅人行动",
+    "status": "succeeded",
+    "elapsed_time": 0.007171,
+    "error": null
+  },
+  {
+    "workflow_run_id": "0c8633a7-1c9c-4594-b964-f4fe6064e3b3",
+    "node_id": "recall",
+    "node_type": "http-request",
+    "title": "PowerContext 读账本与行动预检",
+    "status": "succeeded",
+    "elapsed_time": 0.027148,
+    "error": null
+  },
+  {
+    "workflow_run_id": "0c8633a7-1c9c-4594-b964-f4fe6064e3b3",
+    "node_id": "route",
+    "node_type": "http-request",
+    "title": "提取回执状态",
+    "status": "succeeded",
+    "elapsed_time": 0.027908,
+    "error": null
+  },
+  {
+    "workflow_run_id": "0c8633a7-1c9c-4594-b964-f4fe6064e3b3",
+    "node_id": "branch",
+    "node_type": "if-else",
+    "title": "是否需要生成新剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.024468,
+    "error": null
+  },
+  {
+    "workflow_run_id": "0c8633a7-1c9c-4594-b964-f4fe6064e3b3",
+    "node_id": "narrate",
+    "node_type": "http-request",
+    "title": "本地 Qwen 根据记忆生成对白",
+    "status": "succeeded",
+    "elapsed_time": 5.614842,
+    "error": null
+  },
+  {
+    "workflow_run_id": "0c8633a7-1c9c-4594-b964-f4fe6064e3b3",
+    "node_id": "commit",
+    "node_type": "http-request",
+    "title": "PowerContext 写交易与剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.04316,
+    "error": null
+  },
+  {
+    "workflow_run_id": "0c8633a7-1c9c-4594-b964-f4fe6064e3b3",
+    "node_id": "end",
+    "node_type": "end",
+    "title": "返回剧情与账本",
+    "status": "succeeded",
+    "elapsed_time": 0.020275,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ee5358e1-a0aa-4683-bbb8-fafdf5923236",
+    "node_id": "start",
+    "node_type": "start",
+    "title": "旅人行动",
+    "status": "succeeded",
+    "elapsed_time": 0.010541,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ee5358e1-a0aa-4683-bbb8-fafdf5923236",
+    "node_id": "recall",
+    "node_type": "http-request",
+    "title": "PowerContext 读账本与行动预检",
+    "status": "succeeded",
+    "elapsed_time": 0.033327,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ee5358e1-a0aa-4683-bbb8-fafdf5923236",
+    "node_id": "route",
+    "node_type": "http-request",
+    "title": "提取回执状态",
+    "status": "succeeded",
+    "elapsed_time": 0.037926,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ee5358e1-a0aa-4683-bbb8-fafdf5923236",
+    "node_id": "branch",
+    "node_type": "if-else",
+    "title": "是否需要生成新剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.044106,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ee5358e1-a0aa-4683-bbb8-fafdf5923236",
+    "node_id": "replay",
+    "node_type": "http-request",
+    "title": "从 PowerContext 返回已有回执",
+    "status": "succeeded",
+    "elapsed_time": 0.05377,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ee5358e1-a0aa-4683-bbb8-fafdf5923236",
+    "node_id": "cached_end",
+    "node_type": "end",
+    "title": "返回原始剧情（不重复交易）",
+    "status": "succeeded",
+    "elapsed_time": 0.04259,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ab2a6949-22b8-4ebd-b6a7-3ced6e38b007",
+    "node_id": "start",
+    "node_type": "start",
+    "title": "旅人行动",
+    "status": "succeeded",
+    "elapsed_time": 0.007901,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ab2a6949-22b8-4ebd-b6a7-3ced6e38b007",
+    "node_id": "recall",
+    "node_type": "http-request",
+    "title": "PowerContext 读账本与行动预检",
+    "status": "succeeded",
+    "elapsed_time": 0.038291,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ab2a6949-22b8-4ebd-b6a7-3ced6e38b007",
+    "node_id": "route",
+    "node_type": "http-request",
+    "title": "提取回执状态",
+    "status": "succeeded",
+    "elapsed_time": 0.04031,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ab2a6949-22b8-4ebd-b6a7-3ced6e38b007",
+    "node_id": "branch",
+    "node_type": "if-else",
+    "title": "是否需要生成新剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.043248,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ab2a6949-22b8-4ebd-b6a7-3ced6e38b007",
+    "node_id": "narrate",
+    "node_type": "http-request",
+    "title": "本地 Qwen 根据记忆生成对白",
+    "status": "succeeded",
+    "elapsed_time": 5.110682,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ab2a6949-22b8-4ebd-b6a7-3ced6e38b007",
+    "node_id": "commit",
+    "node_type": "http-request",
+    "title": "PowerContext 写交易与剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.030803,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ab2a6949-22b8-4ebd-b6a7-3ced6e38b007",
+    "node_id": "end",
+    "node_type": "end",
+    "title": "返回剧情与账本",
+    "status": "succeeded",
+    "elapsed_time": 0.026741,
+    "error": null
+  },
+  {
+    "workflow_run_id": "aa2a71b2-b173-47b4-b3c5-9406f056437a",
+    "node_id": "start",
+    "node_type": "start",
+    "title": "旅人行动",
+    "status": "succeeded",
+    "elapsed_time": 0.005582,
+    "error": null
+  },
+  {
+    "workflow_run_id": "aa2a71b2-b173-47b4-b3c5-9406f056437a",
+    "node_id": "recall",
+    "node_type": "http-request",
+    "title": "PowerContext 读账本与行动预检",
+    "status": "succeeded",
+    "elapsed_time": 0.022413,
+    "error": null
+  },
+  {
+    "workflow_run_id": "aa2a71b2-b173-47b4-b3c5-9406f056437a",
+    "node_id": "route",
+    "node_type": "http-request",
+    "title": "提取回执状态",
+    "status": "succeeded",
+    "elapsed_time": 0.024028,
+    "error": null
+  },
+  {
+    "workflow_run_id": "aa2a71b2-b173-47b4-b3c5-9406f056437a",
+    "node_id": "branch",
+    "node_type": "if-else",
+    "title": "是否需要生成新剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.024809,
+    "error": null
+  },
+  {
+    "workflow_run_id": "aa2a71b2-b173-47b4-b3c5-9406f056437a",
+    "node_id": "narrate",
+    "node_type": "http-request",
+    "title": "本地 Qwen 根据记忆生成对白",
+    "status": "succeeded",
+    "elapsed_time": 1.848942,
+    "error": null
+  },
+  {
+    "workflow_run_id": "aa2a71b2-b173-47b4-b3c5-9406f056437a",
+    "node_id": "commit",
+    "node_type": "http-request",
+    "title": "PowerContext 写交易与剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.050544,
+    "error": null
+  },
+  {
+    "workflow_run_id": "aa2a71b2-b173-47b4-b3c5-9406f056437a",
+    "node_id": "end",
+    "node_type": "end",
+    "title": "返回剧情与账本",
+    "status": "succeeded",
+    "elapsed_time": 0.023231,
+    "error": null
+  },
+  {
+    "workflow_run_id": "b2c64e9c-aad5-4bf7-ab3e-d8976e3948dc",
+    "node_id": "start",
+    "node_type": "start",
+    "title": "旅人行动",
+    "status": "succeeded",
+    "elapsed_time": 0.006049,
+    "error": null
+  },
+  {
+    "workflow_run_id": "b2c64e9c-aad5-4bf7-ab3e-d8976e3948dc",
+    "node_id": "recall",
+    "node_type": "http-request",
+    "title": "PowerContext 读账本与行动预检",
+    "status": "succeeded",
+    "elapsed_time": 0.031195,
+    "error": null
+  },
+  {
+    "workflow_run_id": "b2c64e9c-aad5-4bf7-ab3e-d8976e3948dc",
+    "node_id": "route",
+    "node_type": "http-request",
+    "title": "提取回执状态",
+    "status": "succeeded",
+    "elapsed_time": 0.020429,
+    "error": null
+  },
+  {
+    "workflow_run_id": "b2c64e9c-aad5-4bf7-ab3e-d8976e3948dc",
+    "node_id": "branch",
+    "node_type": "if-else",
+    "title": "是否需要生成新剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.020323,
+    "error": null
+  },
+  {
+    "workflow_run_id": "b2c64e9c-aad5-4bf7-ab3e-d8976e3948dc",
+    "node_id": "narrate",
+    "node_type": "http-request",
+    "title": "本地 Qwen 根据记忆生成对白",
+    "status": "succeeded",
+    "elapsed_time": 0.67552,
+    "error": null
+  },
+  {
+    "workflow_run_id": "b2c64e9c-aad5-4bf7-ab3e-d8976e3948dc",
+    "node_id": "commit",
+    "node_type": "http-request",
+    "title": "PowerContext 写交易与剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.039595,
+    "error": null
+  },
+  {
+    "workflow_run_id": "b2c64e9c-aad5-4bf7-ab3e-d8976e3948dc",
+    "node_id": "end",
+    "node_type": "end",
+    "title": "返回剧情与账本",
+    "status": "succeeded",
+    "elapsed_time": 0.016873,
+    "error": null
+  },
+  {
+    "workflow_run_id": "966dac3e-82a8-4e93-9421-22ed94ed4bef",
+    "node_id": "start",
+    "node_type": "start",
+    "title": "旅人行动",
+    "status": "succeeded",
+    "elapsed_time": 0.009486,
+    "error": null
+  },
+  {
+    "workflow_run_id": "966dac3e-82a8-4e93-9421-22ed94ed4bef",
+    "node_id": "recall",
+    "node_type": "http-request",
+    "title": "PowerContext 读账本与行动预检",
+    "status": "succeeded",
+    "elapsed_time": 0.023612,
+    "error": null
+  },
+  {
+    "workflow_run_id": "966dac3e-82a8-4e93-9421-22ed94ed4bef",
+    "node_id": "route",
+    "node_type": "http-request",
+    "title": "提取回执状态",
+    "status": "succeeded",
+    "elapsed_time": 0.027116,
+    "error": null
+  },
+  {
+    "workflow_run_id": "966dac3e-82a8-4e93-9421-22ed94ed4bef",
+    "node_id": "branch",
+    "node_type": "if-else",
+    "title": "是否需要生成新剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.021135,
+    "error": null
+  },
+  {
+    "workflow_run_id": "966dac3e-82a8-4e93-9421-22ed94ed4bef",
+    "node_id": "narrate",
+    "node_type": "http-request",
+    "title": "本地 Qwen 根据记忆生成对白",
+    "status": "succeeded",
+    "elapsed_time": 6.954266,
+    "error": null
+  },
+  {
+    "workflow_run_id": "966dac3e-82a8-4e93-9421-22ed94ed4bef",
+    "node_id": "commit",
+    "node_type": "http-request",
+    "title": "PowerContext 写交易与剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.057844,
+    "error": null
+  },
+  {
+    "workflow_run_id": "966dac3e-82a8-4e93-9421-22ed94ed4bef",
+    "node_id": "end",
+    "node_type": "end",
+    "title": "返回剧情与账本",
+    "status": "succeeded",
+    "elapsed_time": 0.033144,
+    "error": null
+  },
+  {
+    "workflow_run_id": "23230e6f-e7ff-4bc1-a606-49f6a3acfb11",
+    "node_id": "start",
+    "node_type": "start",
+    "title": "旅人行动",
+    "status": "succeeded",
+    "elapsed_time": 0.006243,
+    "error": null
+  },
+  {
+    "workflow_run_id": "23230e6f-e7ff-4bc1-a606-49f6a3acfb11",
+    "node_id": "recall",
+    "node_type": "http-request",
+    "title": "PowerContext 读账本与行动预检",
+    "status": "succeeded",
+    "elapsed_time": 0.024037,
+    "error": null
+  },
+  {
+    "workflow_run_id": "23230e6f-e7ff-4bc1-a606-49f6a3acfb11",
+    "node_id": "route",
+    "node_type": "http-request",
+    "title": "提取回执状态",
+    "status": "succeeded",
+    "elapsed_time": 0.030186,
+    "error": null
+  },
+  {
+    "workflow_run_id": "23230e6f-e7ff-4bc1-a606-49f6a3acfb11",
+    "node_id": "branch",
+    "node_type": "if-else",
+    "title": "是否需要生成新剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.028658,
+    "error": null
+  },
+  {
+    "workflow_run_id": "23230e6f-e7ff-4bc1-a606-49f6a3acfb11",
+    "node_id": "narrate",
+    "node_type": "http-request",
+    "title": "本地 Qwen 根据记忆生成对白",
+    "status": "succeeded",
+    "elapsed_time": 2.459499,
+    "error": null
+  },
+  {
+    "workflow_run_id": "23230e6f-e7ff-4bc1-a606-49f6a3acfb11",
+    "node_id": "commit",
+    "node_type": "http-request",
+    "title": "PowerContext 写交易与剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.035531,
+    "error": null
+  },
+  {
+    "workflow_run_id": "23230e6f-e7ff-4bc1-a606-49f6a3acfb11",
+    "node_id": "end",
+    "node_type": "end",
+    "title": "返回剧情与账本",
+    "status": "succeeded",
+    "elapsed_time": 0.030168,
+    "error": null
+  },
+  {
+    "workflow_run_id": "d02562aa-6015-45bf-b64f-39d41f497877",
+    "node_id": "start",
+    "node_type": "start",
+    "title": "旅人行动",
+    "status": "succeeded",
+    "elapsed_time": 0.011247,
+    "error": null
+  },
+  {
+    "workflow_run_id": "d02562aa-6015-45bf-b64f-39d41f497877",
+    "node_id": "recall",
+    "node_type": "http-request",
+    "title": "PowerContext 读账本与行动预检",
+    "status": "succeeded",
+    "elapsed_time": 0.048879,
+    "error": null
+  },
+  {
+    "workflow_run_id": "d02562aa-6015-45bf-b64f-39d41f497877",
+    "node_id": "route",
+    "node_type": "http-request",
+    "title": "提取回执状态",
+    "status": "succeeded",
+    "elapsed_time": 0.036636,
+    "error": null
+  },
+  {
+    "workflow_run_id": "d02562aa-6015-45bf-b64f-39d41f497877",
+    "node_id": "branch",
+    "node_type": "if-else",
+    "title": "是否需要生成新剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.033436,
+    "error": null
+  },
+  {
+    "workflow_run_id": "d02562aa-6015-45bf-b64f-39d41f497877",
+    "node_id": "narrate",
+    "node_type": "http-request",
+    "title": "本地 Qwen 根据记忆生成对白",
+    "status": "succeeded",
+    "elapsed_time": 8.28838,
+    "error": null
+  },
+  {
+    "workflow_run_id": "d02562aa-6015-45bf-b64f-39d41f497877",
+    "node_id": "commit",
+    "node_type": "http-request",
+    "title": "PowerContext 写交易与剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.065125,
+    "error": null
+  },
+  {
+    "workflow_run_id": "d02562aa-6015-45bf-b64f-39d41f497877",
+    "node_id": "end",
+    "node_type": "end",
+    "title": "返回剧情与账本",
+    "status": "succeeded",
+    "elapsed_time": 0.03516,
+    "error": null
+  },
+  {
+    "workflow_run_id": "f740bf99-4ce4-4564-be21-6fb7416e2b9f",
+    "node_id": "start",
+    "node_type": "start",
+    "title": "旅人行动",
+    "status": "succeeded",
+    "elapsed_time": 0.008931,
+    "error": null
+  },
+  {
+    "workflow_run_id": "f740bf99-4ce4-4564-be21-6fb7416e2b9f",
+    "node_id": "recall",
+    "node_type": "http-request",
+    "title": "PowerContext 读账本与行动预检",
+    "status": "succeeded",
+    "elapsed_time": 0.042129,
+    "error": null
+  },
+  {
+    "workflow_run_id": "f740bf99-4ce4-4564-be21-6fb7416e2b9f",
+    "node_id": "route",
+    "node_type": "http-request",
+    "title": "提取回执状态",
+    "status": "succeeded",
+    "elapsed_time": 0.039861,
+    "error": null
+  },
+  {
+    "workflow_run_id": "f740bf99-4ce4-4564-be21-6fb7416e2b9f",
+    "node_id": "branch",
+    "node_type": "if-else",
+    "title": "是否需要生成新剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.032126,
+    "error": null
+  },
+  {
+    "workflow_run_id": "f740bf99-4ce4-4564-be21-6fb7416e2b9f",
+    "node_id": "narrate",
+    "node_type": "http-request",
+    "title": "本地 Qwen 根据记忆生成对白",
+    "status": "succeeded",
+    "elapsed_time": 6.372005,
+    "error": null
+  },
+  {
+    "workflow_run_id": "f740bf99-4ce4-4564-be21-6fb7416e2b9f",
+    "node_id": "commit",
+    "node_type": "http-request",
+    "title": "PowerContext 写交易与剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.060914,
+    "error": null
+  },
+  {
+    "workflow_run_id": "f740bf99-4ce4-4564-be21-6fb7416e2b9f",
+    "node_id": "end",
+    "node_type": "end",
+    "title": "返回剧情与账本",
+    "status": "succeeded",
+    "elapsed_time": 0.031731,
+    "error": null
+  },
+  {
+    "workflow_run_id": "b18fafa2-beac-4804-b16b-c81738af9f38",
+    "node_id": "start",
+    "node_type": "start",
+    "title": "旅人行动",
+    "status": "succeeded",
+    "elapsed_time": 0.009089,
+    "error": null
+  },
+  {
+    "workflow_run_id": "b18fafa2-beac-4804-b16b-c81738af9f38",
+    "node_id": "recall",
+    "node_type": "http-request",
+    "title": "PowerContext 读账本与行动预检",
+    "status": "succeeded",
+    "elapsed_time": 0.028963,
+    "error": null
+  },
+  {
+    "workflow_run_id": "b18fafa2-beac-4804-b16b-c81738af9f38",
+    "node_id": "route",
+    "node_type": "http-request",
+    "title": "提取回执状态",
+    "status": "succeeded",
+    "elapsed_time": 0.023812,
+    "error": null
+  },
+  {
+    "workflow_run_id": "b18fafa2-beac-4804-b16b-c81738af9f38",
+    "node_id": "branch",
+    "node_type": "if-else",
+    "title": "是否需要生成新剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.027398,
+    "error": null
+  },
+  {
+    "workflow_run_id": "b18fafa2-beac-4804-b16b-c81738af9f38",
+    "node_id": "narrate",
+    "node_type": "http-request",
+    "title": "本地 Qwen 根据记忆生成对白",
+    "status": "succeeded",
+    "elapsed_time": 4.867908,
+    "error": null
+  },
+  {
+    "workflow_run_id": "b18fafa2-beac-4804-b16b-c81738af9f38",
+    "node_id": "commit",
+    "node_type": "http-request",
+    "title": "PowerContext 写交易与剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.05813,
+    "error": null
+  },
+  {
+    "workflow_run_id": "b18fafa2-beac-4804-b16b-c81738af9f38",
+    "node_id": "end",
+    "node_type": "end",
+    "title": "返回剧情与账本",
+    "status": "succeeded",
+    "elapsed_time": 0.029761,
+    "error": null
+  },
+  {
+    "workflow_run_id": "30c15dbc-e7d4-49e3-8fb1-15ad36725fcf",
+    "node_id": "start",
+    "node_type": "start",
+    "title": "旅人行动",
+    "status": "succeeded",
+    "elapsed_time": 0.008242,
+    "error": null
+  },
+  {
+    "workflow_run_id": "30c15dbc-e7d4-49e3-8fb1-15ad36725fcf",
+    "node_id": "recall",
+    "node_type": "http-request",
+    "title": "PowerContext 读账本与行动预检",
+    "status": "succeeded",
+    "elapsed_time": 0.032748,
+    "error": null
+  },
+  {
+    "workflow_run_id": "30c15dbc-e7d4-49e3-8fb1-15ad36725fcf",
+    "node_id": "route",
+    "node_type": "http-request",
+    "title": "提取回执状态",
+    "status": "succeeded",
+    "elapsed_time": 0.025062,
+    "error": null
+  },
+  {
+    "workflow_run_id": "30c15dbc-e7d4-49e3-8fb1-15ad36725fcf",
+    "node_id": "branch",
+    "node_type": "if-else",
+    "title": "是否需要生成新剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.024523,
+    "error": null
+  },
+  {
+    "workflow_run_id": "30c15dbc-e7d4-49e3-8fb1-15ad36725fcf",
+    "node_id": "narrate",
+    "node_type": "http-request",
+    "title": "本地 Qwen 根据记忆生成对白",
+    "status": "succeeded",
+    "elapsed_time": 4.352991,
+    "error": null
+  },
+  {
+    "workflow_run_id": "30c15dbc-e7d4-49e3-8fb1-15ad36725fcf",
+    "node_id": "commit",
+    "node_type": "http-request",
+    "title": "PowerContext 写交易与剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.053754,
+    "error": null
+  },
+  {
+    "workflow_run_id": "30c15dbc-e7d4-49e3-8fb1-15ad36725fcf",
+    "node_id": "end",
+    "node_type": "end",
+    "title": "返回剧情与账本",
+    "status": "succeeded",
+    "elapsed_time": 0.038758,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ce55fd3b-1a5e-45b0-b298-82924c7ff7aa",
+    "node_id": "start",
+    "node_type": "start",
+    "title": "旅人行动",
+    "status": "succeeded",
+    "elapsed_time": 0.009015,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ce55fd3b-1a5e-45b0-b298-82924c7ff7aa",
+    "node_id": "recall",
+    "node_type": "http-request",
+    "title": "PowerContext 读账本与行动预检",
+    "status": "succeeded",
+    "elapsed_time": 0.029532,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ce55fd3b-1a5e-45b0-b298-82924c7ff7aa",
+    "node_id": "route",
+    "node_type": "http-request",
+    "title": "提取回执状态",
+    "status": "succeeded",
+    "elapsed_time": 0.026565,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ce55fd3b-1a5e-45b0-b298-82924c7ff7aa",
+    "node_id": "branch",
+    "node_type": "if-else",
+    "title": "是否需要生成新剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.02406,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ce55fd3b-1a5e-45b0-b298-82924c7ff7aa",
+    "node_id": "narrate",
+    "node_type": "http-request",
+    "title": "本地 Qwen 根据记忆生成对白",
+    "status": "succeeded",
+    "elapsed_time": 3.675634,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ce55fd3b-1a5e-45b0-b298-82924c7ff7aa",
+    "node_id": "commit",
+    "node_type": "http-request",
+    "title": "PowerContext 写交易与剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.054497,
+    "error": null
+  },
+  {
+    "workflow_run_id": "ce55fd3b-1a5e-45b0-b298-82924c7ff7aa",
+    "node_id": "end",
+    "node_type": "end",
+    "title": "返回剧情与账本",
+    "status": "succeeded",
+    "elapsed_time": 0.033251,
+    "error": null
+  },
+  {
+    "workflow_run_id": "90a87b31-863f-40b5-8044-c3a939610e01",
+    "node_id": "start",
+    "node_type": "start",
+    "title": "旅人行动",
+    "status": "succeeded",
+    "elapsed_time": 0.009502,
+    "error": null
+  },
+  {
+    "workflow_run_id": "90a87b31-863f-40b5-8044-c3a939610e01",
+    "node_id": "recall",
+    "node_type": "http-request",
+    "title": "PowerContext 读账本与行动预检",
+    "status": "succeeded",
+    "elapsed_time": 0.034602,
+    "error": null
+  },
+  {
+    "workflow_run_id": "90a87b31-863f-40b5-8044-c3a939610e01",
+    "node_id": "route",
+    "node_type": "http-request",
+    "title": "提取回执状态",
+    "status": "succeeded",
+    "elapsed_time": 0.026472,
+    "error": null
+  },
+  {
+    "workflow_run_id": "90a87b31-863f-40b5-8044-c3a939610e01",
+    "node_id": "branch",
+    "node_type": "if-else",
+    "title": "是否需要生成新剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.024451,
+    "error": null
+  },
+  {
+    "workflow_run_id": "90a87b31-863f-40b5-8044-c3a939610e01",
+    "node_id": "narrate",
+    "node_type": "http-request",
+    "title": "本地 Qwen 根据记忆生成对白",
+    "status": "succeeded",
+    "elapsed_time": 4.668307,
+    "error": null
+  },
+  {
+    "workflow_run_id": "90a87b31-863f-40b5-8044-c3a939610e01",
+    "node_id": "commit",
+    "node_type": "http-request",
+    "title": "PowerContext 写交易与剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.055677,
+    "error": null
+  },
+  {
+    "workflow_run_id": "90a87b31-863f-40b5-8044-c3a939610e01",
+    "node_id": "end",
+    "node_type": "end",
+    "title": "返回剧情与账本",
+    "status": "succeeded",
+    "elapsed_time": 0.034408,
+    "error": null
+  },
+  {
+    "workflow_run_id": "8254afd5-2c96-4d90-84b5-871644c43dd1",
+    "node_id": "start",
+    "node_type": "start",
+    "title": "旅人行动",
+    "status": "succeeded",
+    "elapsed_time": 0.010923,
+    "error": null
+  },
+  {
+    "workflow_run_id": "8254afd5-2c96-4d90-84b5-871644c43dd1",
+    "node_id": "recall",
+    "node_type": "http-request",
+    "title": "PowerContext 读账本与行动预检",
+    "status": "succeeded",
+    "elapsed_time": 0.029356,
+    "error": null
+  },
+  {
+    "workflow_run_id": "8254afd5-2c96-4d90-84b5-871644c43dd1",
+    "node_id": "route",
+    "node_type": "http-request",
+    "title": "提取回执状态",
+    "status": "succeeded",
+    "elapsed_time": 0.026686,
+    "error": null
+  },
+  {
+    "workflow_run_id": "8254afd5-2c96-4d90-84b5-871644c43dd1",
+    "node_id": "branch",
+    "node_type": "if-else",
+    "title": "是否需要生成新剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.031558,
+    "error": null
+  },
+  {
+    "workflow_run_id": "8254afd5-2c96-4d90-84b5-871644c43dd1",
+    "node_id": "narrate",
+    "node_type": "http-request",
+    "title": "本地 Qwen 根据记忆生成对白",
+    "status": "succeeded",
+    "elapsed_time": 4.30707,
+    "error": null
+  },
+  {
+    "workflow_run_id": "8254afd5-2c96-4d90-84b5-871644c43dd1",
+    "node_id": "commit",
+    "node_type": "http-request",
+    "title": "PowerContext 写交易与剧情",
+    "status": "succeeded",
+    "elapsed_time": 0.083657,
+    "error": null
+  },
+  {
+    "workflow_run_id": "8254afd5-2c96-4d90-84b5-871644c43dd1",
+    "node_id": "end",
+    "node_type": "end",
+    "title": "返回剧情与账本",
+    "status": "succeeded",
+    "elapsed_time": 0.039376,
+    "error": null
+  }
+]

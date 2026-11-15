@@ -1,0 +1,649 @@
+version: 0.4.0
+kind: app
+dependencies: []
+app:
+  name: 回声当铺｜记忆有价，后果自负
+  mode: workflow
+  icon: ☂️
+  icon_type: emoji
+  icon_background: '#E6D9C6'
+  use_icon_as_answer_icon: false
+  description: 典当记忆寻找妹妹。跨会话保留交易，四种结局；Dify 编排 + PowerContext 持久化 + 本地 Qwen。
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - id: echo-url
+    name: ECHO_BASE_URL
+    value_type: string
+    selector:
+    - env
+    - ECHO_BASE_URL
+    value: http://host.docker.internal:18080
+  - id: echo-key
+    name: ECHO_TOOL_KEY
+    value_type: secret
+    selector:
+    - env
+    - ECHO_TOOL_KEY
+    value: REPLACE_WITH_ECHO_TOOL_KEY
+  features:
+    file_upload:
+      enabled: false
+    opening_statement: ''
+    retriever_resource:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+  graph:
+    nodes:
+    - id: start
+      type: custom
+      position:
+        x: 0
+        y: 100
+      width: 244
+      height: 98
+      sourcePosition: right
+      targetPosition: left
+      data:
+        title: 旅人行动
+        type: start
+        desc: ''
+        selected: false
+        variables:
+        - variable: player_id
+          label: 旅人编号（相同编号续玩）
+          type: text-input
+          required: true
+          max_length: 48
+          default: traveler-demo
+        - variable: session_id
+          label: 本次会话编号（换会话仍可找回记忆）
+          type: text-input
+          required: true
+          max_length: 64
+          default: visit-1
+        - variable: request_id
+          label: 唯一行动编号（重试保持相同）
+          type: text-input
+          required: true
+          max_length: 80
+          default: turn-1
+        - variable: action
+          label: 行动
+          type: select
+          required: true
+          max_length: 20
+          default: enter
+          options:
+          - enter
+          - pawn
+          - ask
+          - redeem
+          - finish
+        - variable: memory
+          label: 记忆
+          type: select
+          required: true
+          max_length: 20
+          default: umbrella
+          options:
+          - umbrella
+          - name
+          - song
+        - variable: words
+          label: 对店主说的话
+          type: text-input
+          required: false
+          max_length: 400
+          default: ''
+    - id: recall
+      type: custom
+      position:
+        x: 300
+        y: 100
+      width: 244
+      height: 98
+      sourcePosition: right
+      targetPosition: left
+      data:
+        title: PowerContext 读账本与行动预检
+        type: http-request
+        desc: ''
+        selected: false
+        method: post
+        url: '{{#env.ECHO_BASE_URL#}}/tools/context'
+        authorization:
+          type: no-auth
+        headers: 'X-Echo-Key:{{#env.ECHO_TOOL_KEY#}}
+
+          '
+        params: ''
+        ssl_verify: true
+        timeout:
+          connect: 10
+          read: 180
+          write: 30
+        body:
+          type: x-www-form-urlencoded
+          data:
+          - key: player_id
+            type: text
+            value: '{{#start.player_id#}}'
+          - key: session_id
+            type: text
+            value: '{{#start.session_id#}}'
+          - key: request_id
+            type: text
+            value: '{{#start.request_id#}}'
+          - key: action
+            type: text
+            value: '{{#start.action#}}'
+          - key: memory
+            type: text
+            value: '{{#start.memory#}}'
+          - key: words
+            type: text
+            value: '{{#start.words#}}'
+        error_strategy: fail-branch
+        retry_config:
+          retry_enabled: false
+          max_retries: 0
+          retry_interval: 1000
+    - id: route
+      type: custom
+      position:
+        x: 600
+        y: 100
+      width: 244
+      height: 98
+      sourcePosition: right
+      targetPosition: left
+      data:
+        title: 提取回执状态
+        type: http-request
+        desc: ''
+        selected: false
+        method: post
+        url: '{{#env.ECHO_BASE_URL#}}/tools/route'
+        authorization:
+          type: no-auth
+        headers: 'X-Echo-Key:{{#env.ECHO_TOOL_KEY#}}
+
+          Content-Type:application/json'
+        params: ''
+        ssl_verify: true
+        timeout:
+          connect: 10
+          read: 180
+          write: 30
+        body:
+          type: json
+          data:
+          - key: ''
+            type: text
+            value: '{{#recall.body#}}'
+        error_strategy: fail-branch
+        retry_config:
+          retry_enabled: false
+          max_retries: 0
+          retry_interval: 1000
+    - id: branch
+      type: custom
+      position:
+        x: 900
+        y: 100
+      width: 244
+      height: 98
+      sourcePosition: right
+      targetPosition: left
+      data:
+        title: 是否需要生成新剧情
+        type: if-else
+        desc: ''
+        selected: false
+        cases:
+        - case_id: 'true'
+          logical_operator: and
+          conditions:
+          - id: needs-model
+            variable_selector:
+            - route
+            - body
+            varType: string
+            comparison_operator: is
+            value: narrate
+    - id: narrate
+      type: custom
+      position:
+        x: 1200
+        y: 0
+      width: 244
+      height: 98
+      sourcePosition: right
+      targetPosition: left
+      data:
+        title: 本地 Qwen 根据记忆生成对白
+        type: http-request
+        desc: ''
+        selected: false
+        method: post
+        url: '{{#env.ECHO_BASE_URL#}}/tools/narrate'
+        authorization:
+          type: no-auth
+        headers: 'X-Echo-Key:{{#env.ECHO_TOOL_KEY#}}
+
+          Content-Type:application/json'
+        params: ''
+        ssl_verify: true
+        timeout:
+          connect: 10
+          read: 180
+          write: 30
+        body:
+          type: json
+          data:
+          - key: ''
+            type: text
+            value: '{{#recall.body#}}'
+        error_strategy: fail-branch
+        retry_config:
+          retry_enabled: false
+          max_retries: 0
+          retry_interval: 1000
+    - id: commit
+      type: custom
+      position:
+        x: 1500
+        y: 0
+      width: 244
+      height: 98
+      sourcePosition: right
+      targetPosition: left
+      data:
+        title: PowerContext 写交易与剧情
+        type: http-request
+        desc: ''
+        selected: false
+        method: post
+        url: '{{#env.ECHO_BASE_URL#}}/tools/commit'
+        authorization:
+          type: no-auth
+        headers: 'X-Echo-Key:{{#env.ECHO_TOOL_KEY#}}
+
+          Content-Type:application/json'
+        params: ''
+        ssl_verify: true
+        timeout:
+          connect: 10
+          read: 180
+          write: 30
+        body:
+          type: json
+          data:
+          - key: ''
+            type: text
+            value: '{{#narrate.body#}}'
+        error_strategy: fail-branch
+        retry_config:
+          retry_enabled: false
+          max_retries: 0
+          retry_interval: 1000
+    - id: replay
+      type: custom
+      position:
+        x: 1200
+        y: 260
+      width: 244
+      height: 98
+      sourcePosition: right
+      targetPosition: left
+      data:
+        title: 从 PowerContext 返回已有回执
+        type: http-request
+        desc: ''
+        selected: false
+        method: post
+        url: '{{#env.ECHO_BASE_URL#}}/tools/commit'
+        authorization:
+          type: no-auth
+        headers: 'X-Echo-Key:{{#env.ECHO_TOOL_KEY#}}
+
+          Content-Type:application/json'
+        params: ''
+        ssl_verify: true
+        timeout:
+          connect: 10
+          read: 180
+          write: 30
+        body:
+          type: json
+          data:
+          - key: ''
+            type: text
+            value: '{{#recall.body#}}'
+        error_strategy: fail-branch
+        retry_config:
+          retry_enabled: false
+          max_retries: 0
+          retry_interval: 1000
+    - id: end
+      type: custom
+      position:
+        x: 1800
+        y: 0
+      width: 244
+      height: 98
+      sourcePosition: right
+      targetPosition: left
+      data:
+        title: 返回剧情与账本
+        type: end
+        desc: ''
+        selected: false
+        outputs:
+        - variable: story
+          value_selector:
+          - commit
+          - body
+          value_type: string
+    - id: cached_end
+      type: custom
+      position:
+        x: 1500
+        y: 260
+      width: 244
+      height: 98
+      sourcePosition: right
+      targetPosition: left
+      data:
+        title: 返回原始剧情（不重复交易）
+        type: end
+        desc: ''
+        selected: false
+        outputs:
+        - variable: story
+          value_selector:
+          - replay
+          - body
+          value_type: string
+    - id: recall_error
+      type: custom
+      position:
+        x: 0
+        y: 560
+      width: 244
+      height: 98
+      sourcePosition: right
+      targetPosition: left
+      data:
+        title: 行动中止：返回错误信息
+        type: end
+        desc: ''
+        selected: false
+        outputs:
+        - variable: error
+          value_selector:
+          - recall
+          - body
+          value_type: string
+        - variable: status_code
+          value_selector:
+          - recall
+          - status_code
+          value_type: number
+    - id: route_error
+      type: custom
+      position:
+        x: 300
+        y: 560
+      width: 244
+      height: 98
+      sourcePosition: right
+      targetPosition: left
+      data:
+        title: 行动中止：返回错误信息
+        type: end
+        desc: ''
+        selected: false
+        outputs:
+        - variable: error
+          value_selector:
+          - route
+          - body
+          value_type: string
+        - variable: status_code
+          value_selector:
+          - route
+          - status_code
+          value_type: number
+    - id: narrate_error
+      type: custom
+      position:
+        x: 600
+        y: 560
+      width: 244
+      height: 98
+      sourcePosition: right
+      targetPosition: left
+      data:
+        title: 行动中止：返回错误信息
+        type: end
+        desc: ''
+        selected: false
+        outputs:
+        - variable: error
+          value_selector:
+          - narrate
+          - body
+          value_type: string
+        - variable: status_code
+          value_selector:
+          - narrate
+          - status_code
+          value_type: number
+    - id: commit_error
+      type: custom
+      position:
+        x: 900
+        y: 560
+      width: 244
+      height: 98
+      sourcePosition: right
+      targetPosition: left
+      data:
+        title: 行动中止：返回错误信息
+        type: end
+        desc: ''
+        selected: false
+        outputs:
+        - variable: error
+          value_selector:
+          - commit
+          - body
+          value_type: string
+        - variable: status_code
+          value_selector:
+          - commit
+          - status_code
+          value_type: number
+    - id: replay_error
+      type: custom
+      position:
+        x: 1200
+        y: 560
+      width: 244
+      height: 98
+      sourcePosition: right
+      targetPosition: left
+      data:
+        title: 行动中止：返回错误信息
+        type: end
+        desc: ''
+        selected: false
+        outputs:
+        - variable: error
+          value_selector:
+          - replay
+          - body
+          value_type: string
+        - variable: status_code
+          value_selector:
+          - replay
+          - status_code
+          value_type: number
+    edges:
+    - id: start-source-recall
+      source: start
+      target: recall
+      sourceHandle: source
+      targetHandle: target
+      type: custom
+      data:
+        sourceType: start
+        targetType: http-request
+        isInIteration: false
+        isInLoop: false
+    - id: recall-source-route
+      source: recall
+      target: route
+      sourceHandle: source
+      targetHandle: target
+      type: custom
+      data:
+        sourceType: http-request
+        targetType: http-request
+        isInIteration: false
+        isInLoop: false
+    - id: route-source-branch
+      source: route
+      target: branch
+      sourceHandle: source
+      targetHandle: target
+      type: custom
+      data:
+        sourceType: http-request
+        targetType: if-else
+        isInIteration: false
+        isInLoop: false
+    - id: narrate-source-commit
+      source: narrate
+      target: commit
+      sourceHandle: source
+      targetHandle: target
+      type: custom
+      data:
+        sourceType: http-request
+        targetType: http-request
+        isInIteration: false
+        isInLoop: false
+    - id: commit-source-end
+      source: commit
+      target: end
+      sourceHandle: source
+      targetHandle: target
+      type: custom
+      data:
+        sourceType: http-request
+        targetType: end
+        isInIteration: false
+        isInLoop: false
+    - id: replay-source-cached_end
+      source: replay
+      target: cached_end
+      sourceHandle: source
+      targetHandle: target
+      type: custom
+      data:
+        sourceType: http-request
+        targetType: end
+        isInIteration: false
+        isInLoop: false
+    - id: branch-true-narrate
+      source: branch
+      target: narrate
+      sourceHandle: 'true'
+      targetHandle: target
+      type: custom
+      data:
+        sourceType: if-else
+        targetType: http-request
+        isInIteration: false
+        isInLoop: false
+    - id: branch-false-replay
+      source: branch
+      target: replay
+      sourceHandle: 'false'
+      targetHandle: target
+      type: custom
+      data:
+        sourceType: if-else
+        targetType: http-request
+        isInIteration: false
+        isInLoop: false
+    - id: recall-fail-branch-recall_error
+      source: recall
+      target: recall_error
+      sourceHandle: fail-branch
+      targetHandle: target
+      type: custom
+      data:
+        sourceType: http-request
+        targetType: end
+        isInIteration: false
+        isInLoop: false
+    - id: route-fail-branch-route_error
+      source: route
+      target: route_error
+      sourceHandle: fail-branch
+      targetHandle: target
+      type: custom
+      data:
+        sourceType: http-request
+        targetType: end
+        isInIteration: false
+        isInLoop: false
+    - id: narrate-fail-branch-narrate_error
+      source: narrate
+      target: narrate_error
+      sourceHandle: fail-branch
+      targetHandle: target
+      type: custom
+      data:
+        sourceType: http-request
+        targetType: end
+        isInIteration: false
+        isInLoop: false
+    - id: commit-fail-branch-commit_error
+      source: commit
+      target: commit_error
+      sourceHandle: fail-branch
+      targetHandle: target
+      type: custom
+      data:
+        sourceType: http-request
+        targetType: end
+        isInIteration: false
+        isInLoop: false
+    - id: replay-fail-branch-replay_error
+      source: replay
+      target: replay_error
+      sourceHandle: fail-branch
+      targetHandle: target
+      type: custom
+      data:
+        sourceType: http-request
+        targetType: end
+        isInIteration: false
+        isInLoop: false
+    viewport:
+      x: 0
+      y: 0
+      zoom: 0.65

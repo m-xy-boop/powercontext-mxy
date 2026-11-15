@@ -1,0 +1,15 @@
+{
+  "dify_version": "1.9.2",
+  "dsl_version": "0.4.0",
+  "import": {
+    "id": "5282ba9d-08b0-46f8-bb80-7b5979c3d6e3",
+    "status": "completed",
+    "app_id": "5e33defe-1e26-4ab5-bb59-4fdbf89b3684",
+    "app_mode": "workflow",
+    "current_dsl_version": "0.4.0",
+    "imported_dsl_version": "0.4.0",
+    "error": ""
+  },
+  "published_workflow_id": "a8ead518-13c4-4edf-bba5-04d019077a08",
+  "nodes": 14
+}

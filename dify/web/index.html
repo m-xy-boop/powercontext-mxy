@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>回声当铺 · 记忆有价</title><link rel="stylesheet" href="/style.css"></head>
+<body><div class="rain" aria-hidden="true"></div><main>
+<header><span class="seal">回<br>声</span><div><p class="eyebrow">THE PAWNSHOP OF ECHOES · 午夜营业</p><h1>你愿意，<br>用什么换一个<span>重逢</span>？</h1><p class="intro">雨巷尽头，有一家只收记忆的当铺。<br>你要寻找失踪的妹妹。店主却说：先想好，什么可以忘记。</p></div><div class="umbrella" aria-hidden="true">☂</div></header>
+<section class="counter"><div class="identity"><label>旅人编号<input id="player" maxlength="48" aria-label="旅人编号"></label><button id="visit" class="quiet">合伞离店，再次来访 ↗</button><span id="session"></span></div>
+<div class="layout"><aside><p class="eyebrow">01 / 柜里的价签</p><h2>记忆有价</h2><p class="muted">典当会改变后来的故事。<br>原价赎回，记忆才会回来。</p><div class="memories">
+<button class="memory selected" data-memory="umbrella"><span class="glyph">☂</span><span>红伞<small>妹妹在雨里递给你的伞</small></span><b>3<small>回声币</small></b></button>
+<button class="memory" data-memory="name"><span class="glyph">名</span><span>名字<small>母亲第一次唤你</small></span><b>4<small>回声币</small></b></button>
+<button class="memory" data-memory="song"><span class="glyph">♪</span><span>摇篮曲<small>父亲走调的哼唱</small></span><b>2<small>回声币</small></b></button></div>
+<p class="hint">线索售价 2 币。每次选择都记入账本；换一个会话，店主也不会忘记你。</p></aside>
+<article><div class="story-heading"><span class="eyebrow">02 / 乌有的柜台</span><span class="open-dot">灯还亮着</span></div><div id="story" aria-live="polite"><p class="opening">铜铃响了。<br><br>“进来吧，”乌有抬起眼，<br>“我们不收钱。<br>只收你舍得忘掉的东西。”</p><p class="muted">先选一段记忆，再决定是否典当。<br>点击「推门进店」开始你的故事。</p></div><p id="error" role="alert"></p>
+<label class="words">对店主说点什么<textarea id="words" maxlength="400" placeholder="例如：我只想再见她一面。" rows="2"></textarea></label>
+<div class="actions"><button data-action="enter" class="primary">推门进店</button><button data-action="pawn">典当所选记忆</button><button data-action="ask">问线索 · 2 币</button><button data-action="redeem">赎回所选记忆</button><button data-action="finish" class="finish">走向终局 →</button></div><p id="status">选择不会自动发生。每一步，都由你决定。</p></article></div></section>
+<footer><span>记忆有价，后果自负。</span><span>Dify × PowerContext · Just for Fun</span></footer></main><script src="/app.js"></script></body></html>
