@@ -121,27 +121,139 @@ class _PDFPageDefinition:
 
 PDF_PAGE_SOURCE_DEFINITION: SourceDefinition[PDFPageInput, PDFPageSource, PDFPageInput] = _PDFPageDefinition()
 
-# General financial terminology, independent of any company, year or benchmark.
+# Generic accounting concepts and alternate report headings. These rules do not
+# depend on a document, issuer, question ID or annotated evidence location.
 _FINANCIAL_TERMS = (
     (
-        r"geograph|operat.*(?:region|countr)|primarily operat",
-        "geographic countries regions segments international operations",
+        r"geograph|primarily operat|operat.*(?:region|countr)",
+        ("geographic", "reportable segments", "international operations", "countries regions"),
+        ("geographic", "our divisions", "reportable segments", "business segments"),
     ),
-    (r"legal|litigat|lawsuit|battles", "legal proceedings litigation contingencies claims lawsuits"),
     (
-        r"income statement|p&l|ebitda|profit|margin",
-        "consolidated statements income earnings operations revenue operating",
+        r"legal|litigat|lawsuit|battles",
+        ("legal proceedings", "litigation", "contingencies", "lawsuits"),
+        ("legal proceedings", "litigation", "contingencies"),
+    ),
+    (
+        r"income statement|p&l|ebitda|profit|margin|operating income",
+        ("statement income", "statements operations", "statements earnings", "operating profit"),
+        (
+            "statement of income",
+            "statements of income",
+            "statements of operations",
+            "statement of operations",
+            "statements of earnings",
+            "income statements",
+        ),
     ),
     (
         r"cash flow|capex|capital expend|ebitda|d&a",
-        "consolidated statements cash flows depreciation amortization capital spending expenditures",
+        ("statement cash flows", "depreciation amortization", "capital expenditures", "capital spending"),
+        ("statement of cash flows", "statements of cash flows", "cash flow statements"),
     ),
-    (r"restructur", "restructuring impairment charges costs expenses"),
-    (r"balance sheet|assets|liabilities|working capital", "consolidated balance sheets assets liabilities current"),
-    (r"revenue|sales|growth", "net revenue revenues sales segment organic growth"),
-    (r"dividend|repurchase|buyback", "dividends repurchases common shares stock shareholders"),
-    (r"debt|borrow|interest", "debt borrowings interest maturities obligations financing"),
+    (r"restructur", ("restructuring", "impairment charges"), ("restructuring",)),
+    (
+        r"balance sheet|assets|liabilities|working capital|current ratio",
+        ("balance sheets", "current assets", "current liabilities"),
+        ("balance sheet", "balance sheets", "financial position"),
+    ),
+    (
+        r"revenue|sales|growth",
+        ("net revenue", "net sales", "organic growth"),
+        ("net revenue", "net sales", "segment results"),
+    ),
+    (
+        r"dividend|repurchase|buyback",
+        ("dividends", "share repurchases", "stock repurchases"),
+        ("dividends", "repurchases"),
+    ),
+    (r"debt|borrow|interest", ("debt", "borrowings", "interest expense"), ("debt", "borrowings")),
 )
+_QUERY_NOISE = frozenset([
+    "has",
+    "have",
+    "had",
+    "any",
+    "all",
+    "also",
+    "primarily",
+    "reported",
+    "report",
+    "annual",
+    "fiscal",
+    "fy",
+    "important",
+    "materially",
+    "ongoing",
+    "quantity",
+    "directly",
+    "outlined",
+    "explicitly",
+    "state",
+    "then",
+    "if",
+    "not",
+    "define",
+    "defined",
+    "assuming",
+    "perspective",
+    "investment",
+    "analyst",
+    "use",
+    "only",
+    "details",
+    "shown",
+    "within",
+    "answer",
+    "respond",
+    "response",
+    "give",
+    "question",
+    "calculate",
+    "calculated",
+    "using",
+    "based",
+    "relying",
+    "less",
+    "unadjusted",
+    "adjusted",
+    "usd",
+    "dollar",
+    "dollars",
+    "million",
+    "millions",
+    "billion",
+    "billions",
+    "year",
+    "years",
+    "end",
+    "ended",
+    "much",
+    "many",
+    "total",
+    "company",
+    "inc",
+    "corporation",
+    "corp",
+    "financial",
+    "statements",
+    "statement",
+])
+
+
+def _query_plan(question: str) -> tuple[str, list[tuple[str, ...]], list[str]]:
+    normalized = re.sub(r"\bfy\s*(\d{4})\b", r"\1", question.casefold())
+    core = " ".join(word for word in analyze_fts_query(normalized).split() if word not in _QUERY_NOISE)
+    groups: list[tuple[str, ...]] = [
+        queries for pattern, queries, _headings in _FINANCIAL_TERMS if re.search(pattern, normalized)
+    ]
+    headings = [
+        heading
+        for pattern, _queries, headings in _FINANCIAL_TERMS
+        if re.search(pattern, normalized)
+        for heading in headings
+    ]
+    return core, groups, headings
 
 
 def _terms(text: str) -> list[str]:
@@ -160,16 +272,16 @@ def _rank_candidates(
     candidates: dict[tuple[str, str, int, str, str], MemoryHit],
     fusion: dict[tuple[str, str, int, str, str], float],
     core: str,
-    expansions: list[str],
+    headings: list[str],
 ) -> list[MemoryHit]:
-    """Rank retrieved page text by length-normalized lexical relevance."""
+    """Combine lexical relevance with report titles, without using page positions."""
 
-    documents = {key: Counter(_terms(hit.text)) for key, hit in candidates.items()}
+    documents = {key: Counter(_terms(hit.text.split("\n", 1)[-1])) for key, hit in candidates.items()}
     count = len(documents)
     frequencies: Counter[str] = Counter(term for terms in documents.values() for term in terms)
     average = sum(sum(terms.values()) for terms in documents.values()) / count or 1
     original = set(_terms(core))
-    expanded = set(_terms(" ".join(expansions))) - original
+    expanded = set(_terms(" ".join(headings))) - original
 
     def score(key):
         terms = documents[key]
@@ -180,12 +292,21 @@ def _rank_candidates(
             if tf:
                 idf = math.log(1 + (count - frequencies[term] + 0.5) / (frequencies[term] + 0.5))
                 total += (
-                    (1 if term in original else 0.35) * idf * tf * 2.2 / (tf + 1.2 * (0.25 + 0.75 * length / average))
+                    (1 if term in original else 0.4) * idf * tf * 2.2 / (tf + 1.2 * (0.25 + 0.75 * length / average))
                 )
-        # Company/year tokens in the retained document ID disambiguate reports
-        # when the caller's scope contains multiple document revisions or issuers.
-        heading = set(_terms(candidates[key].text.split("\n", 1)[0]))
-        return total + 2 * len(original & heading) + fusion[key] * 10
+        document_id, _, body = candidates[key].text.partition("\n")
+        heading = set(_terms(document_id))
+        # Issuer/year constrain a question; body term frequency must not swamp
+        # them when the scope contains reports from multiple companies.
+        document_match = 5 * len(original & heading)
+        # A report can contain several sections on one physical page. Match
+        # short heading lines anywhere, rather than just the first characters.
+        title_lines = [" ".join(line.casefold().split()) for line in body.splitlines() if len(line.strip()) <= 100]
+        title_match = max((12.0 for phrase in headings if any(phrase in line for line in title_lines)), default=0.0)
+        # Contents pages mention every financial topic without providing its
+        # evidence. Recognize the list structure, not the recurring page banner.
+        contents_penalty = 12 if len(re.findall(r"\bItem\s+\d+[A-Z]?\.", body)) >= 5 else 0
+        return total + document_match + title_match + fusion[key] * 5 - contents_penalty
 
     return [candidates[key] for key in sorted(candidates, key=score, reverse=True)]
 
@@ -195,15 +316,21 @@ async def search_pdf_pages(memory, question: str, limit: int = 10) -> tuple[Memo
 
     if limit <= 0 or not question.strip():
         return ()
-    core = analyze_fts_query(question)
-    expansions = [terms for pattern, terms in _FINANCIAL_TERMS if re.search(pattern, question.casefold())]
-    queries = list(dict.fromkeys([core, *expansions]))
+    core, groups, headings = _query_plan(question)
+    # Short queries avoid excluding a relevant statement merely because it
+    # lacks the many explanatory or instructional words in a long question.
+    queries = list(dict.fromkeys([core, *(query for group in groups for query in group)]))
+    if not groups:
+        words = core.split()
+        queries.extend(" ".join(words[index : index + 2]) for index in range(0, len(words), 2))
     candidates: dict[tuple[str, str, int, str, str], MemoryHit] = {}
     fusion: dict[tuple[str, str, int, str, str], float] = defaultdict(float)
     # Each query uses the same supplied scope. No file access, model or private
     # backend access is involved; every returned reference is verified via get.
     for query in queries:
-        result = await memory.search(SearchMemoryRequest(query=query, mode="fts", limit=max(100, limit * 5)))
+        if not query.strip():
+            continue
+        result = await memory.search(SearchMemoryRequest(query=query, mode="fts", limit=max(150, limit * 8)))
         for rank, hit in enumerate(result.hits):
             key = (
                 hit.memory_ref.family,
@@ -218,7 +345,7 @@ async def search_pdf_pages(memory, question: str, limit: int = 10) -> tuple[Memo
         return ()
     citations = []
     seen = set()
-    for hit in _rank_candidates(candidates, fusion, core, expansions):
+    for hit in _rank_candidates(candidates, fusion, core, headings):
         citation = MemoryCitation(
             memory_ref=hit.memory_ref, entry_id=hit.entry_id, entry_version_id=hit.entry_version_id
         )

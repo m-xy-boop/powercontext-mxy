@@ -128,3 +128,69 @@ def test_restarted_memory_returns_distinct_pages_and_exact_revisions(tmp_path):
                 assert restored in pages
 
     asyncio.run(scenario())
+
+
+def test_long_questions_retrieve_statements_from_the_correct_report(tmp_path):
+    """Instruction vocabulary and another issuer must not crowd out the reports."""
+    from powercontext.sources.pdf_pages import PDFPageInput
+
+    class Pipeline:
+        async def extract(self, request, /):
+            return tuple(
+                MemoryEntryInput(
+                    kind="page", text=source.projection(TEXT_EVIDENCE_PROJECTION_KEY)["content"], sources=(source,)
+                )
+                for source in request.sources
+            )
+
+    async def scenario():
+        registry = SourceDefinitionRegistry((PDF_PAGE_SOURCE_DEFINITION,))
+        config = BuiltinConfig(database=SQLiteConfig(url=f"sqlite+aiosqlite:///{tmp_path / 'ranking.db'}"))
+        pages = []
+        for issuer in ("EXAMPLE_2024_10K", "OTHER_2024_10K"):
+            texts = [
+                "Consolidated Statements of Income\nNet sales 100 Cost of sales 50 Operating income 20",
+                "Consolidated Statements of Cash Flows\nDepreciation 5 Amortization 2 Capital expenditures 3",
+                *[
+                    f"Exhibit {index}\nThe investment analyst shall respond with a quantity of unadjusted "
+                    "EBITDA margin. Define the perspective using details shown within the annual report. "
+                    "An answer in USD millions is calculated assuming the response explicitly outlines costs."
+                    for index in range(24)
+                ],
+            ]
+            pages.extend(
+                PDFPageInput(
+                    document_id=issuer,
+                    document_sha256=hashlib.sha256(issuer.encode()).hexdigest(),
+                    page_number=index,
+                    text=text,
+                )
+                for index, text in enumerate(texts, 1)
+            )
+        observations = [project_source_for_transport(registry, await registry.resolve(page)) for page in pages]
+        async with open_builtin_runtime(config, candidate_pipeline=Pipeline()) as runtime:
+            scope = await runtime.scopes.create(ScopeDraft(title="Reports", summary="Reports", idempotency_key="rank"))
+            await runtime.ingestion.register(manifest_for_definition(PDF_PAGE_SOURCE_DEFINITION))
+            for observation in observations:
+                await runtime.ingestion.submit(
+                    SubmitSourceObservation(scope_id=scope.scope_id, observation=observation)
+                )
+            memory = runtime.memory.for_scope(scope.scope_id)
+            while (await memory.flush()).processed:
+                pass
+        async with open_builtin_runtime(config) as runtime:
+            memory = runtime.memory.for_scope(scope.scope_id)
+            citations = await search_pdf_pages(
+                memory,
+                "What is the FY2024 unadjusted EBITDA margin for Example? Calculate it using operating income "
+                "and depreciation and amortization from the cash flow statement. Respond by assuming the "
+                "perspective of an investment analyst using only details shown in the income statement.",
+                limit=2,
+            )
+            source_ids = {
+                (await memory.get(GetMemoryEntryRequest(citation=citation))).entry.sources[0].source_id
+                for citation in citations
+            }
+            assert source_ids == {observations[0].name, observations[1].name}
+
+    asyncio.run(scenario())
