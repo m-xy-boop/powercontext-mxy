@@ -1,0 +1,107 @@
+{
+  "at": "2026-11-15T18:12:40.358Z",
+  "dtype": "q8",
+  "backend": "wasm",
+  "documents": 16,
+  "configurations": [
+    {
+      "config": {
+        "batch": 1,
+        "refresh": "each"
+      },
+      "name": "sf_opt_mwi5i95k_0",
+      "runs": [
+        {
+          "repeat": 0,
+          "embeddingMs": 2366.8550000041723,
+          "writeMs": 4786.675221999991,
+          "refreshMs": 13338.431948999641,
+          "visibilityMs": 2141.1117580002174,
+          "totalMs": 25943.509999997914
+        },
+        {
+          "repeat": 1,
+          "embeddingMs": 997.995000012219,
+          "writeMs": 5649.220302999951,
+          "refreshMs": 9535.794489999884,
+          "visibilityMs": 1007.3235269999132,
+          "totalMs": 17927.22999999672
+        },
+        {
+          "repeat": 2,
+          "embeddingMs": 458.55500001460314,
+          "writeMs": 464.45143299992196,
+          "refreshMs": 12829.561908999458,
+          "visibilityMs": 455.2865690003382,
+          "totalMs": 14495.889999993145
+        }
+      ]
+    },
+    {
+      "config": {
+        "batch": 1,
+        "refresh": "group"
+      },
+      "name": "sf_opt_mwi5jjyt_1",
+      "runs": [
+        {
+          "repeat": 0,
+          "embeddingMs": 403.4899999946356,
+          "writeMs": 407.4574230000144,
+          "refreshMs": 806.3403570000082,
+          "visibilityMs": 298.577874999959,
+          "totalMs": 1971.039999999106
+        },
+        {
+          "repeat": 1,
+          "embeddingMs": 824.5199999809265,
+          "writeMs": 380.44474499998614,
+          "refreshMs": 505.50154500000644,
+          "visibilityMs": 563.8844380000373,
+          "totalMs": 2338.530000001192
+        },
+        {
+          "repeat": 2,
+          "embeddingMs": 551.9249999970198,
+          "writeMs": 349.69576999999117,
+          "refreshMs": 704.3336739999941,
+          "visibilityMs": 222.90244199999142,
+          "totalMs": 1883.6599999964237
+        }
+      ]
+    },
+    {
+      "config": {
+        "batch": 8,
+        "refresh": "group"
+      },
+      "name": "sf_opt_mwi5jp04_2",
+      "runs": [
+        {
+          "repeat": 0,
+          "embeddingMs": 864.4600000008941,
+          "writeMs": 759.4505929999286,
+          "refreshMs": 405.8416099998867,
+          "visibilityMs": 370.8221340000164,
+          "totalMs": 2453.210000000894
+        },
+        {
+          "repeat": 1,
+          "embeddingMs": 537.9049999937415,
+          "writeMs": 386.172082999954,
+          "refreshMs": 708.5106389999855,
+          "visibilityMs": 791.3886890000431,
+          "totalMs": 2543.4700000062585
+        },
+        {
+          "repeat": 2,
+          "embeddingMs": 501.20000000298023,
+          "writeMs": 530.2399239999941,
+          "refreshMs": 505.12587900005747,
+          "visibilityMs": 458.8439070000313,
+          "totalMs": 2197.460000000894
+        }
+      ]
+    }
+  ]
+}

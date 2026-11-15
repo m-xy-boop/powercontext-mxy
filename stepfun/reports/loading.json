@@ -1,0 +1,355 @@
+{
+  "at": "2026-11-15T18:16:06.634Z",
+  "browser": "141.0.7390.37",
+  "note": "每配置独立全新浏览器 context，第一轮为空缓存，后两轮复用 Cache Storage；下载指同源 localhost 资源读取，不代表互联网速度。",
+  "configurations": [
+    {
+      "config": {
+        "dtype": "fp32",
+        "backend": "wasm"
+      },
+      "runs": [
+        {
+          "repeat": 0,
+          "backend": "wasm",
+          "dtype": "fp32",
+          "reason": "按测试配置使用 WASM",
+          "loadMs": 15343.869999997318,
+          "modelFetchMs": 5129.02499999851,
+          "sessionInitMs": 10214.844999998808,
+          "fileTimings": [
+            {
+              "file": "tokenizer.json",
+              "startMs": 1.7349999994039536,
+              "bytes": 439125,
+              "doneMs": 70.78999999910593
+            },
+            {
+              "file": "tokenizer_config.json",
+              "startMs": 2.314999997615814,
+              "bytes": 367,
+              "doneMs": 69.39500000327826
+            },
+            {
+              "file": "config.json",
+              "startMs": 2.9099999964237213,
+              "bytes": 716,
+              "doneMs": 65.52499999850988
+            },
+            {
+              "file": "onnx/model.onnx",
+              "startMs": 69.05499999970198,
+              "bytes": 94851877,
+              "doneMs": 5129.02499999851
+            }
+          ],
+          "threads": 4
+        },
+        {
+          "repeat": 1,
+          "backend": "wasm",
+          "dtype": "fp32",
+          "reason": "按测试配置使用 WASM",
+          "loadMs": 5478.95000000298,
+          "modelFetchMs": 1077.1150000020862,
+          "sessionInitMs": 4401.835000000894,
+          "fileTimings": [
+            {
+              "file": "tokenizer.json",
+              "startMs": 0.8250000029802322,
+              "bytes": 439125,
+              "doneMs": 566.5899999961257
+            },
+            {
+              "file": "tokenizer_config.json",
+              "startMs": 127.79999999701977,
+              "bytes": 367,
+              "doneMs": 767.3449999988079
+            },
+            {
+              "file": "config.json",
+              "startMs": 129.3800000026822,
+              "bytes": 716,
+              "doneMs": 801.0300000011921
+            },
+            {
+              "file": "onnx/model.onnx",
+              "startMs": 801.9200000017881,
+              "bytes": 94851877,
+              "doneMs": 1077.1150000020862
+            }
+          ],
+          "threads": 4
+        },
+        {
+          "repeat": 2,
+          "backend": "wasm",
+          "dtype": "fp32",
+          "reason": "按测试配置使用 WASM",
+          "loadMs": 3237.719999998808,
+          "modelFetchMs": 735.6449999958277,
+          "sessionInitMs": 2502.0750000029802,
+          "fileTimings": [
+            {
+              "file": "tokenizer.json",
+              "startMs": 0.8650000020861626,
+              "bytes": 439125,
+              "doneMs": 10.375
+            },
+            {
+              "file": "tokenizer_config.json",
+              "startMs": 1.2599999979138374,
+              "bytes": 367,
+              "doneMs": 32.894999995827675
+            },
+            {
+              "file": "config.json",
+              "startMs": 1.844999998807907,
+              "bytes": 716,
+              "doneMs": 200.04500000178814
+            },
+            {
+              "file": "onnx/model.onnx",
+              "startMs": 203.39499999582767,
+              "bytes": 94851877,
+              "doneMs": 735.6449999958277
+            }
+          ],
+          "threads": 4
+        }
+      ]
+    },
+    {
+      "config": {
+        "dtype": "q8",
+        "backend": "wasm"
+      },
+      "runs": [
+        {
+          "repeat": 0,
+          "backend": "wasm",
+          "dtype": "q8",
+          "reason": "按测试配置使用 WASM",
+          "loadMs": 3250.890000000596,
+          "modelFetchMs": 1989.3249999955297,
+          "sessionInitMs": 1261.5650000050664,
+          "fileTimings": [
+            {
+              "file": "tokenizer.json",
+              "startMs": 0.5749999955296516,
+              "bytes": 439125,
+              "doneMs": 1284.015000000596
+            },
+            {
+              "file": "tokenizer_config.json",
+              "startMs": 0.8149999976158142,
+              "bytes": 367,
+              "doneMs": 1278.359999999404
+            },
+            {
+              "file": "config.json",
+              "startMs": 1.030000001192093,
+              "bytes": 716,
+              "doneMs": 1274.125
+            },
+            {
+              "file": "onnx/model_quantized.onnx",
+              "startMs": 1275.710000000894,
+              "bytes": 24010842,
+              "doneMs": 1989.3249999955297
+            }
+          ],
+          "threads": 4
+        },
+        {
+          "repeat": 1,
+          "backend": "wasm",
+          "dtype": "q8",
+          "reason": "按测试配置使用 WASM",
+          "loadMs": 517.7950000017881,
+          "modelFetchMs": 72.64000000059605,
+          "sessionInitMs": 445.1550000011921,
+          "fileTimings": [
+            {
+              "file": "tokenizer.json",
+              "startMs": 1.6050000041723251,
+              "bytes": 439125,
+              "doneMs": 10.620000004768372
+            },
+            {
+              "file": "tokenizer_config.json",
+              "startMs": 1.880000002682209,
+              "bytes": 367,
+              "doneMs": 19.860000006854534
+            },
+            {
+              "file": "config.json",
+              "startMs": 2.2000000029802322,
+              "bytes": 716,
+              "doneMs": 37.395000003278255
+            },
+            {
+              "file": "onnx/model_quantized.onnx",
+              "startMs": 38.645000003278255,
+              "bytes": 24010842,
+              "doneMs": 72.64000000059605
+            }
+          ],
+          "threads": 4
+        },
+        {
+          "repeat": 2,
+          "backend": "wasm",
+          "dtype": "q8",
+          "reason": "按测试配置使用 WASM",
+          "loadMs": 610.7800000011921,
+          "modelFetchMs": 82.64000000059605,
+          "sessionInitMs": 528.140000000596,
+          "fileTimings": [
+            {
+              "file": "tokenizer.json",
+              "startMs": 1.4750000014901161,
+              "bytes": 439125,
+              "doneMs": 7.894999995827675
+            },
+            {
+              "file": "tokenizer_config.json",
+              "startMs": 2.3250000029802322,
+              "bytes": 367,
+              "doneMs": 16.100000001490116
+            },
+            {
+              "file": "config.json",
+              "startMs": 2.769999995827675,
+              "bytes": 716,
+              "doneMs": 37.09499999880791
+            },
+            {
+              "file": "onnx/model_quantized.onnx",
+              "startMs": 38.42999999970198,
+              "bytes": 24010842,
+              "doneMs": 82.64000000059605
+            }
+          ],
+          "threads": 4
+        }
+      ]
+    },
+    {
+      "config": {
+        "dtype": "quantized",
+        "backend": "auto"
+      },
+      "runs": [
+        {
+          "repeat": 0,
+          "backend": "wasm",
+          "dtype": "q8",
+          "reason": "浏览器未提供 WebGPU adapter",
+          "loadMs": 1657.7049999982119,
+          "modelFetchMs": 502.5300000011921,
+          "sessionInitMs": 1155.1749999970198,
+          "fileTimings": [
+            {
+              "file": "tokenizer.json",
+              "startMs": 18.25,
+              "bytes": 439125,
+              "doneMs": 51.020000003278255
+            },
+            {
+              "file": "tokenizer_config.json",
+              "startMs": 18.604999996721745,
+              "bytes": 367,
+              "doneMs": 44.399999998509884
+            },
+            {
+              "file": "config.json",
+              "startMs": 18.905000001192093,
+              "bytes": 716,
+              "doneMs": 79.07999999821186
+            },
+            {
+              "file": "onnx/model_quantized.onnx",
+              "startMs": 80.61500000208616,
+              "bytes": 24010842,
+              "doneMs": 502.5300000011921
+            }
+          ],
+          "threads": 4
+        },
+        {
+          "repeat": 1,
+          "backend": "wasm",
+          "dtype": "q8",
+          "reason": "浏览器未提供 WebGPU adapter",
+          "loadMs": 669.375,
+          "modelFetchMs": 103.48499999940395,
+          "sessionInitMs": 565.890000000596,
+          "fileTimings": [
+            {
+              "file": "tokenizer.json",
+              "startMs": 6.010000005364418,
+              "bytes": 439125,
+              "doneMs": 12.195000000298023
+            },
+            {
+              "file": "tokenizer_config.json",
+              "startMs": 6.260000005364418,
+              "bytes": 367,
+              "doneMs": 21.810000002384186
+            },
+            {
+              "file": "config.json",
+              "startMs": 6.565000005066395,
+              "bytes": 716,
+              "doneMs": 42.17999999970198
+            },
+            {
+              "file": "onnx/model_quantized.onnx",
+              "startMs": 43.64000000059605,
+              "bytes": 24010842,
+              "doneMs": 103.48499999940395
+            }
+          ],
+          "threads": 4
+        },
+        {
+          "repeat": 2,
+          "backend": "wasm",
+          "dtype": "q8",
+          "reason": "浏览器未提供 WebGPU adapter",
+          "loadMs": 674.9050000011921,
+          "modelFetchMs": 94.30499999970198,
+          "sessionInitMs": 580.6000000014901,
+          "fileTimings": [
+            {
+              "file": "tokenizer.json",
+              "startMs": 5.08500000089407,
+              "bytes": 439125,
+              "doneMs": 11.46000000089407
+            },
+            {
+              "file": "tokenizer_config.json",
+              "startMs": 5.384999997913837,
+              "bytes": 367,
+              "doneMs": 24.089999996125698
+            },
+            {
+              "file": "config.json",
+              "startMs": 5.739999994635582,
+              "bytes": 716,
+              "doneMs": 47.04999999701977
+            },
+            {
+              "file": "onnx/model_quantized.onnx",
+              "startMs": 48.92999999970198,
+              "bytes": 24010842,
+              "doneMs": 94.30499999970198
+            }
+          ],
+          "threads": 4
+        }
+      ]
+    }
+  ]
+}

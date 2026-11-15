@@ -1,0 +1,3857 @@
+[
+  {
+    "config": {
+      "dtype": "fp32",
+      "backend": "wasm",
+      "batch": 1
+    },
+    "name": "sf_bench_mwi5bgrt_0",
+    "load": {
+      "backend": "wasm",
+      "dtype": "fp32",
+      "reason": "按测试配置使用 WASM",
+      "loadMs": 2237.630000002682,
+      "threads": 4
+    },
+    "warmLoad": {
+      "backend": "wasm",
+      "dtype": "fp32",
+      "reason": "按测试配置使用 WASM",
+      "loadMs": 837.1199999973178,
+      "threads": 4
+    },
+    "runs": [
+      {
+        "repeat": 0,
+        "embeddingMs": 525.9600000157952,
+        "writeMs": 345.2653940001619,
+        "refreshMs": 9380.877653000178,
+        "importTotalMs": 10704.039999999106,
+        "queries": [
+          {
+            "query": "浏览器不支持 GPU 加速怎么办",
+            "ids": [
+              "gpu",
+              "cache",
+              "privacy",
+              "batch",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 13.915000006556511,
+            "seekdbMs": 10.337633999995887,
+            "totalMs": 40.38000000268221
+          },
+          {
+            "query": "没有显卡如何运行模型",
+            "ids": [
+              "wasm",
+              "int8",
+              "cache",
+              "index",
+              "gpu"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 10.950000002980232,
+            "seekdbMs": 6.917001999972854,
+            "totalMs": 32.63499999791384
+          },
+          {
+            "query": "如何缩小模型下载体积",
+            "ids": [
+              "int8",
+              "chunk",
+              "cache",
+              "wasm",
+              "embedding"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 17.125,
+            "seekdbMs": 7.501864999998361,
+            "totalMs": 44.395000003278255
+          },
+          {
+            "query": "语义相似度是如何计算的",
+            "ids": [
+              "embedding",
+              "index",
+              "fp32",
+              "hybrid",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 17.405000001192093,
+            "seekdbMs": 6.662566999963019,
+            "totalMs": 51.17999999970198
+          },
+          {
+            "query": "如何同时使用关键词和语义搜索",
+            "ids": [
+              "hybrid",
+              "embedding",
+              "state",
+              "rrf",
+              "index"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 19.094999998807907,
+            "seekdbMs": 8.915458999981638,
+            "totalMs": 48.71000000089407
+          },
+          {
+            "query": "导入后为什么要刷新索引",
+            "ids": [
+              "refresh",
+              "utf8",
+              "index",
+              "state",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 24.160000003874302,
+            "seekdbMs": 10.445957000018097,
+            "totalMs": 53.105000004172325
+          },
+          {
+            "query": "长文档怎么分段",
+            "ids": [
+              "chunk",
+              "metric",
+              "embedding",
+              "refresh",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 20.28999999910593,
+            "seekdbMs": 9.819825000013225,
+            "totalMs": 47.399999998509884
+          },
+          {
+            "query": "怎样提高向量化吞吐量",
+            "ids": [
+              "int8",
+              "fp32",
+              "privacy",
+              "refresh",
+              "index"
+            ],
+            "recall5": 0,
+            "ndcg5": 0,
+            "embeddingMs": 22.265000000596046,
+            "seekdbMs": 12.467990999983158,
+            "totalMs": 52.5
+          },
+          {
+            "query": "为什么第二次加载模型更快",
+            "ids": [
+              "cache",
+              "int8",
+              "chunk",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 25.564999997615814,
+            "seekdbMs": 10.17359999998007,
+            "totalMs": 52.24499999731779
+          },
+          {
+            "query": "文档是否需要发送云端 AI",
+            "ids": [
+              "privacy",
+              "refresh",
+              "chunk",
+              "metric",
+              "utf8"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 23.695000000298023,
+            "seekdbMs": 12.70058100001188,
+            "totalMs": 53.60999999940395
+          },
+          {
+            "query": "不同检索分数尺度不同怎么融合",
+            "ids": [
+              "rrf",
+              "hybrid",
+              "embedding",
+              "int8",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 24.21000000089407,
+            "seekdbMs": 11.062465000024531,
+            "totalMs": 50.99000000208616
+          },
+          {
+            "query": "如何防止不同知识库数据串库",
+            "ids": [
+              "state",
+              "privacy",
+              "rrf",
+              "chunk",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 24.405000001192093,
+            "seekdbMs": 10.737604000023566,
+            "totalMs": 51.600000001490116
+          },
+          {
+            "query": "量化对比应该选什么基准",
+            "ids": [
+              "int8",
+              "fp32",
+              "batch",
+              "chunk",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 22.439999997615814,
+            "seekdbMs": 11.834554000000935,
+            "totalMs": 51.28999999910593
+          },
+          {
+            "query": "怎样客观衡量搜索质量",
+            "ids": [
+              "metric",
+              "rrf",
+              "fp32",
+              "int8",
+              "state"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 23.55000000447035,
+            "seekdbMs": 10.85633500001859,
+            "totalMs": 53.57000000029802
+          },
+          {
+            "query": "什么索引能加速向量近邻查询",
+            "ids": [
+              "index",
+              "embedding",
+              "refresh",
+              "privacy",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 26.25500000268221,
+            "seekdbMs": 9.722183000005316,
+            "totalMs": 53.26000000536442
+          },
+          {
+            "query": "导入文本要使用什么编码",
+            "ids": [
+              "utf8",
+              "embedding",
+              "state",
+              "wasm",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 26.685000002384186,
+            "seekdbMs": 13.42854900000384,
+            "totalMs": 61.689999997615814
+          }
+        ]
+      },
+      {
+        "repeat": 1,
+        "embeddingMs": 365.17999997735023,
+        "writeMs": 275.1915920001338,
+        "refreshMs": 10060.947746000078,
+        "importTotalMs": 11068.530000001192,
+        "queries": [
+          {
+            "query": "浏览器不支持 GPU 加速怎么办",
+            "ids": [
+              "gpu",
+              "cache",
+              "privacy",
+              "batch",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 13.20499999821186,
+            "seekdbMs": 5.4372999999905005,
+            "totalMs": 28.765000000596046
+          },
+          {
+            "query": "没有显卡如何运行模型",
+            "ids": [
+              "wasm",
+              "int8",
+              "cache",
+              "index",
+              "gpu"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 12.314999997615814,
+            "seekdbMs": 7.746141000010539,
+            "totalMs": 30.660000003874302
+          },
+          {
+            "query": "如何缩小模型下载体积",
+            "ids": [
+              "int8",
+              "chunk",
+              "cache",
+              "wasm",
+              "embedding"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 13.509999997913837,
+            "seekdbMs": 6.580171999987215,
+            "totalMs": 38.78000000119209
+          },
+          {
+            "query": "语义相似度是如何计算的",
+            "ids": [
+              "embedding",
+              "index",
+              "fp32",
+              "hybrid",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 11.695000000298023,
+            "seekdbMs": 7.694949000026099,
+            "totalMs": 29.67000000178814
+          },
+          {
+            "query": "如何同时使用关键词和语义搜索",
+            "ids": [
+              "hybrid",
+              "embedding",
+              "state",
+              "rrf",
+              "index"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 13.814999997615814,
+            "seekdbMs": 7.136546999972779,
+            "totalMs": 37.02999999374151
+          },
+          {
+            "query": "导入后为什么要刷新索引",
+            "ids": [
+              "refresh",
+              "utf8",
+              "index",
+              "state",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 12.225000001490116,
+            "seekdbMs": 6.196281999989878,
+            "totalMs": 28.774999998509884
+          },
+          {
+            "query": "长文档怎么分段",
+            "ids": [
+              "chunk",
+              "metric",
+              "embedding",
+              "refresh",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 14.530000001192093,
+            "seekdbMs": 6.989643000008073,
+            "totalMs": 32.100000001490116
+          },
+          {
+            "query": "怎样提高向量化吞吐量",
+            "ids": [
+              "int8",
+              "fp32",
+              "privacy",
+              "refresh",
+              "index"
+            ],
+            "recall5": 0,
+            "ndcg5": 0,
+            "embeddingMs": 13.620000004768372,
+            "seekdbMs": 8.231570000003558,
+            "totalMs": 39.42500000447035
+          },
+          {
+            "query": "为什么第二次加载模型更快",
+            "ids": [
+              "cache",
+              "int8",
+              "chunk",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 14.020000003278255,
+            "seekdbMs": 6.94612199999392,
+            "totalMs": 30.65999999642372
+          },
+          {
+            "query": "文档是否需要发送云端 AI",
+            "ids": [
+              "privacy",
+              "refresh",
+              "chunk",
+              "metric",
+              "utf8"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 12.095000006258488,
+            "seekdbMs": 7.826711000001524,
+            "totalMs": 30.600000001490116
+          },
+          {
+            "query": "不同检索分数尺度不同怎么融合",
+            "ids": [
+              "rrf",
+              "hybrid",
+              "embedding",
+              "int8",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 14.174999997019768,
+            "seekdbMs": 7.140020999999251,
+            "totalMs": 38.375
+          },
+          {
+            "query": "如何防止不同知识库数据串库",
+            "ids": [
+              "state",
+              "privacy",
+              "rrf",
+              "chunk",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 12.590000003576279,
+            "seekdbMs": 7.807101999991573,
+            "totalMs": 31.394999995827675
+          },
+          {
+            "query": "量化对比应该选什么基准",
+            "ids": [
+              "int8",
+              "fp32",
+              "batch",
+              "chunk",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 17.04500000178814,
+            "seekdbMs": 9.447054999996908,
+            "totalMs": 52.36999999731779
+          },
+          {
+            "query": "怎样客观衡量搜索质量",
+            "ids": [
+              "metric",
+              "rrf",
+              "fp32",
+              "int8",
+              "state"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 19.615000002086163,
+            "seekdbMs": 6.485846000025049,
+            "totalMs": 50.07999999821186
+          },
+          {
+            "query": "什么索引能加速向量近邻查询",
+            "ids": [
+              "index",
+              "embedding",
+              "refresh",
+              "privacy",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 14.555000007152557,
+            "seekdbMs": 6.905414999986533,
+            "totalMs": 32.50999999791384
+          },
+          {
+            "query": "导入文本要使用什么编码",
+            "ids": [
+              "utf8",
+              "embedding",
+              "state",
+              "wasm",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 19.96000000089407,
+            "seekdbMs": 7.464696999988519,
+            "totalMs": 50.79500000178814
+          }
+        ]
+      },
+      {
+        "repeat": 2,
+        "embeddingMs": 316.91499998420477,
+        "writeMs": 248.27569900004892,
+        "refreshMs": 9356.528036999924,
+        "importTotalMs": 10254.920000001788,
+        "queries": [
+          {
+            "query": "浏览器不支持 GPU 加速怎么办",
+            "ids": [
+              "gpu",
+              "cache",
+              "privacy",
+              "batch",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 19.820000000298023,
+            "seekdbMs": 8.734597000002395,
+            "totalMs": 40.60999999940395
+          },
+          {
+            "query": "没有显卡如何运行模型",
+            "ids": [
+              "wasm",
+              "int8",
+              "cache",
+              "index",
+              "gpu"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 20.24499999731779,
+            "seekdbMs": 7.294134999974631,
+            "totalMs": 54.4100000038743
+          },
+          {
+            "query": "如何缩小模型下载体积",
+            "ids": [
+              "int8",
+              "chunk",
+              "cache",
+              "wasm",
+              "embedding"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 20.934999994933605,
+            "seekdbMs": 7.932440000004135,
+            "totalMs": 49.564999997615814
+          },
+          {
+            "query": "语义相似度是如何计算的",
+            "ids": [
+              "embedding",
+              "index",
+              "fp32",
+              "hybrid",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 18.270000003278255,
+            "seekdbMs": 8.65882699994836,
+            "totalMs": 49.84000000357628
+          },
+          {
+            "query": "如何同时使用关键词和语义搜索",
+            "ids": [
+              "hybrid",
+              "embedding",
+              "state",
+              "rrf",
+              "index"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 19.49500000476837,
+            "seekdbMs": 8.387887999997474,
+            "totalMs": 49.86500000208616
+          },
+          {
+            "query": "导入后为什么要刷新索引",
+            "ids": [
+              "refresh",
+              "utf8",
+              "index",
+              "state",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 20.890000000596046,
+            "seekdbMs": 8.860927000001539,
+            "totalMs": 50.125
+          },
+          {
+            "query": "长文档怎么分段",
+            "ids": [
+              "chunk",
+              "metric",
+              "embedding",
+              "refresh",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 19.839999996125698,
+            "seekdbMs": 8.023680999991484,
+            "totalMs": 49.86999999731779
+          },
+          {
+            "query": "怎样提高向量化吞吐量",
+            "ids": [
+              "int8",
+              "fp32",
+              "privacy",
+              "refresh",
+              "index"
+            ],
+            "recall5": 0,
+            "ndcg5": 0,
+            "embeddingMs": 18.339999996125698,
+            "seekdbMs": 8.11692200001562,
+            "totalMs": 50.230000004172325
+          },
+          {
+            "query": "为什么第二次加载模型更快",
+            "ids": [
+              "cache",
+              "int8",
+              "chunk",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 20.730000004172325,
+            "seekdbMs": 9.415139999997336,
+            "totalMs": 50.03000000119209
+          },
+          {
+            "query": "文档是否需要发送云端 AI",
+            "ids": [
+              "privacy",
+              "refresh",
+              "chunk",
+              "metric",
+              "utf8"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 22.21000000089407,
+            "seekdbMs": 8.846694000007119,
+            "totalMs": 50.41499999910593
+          },
+          {
+            "query": "不同检索分数尺度不同怎么融合",
+            "ids": [
+              "rrf",
+              "hybrid",
+              "embedding",
+              "int8",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 24.375,
+            "seekdbMs": 8.329532000003383,
+            "totalMs": 49.39000000059605
+          },
+          {
+            "query": "如何防止不同知识库数据串库",
+            "ids": [
+              "state",
+              "privacy",
+              "rrf",
+              "chunk",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 22.34000000357628,
+            "seekdbMs": 12.18678499996895,
+            "totalMs": 50.20000000298023
+          },
+          {
+            "query": "量化对比应该选什么基准",
+            "ids": [
+              "int8",
+              "fp32",
+              "batch",
+              "chunk",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 17.269999995827675,
+            "seekdbMs": 8.768377000000328,
+            "totalMs": 49.979999996721745
+          },
+          {
+            "query": "怎样客观衡量搜索质量",
+            "ids": [
+              "metric",
+              "rrf",
+              "fp32",
+              "int8",
+              "state"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 23.25,
+            "seekdbMs": 9.10637700004736,
+            "totalMs": 50.104999996721745
+          },
+          {
+            "query": "什么索引能加速向量近邻查询",
+            "ids": [
+              "index",
+              "embedding",
+              "refresh",
+              "privacy",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 21.195000000298023,
+            "seekdbMs": 10.629148999985773,
+            "totalMs": 49.685000002384186
+          },
+          {
+            "query": "导入文本要使用什么编码",
+            "ids": [
+              "utf8",
+              "embedding",
+              "state",
+              "wasm",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 24.13000000268221,
+            "seekdbMs": 8.269794999971054,
+            "totalMs": 50.064999997615814
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "config": {
+      "dtype": "q8",
+      "backend": "wasm",
+      "batch": 1
+    },
+    "name": "sf_bench_mwi5bgrt_1",
+    "load": {
+      "backend": "wasm",
+      "dtype": "q8",
+      "reason": "按测试配置使用 WASM",
+      "loadMs": 1000.5399999991059,
+      "threads": 4
+    },
+    "warmLoad": {
+      "backend": "wasm",
+      "dtype": "q8",
+      "reason": "按测试配置使用 WASM",
+      "loadMs": 321.97999999672174,
+      "threads": 4
+    },
+    "runs": [
+      {
+        "repeat": 0,
+        "embeddingMs": 305.19499998539686,
+        "writeMs": 863.5953109998954,
+        "refreshMs": 10053.77639500011,
+        "importTotalMs": 11545.984999999404,
+        "queries": [
+          {
+            "query": "浏览器不支持 GPU 加速怎么办",
+            "ids": [
+              "gpu",
+              "cache",
+              "privacy",
+              "refresh",
+              "batch"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 11.399999998509884,
+            "seekdbMs": 9.86193800001638,
+            "totalMs": 33.45499999821186
+          },
+          {
+            "query": "没有显卡如何运行模型",
+            "ids": [
+              "wasm",
+              "int8",
+              "cache",
+              "index",
+              "chunk"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 8.009999997913837,
+            "seekdbMs": 6.029409000009764,
+            "totalMs": 25.88000000268221
+          },
+          {
+            "query": "如何缩小模型下载体积",
+            "ids": [
+              "int8",
+              "chunk",
+              "cache",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 11.155000001192093,
+            "seekdbMs": 5.882261999999173,
+            "totalMs": 26.99499999731779
+          },
+          {
+            "query": "语义相似度是如何计算的",
+            "ids": [
+              "embedding",
+              "index",
+              "hybrid",
+              "privacy",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 8.785000003874302,
+            "seekdbMs": 6.3751069999998435,
+            "totalMs": 35.725000001490116
+          },
+          {
+            "query": "如何同时使用关键词和语义搜索",
+            "ids": [
+              "hybrid",
+              "embedding",
+              "state",
+              "index",
+              "rrf"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 19.674999997019768,
+            "seekdbMs": 5.662843000027351,
+            "totalMs": 50
+          },
+          {
+            "query": "导入后为什么要刷新索引",
+            "ids": [
+              "refresh",
+              "index",
+              "utf8",
+              "state",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 8.32999999821186,
+            "seekdbMs": 6.086494000046514,
+            "totalMs": 22.984999999403954
+          },
+          {
+            "query": "长文档怎么分段",
+            "ids": [
+              "chunk",
+              "metric",
+              "embedding",
+              "refresh",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 10.484999999403954,
+            "seekdbMs": 5.579388999962248,
+            "totalMs": 24.54500000178814
+          },
+          {
+            "query": "怎样提高向量化吞吐量",
+            "ids": [
+              "int8",
+              "fp32",
+              "privacy",
+              "index",
+              "refresh"
+            ],
+            "recall5": 0,
+            "ndcg5": 0,
+            "embeddingMs": 12.570000000298023,
+            "seekdbMs": 8.206003000028431,
+            "totalMs": 33.57999999821186
+          },
+          {
+            "query": "为什么第二次加载模型更快",
+            "ids": [
+              "cache",
+              "int8",
+              "chunk",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 12.405000001192093,
+            "seekdbMs": 6.389789999986533,
+            "totalMs": 30.49499999731779
+          },
+          {
+            "query": "文档是否需要发送云端 AI",
+            "ids": [
+              "privacy",
+              "refresh",
+              "chunk",
+              "metric",
+              "embedding"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 8.734999999403954,
+            "seekdbMs": 6.101446999993641,
+            "totalMs": 38.435000002384186
+          },
+          {
+            "query": "不同检索分数尺度不同怎么融合",
+            "ids": [
+              "rrf",
+              "hybrid",
+              "embedding",
+              "int8",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 10.745000004768372,
+            "seekdbMs": 5.61560499999905,
+            "totalMs": 26.265000000596046
+          },
+          {
+            "query": "如何防止不同知识库数据串库",
+            "ids": [
+              "state",
+              "privacy",
+              "rrf",
+              "chunk",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 9.384999997913837,
+            "seekdbMs": 7.391637999971863,
+            "totalMs": 40.44500000029802
+          },
+          {
+            "query": "量化对比应该选什么基准",
+            "ids": [
+              "int8",
+              "fp32",
+              "batch",
+              "chunk",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 11.125,
+            "seekdbMs": 6.400000000023283,
+            "totalMs": 27.765000000596046
+          },
+          {
+            "query": "怎样客观衡量搜索质量",
+            "ids": [
+              "rrf",
+              "metric",
+              "fp32",
+              "int8",
+              "state"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 9.83500000089407,
+            "seekdbMs": 6.1849180000135675,
+            "totalMs": 39.05499999970198
+          },
+          {
+            "query": "什么索引能加速向量近邻查询",
+            "ids": [
+              "index",
+              "embedding",
+              "refresh",
+              "privacy",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 12.035000003874302,
+            "seekdbMs": 7.8153000000165775,
+            "totalMs": 32.30499999970198
+          },
+          {
+            "query": "导入文本要使用什么编码",
+            "ids": [
+              "utf8",
+              "embedding",
+              "state",
+              "hybrid",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 10.67000000178814,
+            "seekdbMs": 6.9900500000221655,
+            "totalMs": 30.25
+          }
+        ]
+      },
+      {
+        "repeat": 1,
+        "embeddingMs": 242.0250000283122,
+        "writeMs": 177.67876799986698,
+        "refreshMs": 9951.928117999982,
+        "importTotalMs": 10712.820000000298,
+        "queries": [
+          {
+            "query": "浏览器不支持 GPU 加速怎么办",
+            "ids": [
+              "gpu",
+              "cache",
+              "privacy",
+              "refresh",
+              "batch"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 11.564999997615814,
+            "seekdbMs": 10.359181000036187,
+            "totalMs": 35.625
+          },
+          {
+            "query": "没有显卡如何运行模型",
+            "ids": [
+              "wasm",
+              "int8",
+              "cache",
+              "index",
+              "chunk"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 10.54500000178814,
+            "seekdbMs": 6.76898400002392,
+            "totalMs": 33.065000005066395
+          },
+          {
+            "query": "如何缩小模型下载体积",
+            "ids": [
+              "int8",
+              "chunk",
+              "cache",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 10.140000000596046,
+            "seekdbMs": 7.514320000016596,
+            "totalMs": 28.424999997019768
+          },
+          {
+            "query": "语义相似度是如何计算的",
+            "ids": [
+              "embedding",
+              "index",
+              "hybrid",
+              "privacy",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 12.325000002980232,
+            "seekdbMs": 7.638982999953441,
+            "totalMs": 43.88499999791384
+          },
+          {
+            "query": "如何同时使用关键词和语义搜索",
+            "ids": [
+              "hybrid",
+              "embedding",
+              "state",
+              "index",
+              "rrf"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 11.195000000298023,
+            "seekdbMs": 8.361493000003975,
+            "totalMs": 31.115000002086163
+          },
+          {
+            "query": "导入后为什么要刷新索引",
+            "ids": [
+              "refresh",
+              "index",
+              "utf8",
+              "state",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 11.405000001192093,
+            "seekdbMs": 6.287195999990217,
+            "totalMs": 29.094999998807907
+          },
+          {
+            "query": "长文档怎么分段",
+            "ids": [
+              "chunk",
+              "metric",
+              "embedding",
+              "refresh",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 13.640000000596046,
+            "seekdbMs": 8.144900999963284,
+            "totalMs": 39.39000000059605
+          },
+          {
+            "query": "怎样提高向量化吞吐量",
+            "ids": [
+              "int8",
+              "fp32",
+              "privacy",
+              "index",
+              "refresh"
+            ],
+            "recall5": 0,
+            "ndcg5": 0,
+            "embeddingMs": 14.83500000089407,
+            "seekdbMs": 6.132588000036776,
+            "totalMs": 31.970000006258488
+          },
+          {
+            "query": "为什么第二次加载模型更快",
+            "ids": [
+              "cache",
+              "int8",
+              "chunk",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 10.139999993145466,
+            "seekdbMs": 6.908717999991495,
+            "totalMs": 29
+          },
+          {
+            "query": "文档是否需要发送云端 AI",
+            "ids": [
+              "privacy",
+              "refresh",
+              "chunk",
+              "metric",
+              "embedding"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 9.185000002384186,
+            "seekdbMs": 8.891925000003539,
+            "totalMs": 39.100000001490116
+          },
+          {
+            "query": "不同检索分数尺度不同怎么融合",
+            "ids": [
+              "rrf",
+              "hybrid",
+              "embedding",
+              "int8",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 14.344999998807907,
+            "seekdbMs": 10.029092999990098,
+            "totalMs": 50.15999999642372
+          },
+          {
+            "query": "如何防止不同知识库数据串库",
+            "ids": [
+              "state",
+              "privacy",
+              "rrf",
+              "chunk",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 11.25,
+            "seekdbMs": 7.841072999988683,
+            "totalMs": 50.28499999642372
+          },
+          {
+            "query": "量化对比应该选什么基准",
+            "ids": [
+              "int8",
+              "fp32",
+              "batch",
+              "chunk",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 15.655000001192093,
+            "seekdbMs": 8.768899000016972,
+            "totalMs": 49.60999999940395
+          },
+          {
+            "query": "怎样客观衡量搜索质量",
+            "ids": [
+              "rrf",
+              "metric",
+              "fp32",
+              "int8",
+              "state"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 16.734999999403954,
+            "seekdbMs": 9.848798000020906,
+            "totalMs": 50.16499999910593
+          },
+          {
+            "query": "什么索引能加速向量近邻查询",
+            "ids": [
+              "index",
+              "embedding",
+              "refresh",
+              "privacy",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 17.12999999523163,
+            "seekdbMs": 9.58662399998866,
+            "totalMs": 50.21000000089407
+          },
+          {
+            "query": "导入文本要使用什么编码",
+            "ids": [
+              "utf8",
+              "embedding",
+              "state",
+              "hybrid",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 18.469999998807907,
+            "seekdbMs": 10.18159699998796,
+            "totalMs": 50.03499999642372
+          }
+        ]
+      },
+      {
+        "repeat": 2,
+        "embeddingMs": 239.51499999314547,
+        "writeMs": 169.90324999997392,
+        "refreshMs": 10452.53443900001,
+        "importTotalMs": 11194.070000000298,
+        "queries": [
+          {
+            "query": "浏览器不支持 GPU 加速怎么办",
+            "ids": [
+              "gpu",
+              "cache",
+              "privacy",
+              "refresh",
+              "batch"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 11.424999997019768,
+            "seekdbMs": 5.56180399999721,
+            "totalMs": 27.060000002384186
+          },
+          {
+            "query": "没有显卡如何运行模型",
+            "ids": [
+              "wasm",
+              "int8",
+              "cache",
+              "index",
+              "chunk"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 8.609999999403954,
+            "seekdbMs": 4.291527999972459,
+            "totalMs": 22.695000000298023
+          },
+          {
+            "query": "如何缩小模型下载体积",
+            "ids": [
+              "int8",
+              "chunk",
+              "cache",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 9.679999999701977,
+            "seekdbMs": 4.846386999997776,
+            "totalMs": 23.339999996125698
+          },
+          {
+            "query": "语义相似度是如何计算的",
+            "ids": [
+              "embedding",
+              "index",
+              "hybrid",
+              "privacy",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 8.109999999403954,
+            "seekdbMs": 5.397982999973465,
+            "totalMs": 23.354999996721745
+          },
+          {
+            "query": "如何同时使用关键词和语义搜索",
+            "ids": [
+              "hybrid",
+              "embedding",
+              "state",
+              "index",
+              "rrf"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 9.429999999701977,
+            "seekdbMs": 5.365925000049174,
+            "totalMs": 23.365000002086163
+          },
+          {
+            "query": "导入后为什么要刷新索引",
+            "ids": [
+              "refresh",
+              "index",
+              "utf8",
+              "state",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 7.620000004768372,
+            "seekdbMs": 5.820783000031952,
+            "totalMs": 22.29500000178814
+          },
+          {
+            "query": "长文档怎么分段",
+            "ids": [
+              "chunk",
+              "metric",
+              "embedding",
+              "refresh",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 7.920000001788139,
+            "seekdbMs": 5.399486000009347,
+            "totalMs": 22.945000000298023
+          },
+          {
+            "query": "怎样提高向量化吞吐量",
+            "ids": [
+              "int8",
+              "fp32",
+              "privacy",
+              "index",
+              "refresh"
+            ],
+            "recall5": 0,
+            "ndcg5": 0,
+            "embeddingMs": 9.655000001192093,
+            "seekdbMs": 6.534608000016306,
+            "totalMs": 39.64000000059605
+          },
+          {
+            "query": "为什么第二次加载模型更快",
+            "ids": [
+              "cache",
+              "int8",
+              "chunk",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 9.71000000089407,
+            "seekdbMs": 4.804788000008557,
+            "totalMs": 23.769999995827675
+          },
+          {
+            "query": "文档是否需要发送云端 AI",
+            "ids": [
+              "privacy",
+              "refresh",
+              "chunk",
+              "metric",
+              "embedding"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 11.084999993443489,
+            "seekdbMs": 6.453251000028104,
+            "totalMs": 42.815000005066395
+          },
+          {
+            "query": "不同检索分数尺度不同怎么融合",
+            "ids": [
+              "rrf",
+              "hybrid",
+              "embedding",
+              "int8",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 10.969999998807907,
+            "seekdbMs": 5.266397999948822,
+            "totalMs": 26.009999997913837
+          },
+          {
+            "query": "如何防止不同知识库数据串库",
+            "ids": [
+              "state",
+              "privacy",
+              "rrf",
+              "chunk",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 7.644999995827675,
+            "seekdbMs": 5.454357000009622,
+            "totalMs": 21.730000004172325
+          },
+          {
+            "query": "量化对比应该选什么基准",
+            "ids": [
+              "int8",
+              "fp32",
+              "batch",
+              "chunk",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 9.46000000089407,
+            "seekdbMs": 5.879840999958105,
+            "totalMs": 24.08499999344349
+          },
+          {
+            "query": "怎样客观衡量搜索质量",
+            "ids": [
+              "rrf",
+              "metric",
+              "fp32",
+              "int8",
+              "state"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 9.71000000089407,
+            "seekdbMs": 5.4351150000002235,
+            "totalMs": 24.799999997019768
+          },
+          {
+            "query": "什么索引能加速向量近邻查询",
+            "ids": [
+              "index",
+              "embedding",
+              "refresh",
+              "privacy",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 12.490000002086163,
+            "seekdbMs": 6.352289000002202,
+            "totalMs": 36.82999999821186
+          },
+          {
+            "query": "导入文本要使用什么编码",
+            "ids": [
+              "utf8",
+              "embedding",
+              "state",
+              "hybrid",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 8.685000002384186,
+            "seekdbMs": 5.090526000014506,
+            "totalMs": 23.575000002980232
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "config": {
+      "dtype": "q8",
+      "backend": "wasm",
+      "batch": 8
+    },
+    "name": "sf_bench_mwi5bgrt_2",
+    "load": {
+      "backend": "wasm",
+      "dtype": "q8",
+      "reason": "按测试配置使用 WASM",
+      "loadMs": 358.26500000059605,
+      "threads": 4
+    },
+    "warmLoad": {
+      "backend": "wasm",
+      "dtype": "q8",
+      "reason": "按测试配置使用 WASM",
+      "loadMs": 537.9099999964237,
+      "threads": 4
+    },
+    "runs": [
+      {
+        "repeat": 0,
+        "embeddingMs": 261.5249999985099,
+        "writeMs": 180.18130799999926,
+        "refreshMs": 604.3929010000429,
+        "importTotalMs": 1239.2699999958277,
+        "queries": [
+          {
+            "query": "浏览器不支持 GPU 加速怎么办",
+            "ids": [
+              "gpu",
+              "cache",
+              "privacy",
+              "refresh",
+              "batch"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 13.745000004768372,
+            "seekdbMs": 10.92413099994883,
+            "totalMs": 43.96000000089407
+          },
+          {
+            "query": "没有显卡如何运行模型",
+            "ids": [
+              "wasm",
+              "int8",
+              "cache",
+              "index",
+              "gpu"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 10.759999997913837,
+            "seekdbMs": 6.300514000002295,
+            "totalMs": 44.33500000089407
+          },
+          {
+            "query": "如何缩小模型下载体积",
+            "ids": [
+              "int8",
+              "chunk",
+              "cache",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 10.645000003278255,
+            "seekdbMs": 7.431299999996554,
+            "totalMs": 49.980000004172325
+          },
+          {
+            "query": "语义相似度是如何计算的",
+            "ids": [
+              "embedding",
+              "index",
+              "hybrid",
+              "privacy",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 10.379999995231628,
+            "seekdbMs": 7.212260000000242,
+            "totalMs": 92.85000000149012
+          },
+          {
+            "query": "如何同时使用关键词和语义搜索",
+            "ids": [
+              "hybrid",
+              "embedding",
+              "state",
+              "index",
+              "rrf"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 17.320000000298023,
+            "seekdbMs": 6.24304899998242,
+            "totalMs": 47.01500000059605
+          },
+          {
+            "query": "导入后为什么要刷新索引",
+            "ids": [
+              "refresh",
+              "index",
+              "utf8",
+              "state",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 13.304999999701977,
+            "seekdbMs": 6.943399999989197,
+            "totalMs": 43.42499999701977
+          },
+          {
+            "query": "长文档怎么分段",
+            "ids": [
+              "chunk",
+              "metric",
+              "embedding",
+              "refresh",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 9.490000002086163,
+            "seekdbMs": 8.866786999977194,
+            "totalMs": 30.564999997615814
+          },
+          {
+            "query": "怎样提高向量化吞吐量",
+            "ids": [
+              "int8",
+              "fp32",
+              "privacy",
+              "index",
+              "refresh"
+            ],
+            "recall5": 0,
+            "ndcg5": 0,
+            "embeddingMs": 13.54500000178814,
+            "seekdbMs": 7.2096109999693,
+            "totalMs": 53.064999997615814
+          },
+          {
+            "query": "为什么第二次加载模型更快",
+            "ids": [
+              "cache",
+              "int8",
+              "chunk",
+              "wasm",
+              "fp32"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 16.049999997019768,
+            "seekdbMs": 8.561401000013575,
+            "totalMs": 49.98499999940395
+          },
+          {
+            "query": "文档是否需要发送云端 AI",
+            "ids": [
+              "privacy",
+              "refresh",
+              "chunk",
+              "metric",
+              "utf8"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 14.859999999403954,
+            "seekdbMs": 7.854486999975052,
+            "totalMs": 50.42000000178814
+          },
+          {
+            "query": "不同检索分数尺度不同怎么融合",
+            "ids": [
+              "rrf",
+              "hybrid",
+              "embedding",
+              "int8",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 14.415000006556511,
+            "seekdbMs": 7.497032000042964,
+            "totalMs": 53.92500000447035
+          },
+          {
+            "query": "如何防止不同知识库数据串库",
+            "ids": [
+              "state",
+              "privacy",
+              "rrf",
+              "chunk",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 17.78999999910593,
+            "seekdbMs": 8.013374999980442,
+            "totalMs": 42.15500000119209
+          },
+          {
+            "query": "量化对比应该选什么基准",
+            "ids": [
+              "int8",
+              "fp32",
+              "batch",
+              "chunk",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 17.225000001490116,
+            "seekdbMs": 7.210126999998465,
+            "totalMs": 53.84000000357628
+          },
+          {
+            "query": "怎样客观衡量搜索质量",
+            "ids": [
+              "rrf",
+              "metric",
+              "fp32",
+              "int8",
+              "state"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 11.659999996423721,
+            "seekdbMs": 7.5209909999975935,
+            "totalMs": 49.51500000059605
+          },
+          {
+            "query": "什么索引能加速向量近邻查询",
+            "ids": [
+              "index",
+              "embedding",
+              "refresh",
+              "privacy",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 12.730000004172325,
+            "seekdbMs": 8.367803999979515,
+            "totalMs": 49.95000000298023
+          },
+          {
+            "query": "导入文本要使用什么编码",
+            "ids": [
+              "utf8",
+              "embedding",
+              "state",
+              "hybrid",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 15.20499999821186,
+            "seekdbMs": 7.31080400000792,
+            "totalMs": 61.08500000089407
+          }
+        ]
+      },
+      {
+        "repeat": 1,
+        "embeddingMs": 330.63499999791384,
+        "writeMs": 284.6325580000412,
+        "refreshMs": 404.74816399998963,
+        "importTotalMs": 1317.469999998808,
+        "queries": [
+          {
+            "query": "浏览器不支持 GPU 加速怎么办",
+            "ids": [
+              "gpu",
+              "cache",
+              "privacy",
+              "refresh",
+              "batch"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 20.320000000298023,
+            "seekdbMs": 11.231284000037704,
+            "totalMs": 114.11500000208616
+          },
+          {
+            "query": "没有显卡如何运行模型",
+            "ids": [
+              "wasm",
+              "int8",
+              "cache",
+              "index",
+              "gpu"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 18.530000001192093,
+            "seekdbMs": 7.742554999946151,
+            "totalMs": 106.79500000178814
+          },
+          {
+            "query": "如何缩小模型下载体积",
+            "ids": [
+              "int8",
+              "chunk",
+              "cache",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 18.634999997913837,
+            "seekdbMs": 10.62390399997821,
+            "totalMs": 72.9699999988079
+          },
+          {
+            "query": "语义相似度是如何计算的",
+            "ids": [
+              "embedding",
+              "index",
+              "hybrid",
+              "privacy",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 17.314999997615814,
+            "seekdbMs": 8.643187000008766,
+            "totalMs": 73.92999999970198
+          },
+          {
+            "query": "如何同时使用关键词和语义搜索",
+            "ids": [
+              "hybrid",
+              "embedding",
+              "state",
+              "index",
+              "rrf"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 25.78999999910593,
+            "seekdbMs": 13.184823999996297,
+            "totalMs": 118.0300000011921
+          },
+          {
+            "query": "导入后为什么要刷新索引",
+            "ids": [
+              "refresh",
+              "index",
+              "utf8",
+              "state",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 16.609999999403954,
+            "seekdbMs": 10.257433000020683,
+            "totalMs": 52.53000000119209
+          },
+          {
+            "query": "长文档怎么分段",
+            "ids": [
+              "chunk",
+              "metric",
+              "embedding",
+              "refresh",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 19.36999999731779,
+            "seekdbMs": 15.904036000021733,
+            "totalMs": 71.46500000357628
+          },
+          {
+            "query": "怎样提高向量化吞吐量",
+            "ids": [
+              "int8",
+              "fp32",
+              "privacy",
+              "index",
+              "refresh"
+            ],
+            "recall5": 0,
+            "ndcg5": 0,
+            "embeddingMs": 19.74499999731779,
+            "seekdbMs": 11.594577000010759,
+            "totalMs": 61.474999994039536
+          },
+          {
+            "query": "为什么第二次加载模型更快",
+            "ids": [
+              "cache",
+              "int8",
+              "chunk",
+              "wasm",
+              "fp32"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 19.929999999701977,
+            "seekdbMs": 9.733561999979429,
+            "totalMs": 279.96000000089407
+          },
+          {
+            "query": "文档是否需要发送云端 AI",
+            "ids": [
+              "privacy",
+              "refresh",
+              "chunk",
+              "metric",
+              "utf8"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 15.625,
+            "seekdbMs": 7.127716000017244,
+            "totalMs": 66.3449999988079
+          },
+          {
+            "query": "不同检索分数尺度不同怎么融合",
+            "ids": [
+              "rrf",
+              "hybrid",
+              "embedding",
+              "int8",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 16.195000000298023,
+            "seekdbMs": 7.565808999992441,
+            "totalMs": 98.57000000029802
+          },
+          {
+            "query": "如何防止不同知识库数据串库",
+            "ids": [
+              "state",
+              "privacy",
+              "rrf",
+              "chunk",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 15.929999999701977,
+            "seekdbMs": 7.98921299999347,
+            "totalMs": 88.0899999961257
+          },
+          {
+            "query": "量化对比应该选什么基准",
+            "ids": [
+              "int8",
+              "fp32",
+              "batch",
+              "chunk",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 16.99499999731779,
+            "seekdbMs": 9.427842999983113,
+            "totalMs": 81.24000000208616
+          },
+          {
+            "query": "怎样客观衡量搜索质量",
+            "ids": [
+              "rrf",
+              "metric",
+              "fp32",
+              "int8",
+              "state"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 15.244999997317791,
+            "seekdbMs": 11.462526999996044,
+            "totalMs": 66.37999999523163
+          },
+          {
+            "query": "什么索引能加速向量近邻查询",
+            "ids": [
+              "index",
+              "embedding",
+              "refresh",
+              "privacy",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 20.145000003278255,
+            "seekdbMs": 22.075318999995943,
+            "totalMs": 120.2800000011921
+          },
+          {
+            "query": "导入文本要使用什么编码",
+            "ids": [
+              "utf8",
+              "embedding",
+              "state",
+              "hybrid",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 16.40999999642372,
+            "seekdbMs": 15.048654999991413,
+            "totalMs": 90.46000000089407
+          }
+        ]
+      },
+      {
+        "repeat": 2,
+        "embeddingMs": 393.375,
+        "writeMs": 319.7700070000137,
+        "refreshMs": 805.1976020000293,
+        "importTotalMs": 1778.875,
+        "queries": [
+          {
+            "query": "浏览器不支持 GPU 加速怎么办",
+            "ids": [
+              "gpu",
+              "cache",
+              "privacy",
+              "refresh",
+              "batch"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 19.525000005960464,
+            "seekdbMs": 10.542547999997623,
+            "totalMs": 48.81999999284744
+          },
+          {
+            "query": "没有显卡如何运行模型",
+            "ids": [
+              "wasm",
+              "int8",
+              "cache",
+              "index",
+              "gpu"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 17.100000001490116,
+            "seekdbMs": 8.456398000009358,
+            "totalMs": 47.48499999940395
+          },
+          {
+            "query": "如何缩小模型下载体积",
+            "ids": [
+              "int8",
+              "chunk",
+              "cache",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 13.91499999910593,
+            "seekdbMs": 8.60930399998324,
+            "totalMs": 50.024999998509884
+          },
+          {
+            "query": "语义相似度是如何计算的",
+            "ids": [
+              "embedding",
+              "index",
+              "hybrid",
+              "privacy",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 15.940000005066395,
+            "seekdbMs": 8.057242000009865,
+            "totalMs": 49.895000003278255
+          },
+          {
+            "query": "如何同时使用关键词和语义搜索",
+            "ids": [
+              "hybrid",
+              "embedding",
+              "state",
+              "index",
+              "rrf"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 17.13000000268221,
+            "seekdbMs": 7.750661999976728,
+            "totalMs": 50.01500000059605
+          },
+          {
+            "query": "导入后为什么要刷新索引",
+            "ids": [
+              "refresh",
+              "index",
+              "utf8",
+              "state",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 14.100000001490116,
+            "seekdbMs": 9.049935000017285,
+            "totalMs": 50.07999999821186
+          },
+          {
+            "query": "长文档怎么分段",
+            "ids": [
+              "chunk",
+              "metric",
+              "embedding",
+              "refresh",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 13.82999999821186,
+            "seekdbMs": 7.701858000014909,
+            "totalMs": 50.184999994933605
+          },
+          {
+            "query": "怎样提高向量化吞吐量",
+            "ids": [
+              "int8",
+              "fp32",
+              "privacy",
+              "index",
+              "refresh"
+            ],
+            "recall5": 0,
+            "ndcg5": 0,
+            "embeddingMs": 17.009999997913837,
+            "seekdbMs": 7.495079000014812,
+            "totalMs": 49.73499999940395
+          },
+          {
+            "query": "为什么第二次加载模型更快",
+            "ids": [
+              "cache",
+              "int8",
+              "chunk",
+              "wasm",
+              "fp32"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 15.059999994933605,
+            "seekdbMs": 7.681466000038199,
+            "totalMs": 49.95499999821186
+          },
+          {
+            "query": "文档是否需要发送云端 AI",
+            "ids": [
+              "privacy",
+              "refresh",
+              "chunk",
+              "metric",
+              "utf8"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 15.844999998807907,
+            "seekdbMs": 7.9446370000368915,
+            "totalMs": 50.12999999523163
+          },
+          {
+            "query": "不同检索分数尺度不同怎么融合",
+            "ids": [
+              "rrf",
+              "hybrid",
+              "embedding",
+              "int8",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 19.304999999701977,
+            "seekdbMs": 8.879620999970939,
+            "totalMs": 50.28999999910593
+          },
+          {
+            "query": "如何防止不同知识库数据串库",
+            "ids": [
+              "state",
+              "privacy",
+              "rrf",
+              "chunk",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 15.945000000298023,
+            "seekdbMs": 9.374439999985043,
+            "totalMs": 50.04999999701977
+          },
+          {
+            "query": "量化对比应该选什么基准",
+            "ids": [
+              "int8",
+              "fp32",
+              "batch",
+              "chunk",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 14.245000004768372,
+            "seekdbMs": 6.8814279999933206,
+            "totalMs": 32.975000001490116
+          },
+          {
+            "query": "怎样客观衡量搜索质量",
+            "ids": [
+              "rrf",
+              "metric",
+              "fp32",
+              "int8",
+              "state"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 15.350000001490116,
+            "seekdbMs": 7.74020699999528,
+            "totalMs": 50.24499999731779
+          },
+          {
+            "query": "什么索引能加速向量近邻查询",
+            "ids": [
+              "index",
+              "embedding",
+              "refresh",
+              "privacy",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 16.67000000178814,
+            "seekdbMs": 8.992807000002358,
+            "totalMs": 49.66499999910593
+          },
+          {
+            "query": "导入文本要使用什么编码",
+            "ids": [
+              "utf8",
+              "embedding",
+              "state",
+              "hybrid",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 18.84000000357628,
+            "seekdbMs": 9.954486999951769,
+            "totalMs": 50.2149999961257
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "config": {
+      "dtype": "fp16",
+      "backend": "auto",
+      "batch": 8
+    },
+    "name": "sf_bench_mwi5bgrt_3",
+    "load": {
+      "backend": "wasm",
+      "dtype": "fp16",
+      "reason": "The device (webgpu) does not support fp16.",
+      "loadMs": 1503.2749999985099,
+      "threads": 4
+    },
+    "warmLoad": {
+      "backend": "wasm",
+      "dtype": "fp16",
+      "reason": "The device (webgpu) does not support fp16.",
+      "loadMs": 803.2899999991059,
+      "threads": 4
+    },
+    "runs": [
+      {
+        "repeat": 0,
+        "embeddingMs": 677.9399999976158,
+        "writeMs": 210.5806609999854,
+        "refreshMs": 503.35276700003305,
+        "importTotalMs": 1632.9499999955297,
+        "queries": [
+          {
+            "query": "浏览器不支持 GPU 加速怎么办",
+            "ids": [
+              "gpu",
+              "cache",
+              "privacy",
+              "batch",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 38.814999997615814,
+            "seekdbMs": 16.58601999998791,
+            "totalMs": 75.50499999523163
+          },
+          {
+            "query": "没有显卡如何运行模型",
+            "ids": [
+              "wasm",
+              "int8",
+              "cache",
+              "index",
+              "gpu"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 36.90500000119209,
+            "seekdbMs": 10.202657999994699,
+            "totalMs": 62.69999999552965
+          },
+          {
+            "query": "如何缩小模型下载体积",
+            "ids": [
+              "int8",
+              "chunk",
+              "cache",
+              "wasm",
+              "embedding"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 38.814999997615814,
+            "seekdbMs": 9.692238999996334,
+            "totalMs": 61.975000001490116
+          },
+          {
+            "query": "语义相似度是如何计算的",
+            "ids": [
+              "embedding",
+              "index",
+              "fp32",
+              "hybrid",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 38.79500000178814,
+            "seekdbMs": 9.86473000003025,
+            "totalMs": 63.314999997615814
+          },
+          {
+            "query": "如何同时使用关键词和语义搜索",
+            "ids": [
+              "hybrid",
+              "embedding",
+              "state",
+              "rrf",
+              "index"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 42.29999999701977,
+            "seekdbMs": 11.406141999992542,
+            "totalMs": 68.5650000050664
+          },
+          {
+            "query": "导入后为什么要刷新索引",
+            "ids": [
+              "refresh",
+              "utf8",
+              "index",
+              "state",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 35.854999996721745,
+            "seekdbMs": 10.396129000000656,
+            "totalMs": 60.50499999523163
+          },
+          {
+            "query": "长文档怎么分段",
+            "ids": [
+              "chunk",
+              "metric",
+              "embedding",
+              "refresh",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 35.34000000357628,
+            "seekdbMs": 10.900491999986116,
+            "totalMs": 61.66499999910593
+          },
+          {
+            "query": "怎样提高向量化吞吐量",
+            "ids": [
+              "int8",
+              "fp32",
+              "privacy",
+              "refresh",
+              "index"
+            ],
+            "recall5": 0,
+            "ndcg5": 0,
+            "embeddingMs": 39.29999999701977,
+            "seekdbMs": 10.413820999965537,
+            "totalMs": 64.4050000011921
+          },
+          {
+            "query": "为什么第二次加载模型更快",
+            "ids": [
+              "cache",
+              "int8",
+              "chunk",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 38.604999996721745,
+            "seekdbMs": 11.384957000031136,
+            "totalMs": 66.34000000357628
+          },
+          {
+            "query": "文档是否需要发送云端 AI",
+            "ids": [
+              "privacy",
+              "refresh",
+              "chunk",
+              "metric",
+              "utf8"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 37.67000000178814,
+            "seekdbMs": 9.408855999994557,
+            "totalMs": 62.66499999910593
+          },
+          {
+            "query": "不同检索分数尺度不同怎么融合",
+            "ids": [
+              "rrf",
+              "hybrid",
+              "embedding",
+              "int8",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 43.32999999821186,
+            "seekdbMs": 12.604943000013009,
+            "totalMs": 70.76500000059605
+          },
+          {
+            "query": "如何防止不同知识库数据串库",
+            "ids": [
+              "state",
+              "privacy",
+              "rrf",
+              "chunk",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 43.600000001490116,
+            "seekdbMs": 13.547832000011113,
+            "totalMs": 75.75500000268221
+          },
+          {
+            "query": "量化对比应该选什么基准",
+            "ids": [
+              "int8",
+              "fp32",
+              "batch",
+              "chunk",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 51.16499999910593,
+            "seekdbMs": 13.713507000007667,
+            "totalMs": 87.51999999582767
+          },
+          {
+            "query": "怎样客观衡量搜索质量",
+            "ids": [
+              "metric",
+              "rrf",
+              "fp32",
+              "int8",
+              "state"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 48.04999999701977,
+            "seekdbMs": 13.47695099998964,
+            "totalMs": 81.50999999791384
+          },
+          {
+            "query": "什么索引能加速向量近邻查询",
+            "ids": [
+              "index",
+              "embedding",
+              "refresh",
+              "privacy",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 54.61500000208616,
+            "seekdbMs": 15.403434000036214,
+            "totalMs": 89.82999999821186
+          },
+          {
+            "query": "导入文本要使用什么编码",
+            "ids": [
+              "utf8",
+              "embedding",
+              "state",
+              "wasm",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 53.87000000476837,
+            "seekdbMs": 16.879132999980357,
+            "totalMs": 93.17999999970198
+          }
+        ]
+      },
+      {
+        "repeat": 1,
+        "embeddingMs": 947.8999999985099,
+        "writeMs": 305.3569810000481,
+        "refreshMs": 503.76689500000793,
+        "importTotalMs": 2006.4750000014901,
+        "queries": [
+          {
+            "query": "浏览器不支持 GPU 加速怎么办",
+            "ids": [
+              "gpu",
+              "cache",
+              "privacy",
+              "batch",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 47.25999999791384,
+            "seekdbMs": 12.759136000007857,
+            "totalMs": 78.39000000059605
+          },
+          {
+            "query": "没有显卡如何运行模型",
+            "ids": [
+              "wasm",
+              "int8",
+              "cache",
+              "index",
+              "gpu"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 34.07999999821186,
+            "seekdbMs": 9.657743999967352,
+            "totalMs": 61.00999999791384
+          },
+          {
+            "query": "如何缩小模型下载体积",
+            "ids": [
+              "int8",
+              "chunk",
+              "cache",
+              "wasm",
+              "embedding"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 38.58500000089407,
+            "seekdbMs": 9.925510999979451,
+            "totalMs": 63.86500000208616
+          },
+          {
+            "query": "语义相似度是如何计算的",
+            "ids": [
+              "embedding",
+              "index",
+              "fp32",
+              "hybrid",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 47.725000001490116,
+            "seekdbMs": 16.67787999997381,
+            "totalMs": 86.92499999701977
+          },
+          {
+            "query": "如何同时使用关键词和语义搜索",
+            "ids": [
+              "hybrid",
+              "embedding",
+              "state",
+              "rrf",
+              "index"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 111.625,
+            "seekdbMs": 14.97873900004197,
+            "totalMs": 157.42499999701977
+          },
+          {
+            "query": "导入后为什么要刷新索引",
+            "ids": [
+              "refresh",
+              "utf8",
+              "index",
+              "state",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 60.32000000029802,
+            "seekdbMs": 15.231029999966267,
+            "totalMs": 98.23499999940395
+          },
+          {
+            "query": "长文档怎么分段",
+            "ids": [
+              "chunk",
+              "metric",
+              "embedding",
+              "refresh",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 70.28999999910593,
+            "seekdbMs": 15.889276999980211,
+            "totalMs": 114.48000000417233
+          },
+          {
+            "query": "怎样提高向量化吞吐量",
+            "ids": [
+              "int8",
+              "fp32",
+              "privacy",
+              "refresh",
+              "index"
+            ],
+            "recall5": 0,
+            "ndcg5": 0,
+            "embeddingMs": 63.52999999374151,
+            "seekdbMs": 15.2582720000064,
+            "totalMs": 98.82999999821186
+          },
+          {
+            "query": "为什么第二次加载模型更快",
+            "ids": [
+              "cache",
+              "int8",
+              "chunk",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 50.23499999940395,
+            "seekdbMs": 12.625408999971114,
+            "totalMs": 82.54999999701977
+          },
+          {
+            "query": "文档是否需要发送云端 AI",
+            "ids": [
+              "privacy",
+              "refresh",
+              "chunk",
+              "metric",
+              "utf8"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 54.69999999552965,
+            "seekdbMs": 11.904215999995358,
+            "totalMs": 85.00999999791384
+          },
+          {
+            "query": "不同检索分数尺度不同怎么融合",
+            "ids": [
+              "rrf",
+              "hybrid",
+              "embedding",
+              "int8",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 47.49000000208616,
+            "seekdbMs": 13.435302999976557,
+            "totalMs": 80.0300000011921
+          },
+          {
+            "query": "如何防止不同知识库数据串库",
+            "ids": [
+              "state",
+              "privacy",
+              "rrf",
+              "chunk",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 42.62000000476837,
+            "seekdbMs": 12.304193999967538,
+            "totalMs": 73.89000000059605
+          },
+          {
+            "query": "量化对比应该选什么基准",
+            "ids": [
+              "int8",
+              "fp32",
+              "batch",
+              "chunk",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 42.75500000268221,
+            "seekdbMs": 11.529462999955285,
+            "totalMs": 69.9100000038743
+          },
+          {
+            "query": "怎样客观衡量搜索质量",
+            "ids": [
+              "metric",
+              "rrf",
+              "fp32",
+              "int8",
+              "state"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 37.31999999284744,
+            "seekdbMs": 11.465368000033777,
+            "totalMs": 66.79999999701977
+          },
+          {
+            "query": "什么索引能加速向量近邻查询",
+            "ids": [
+              "index",
+              "embedding",
+              "refresh",
+              "privacy",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 46.46999999880791,
+            "seekdbMs": 11.81989500002237,
+            "totalMs": 77.09999999403954
+          },
+          {
+            "query": "导入文本要使用什么编码",
+            "ids": [
+              "utf8",
+              "embedding",
+              "state",
+              "wasm",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 46.51500000059605,
+            "seekdbMs": 12.013388000021223,
+            "totalMs": 76.66499999910593
+          }
+        ]
+      },
+      {
+        "repeat": 2,
+        "embeddingMs": 700.0949999988079,
+        "writeMs": 259.90956800000276,
+        "refreshMs": 505.7283349999925,
+        "importTotalMs": 1778.6599999964237,
+        "queries": [
+          {
+            "query": "浏览器不支持 GPU 加速怎么办",
+            "ids": [
+              "gpu",
+              "cache",
+              "privacy",
+              "batch",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 43.8399999961257,
+            "seekdbMs": 9.84779199998593,
+            "totalMs": 71.07000000029802
+          },
+          {
+            "query": "没有显卡如何运行模型",
+            "ids": [
+              "wasm",
+              "int8",
+              "cache",
+              "index",
+              "gpu"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 39.70499999821186,
+            "seekdbMs": 10.493711000017356,
+            "totalMs": 66.58000000566244
+          },
+          {
+            "query": "如何缩小模型下载体积",
+            "ids": [
+              "int8",
+              "chunk",
+              "cache",
+              "wasm",
+              "embedding"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 37.769999995827675,
+            "seekdbMs": 10.478681000007782,
+            "totalMs": 63.49499999731779
+          },
+          {
+            "query": "语义相似度是如何计算的",
+            "ids": [
+              "embedding",
+              "index",
+              "fp32",
+              "hybrid",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 32.87999999523163,
+            "seekdbMs": 8.486803000036161,
+            "totalMs": 58.04999999701977
+          },
+          {
+            "query": "如何同时使用关键词和语义搜索",
+            "ids": [
+              "hybrid",
+              "embedding",
+              "state",
+              "rrf",
+              "index"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 43.62000000476837,
+            "seekdbMs": 11.430587999988347,
+            "totalMs": 70.17500000447035
+          },
+          {
+            "query": "导入后为什么要刷新索引",
+            "ids": [
+              "refresh",
+              "utf8",
+              "index",
+              "state",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 46.19999999552965,
+            "seekdbMs": 13.80572599999141,
+            "totalMs": 77.42500000447035
+          },
+          {
+            "query": "长文档怎么分段",
+            "ids": [
+              "chunk",
+              "metric",
+              "embedding",
+              "refresh",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 53.2149999961257,
+            "seekdbMs": 12.53234400000656,
+            "totalMs": 83.14500000327826
+          },
+          {
+            "query": "怎样提高向量化吞吐量",
+            "ids": [
+              "int8",
+              "fp32",
+              "privacy",
+              "refresh",
+              "index"
+            ],
+            "recall5": 0,
+            "ndcg5": 0,
+            "embeddingMs": 48.394999995827675,
+            "seekdbMs": 14.607704999973066,
+            "totalMs": 81.79500000178814
+          },
+          {
+            "query": "为什么第二次加载模型更快",
+            "ids": [
+              "cache",
+              "int8",
+              "chunk",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 57.57000000029802,
+            "seekdbMs": 13.903427999990527,
+            "totalMs": 90.11500000208616
+          },
+          {
+            "query": "文档是否需要发送云端 AI",
+            "ids": [
+              "privacy",
+              "refresh",
+              "chunk",
+              "metric",
+              "utf8"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 54.84499999880791,
+            "seekdbMs": 15.232554000045639,
+            "totalMs": 88.81499999761581
+          },
+          {
+            "query": "不同检索分数尺度不同怎么融合",
+            "ids": [
+              "rrf",
+              "hybrid",
+              "embedding",
+              "int8",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 64.38000000268221,
+            "seekdbMs": 16.73265800002264,
+            "totalMs": 104.16499999910593
+          },
+          {
+            "query": "如何防止不同知识库数据串库",
+            "ids": [
+              "state",
+              "privacy",
+              "rrf",
+              "chunk",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 59.74499999731779,
+            "seekdbMs": 15.213978999992833,
+            "totalMs": 94.71500000357628
+          },
+          {
+            "query": "量化对比应该选什么基准",
+            "ids": [
+              "int8",
+              "fp32",
+              "batch",
+              "chunk",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 45.725000001490116,
+            "seekdbMs": 12.769079999998212,
+            "totalMs": 76.7800000011921
+          },
+          {
+            "query": "怎样客观衡量搜索质量",
+            "ids": [
+              "metric",
+              "rrf",
+              "fp32",
+              "int8",
+              "state"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 49.80499999970198,
+            "seekdbMs": 11.610007999988738,
+            "totalMs": 79
+          },
+          {
+            "query": "什么索引能加速向量近邻查询",
+            "ids": [
+              "index",
+              "embedding",
+              "refresh",
+              "privacy",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 44.94500000029802,
+            "seekdbMs": 11.085182000009809,
+            "totalMs": 73.50999999791384
+          },
+          {
+            "query": "导入文本要使用什么编码",
+            "ids": [
+              "utf8",
+              "embedding",
+              "state",
+              "wasm",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 37.88499999791384,
+            "seekdbMs": 12.110381999984384,
+            "totalMs": 65.72000000625849
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "config": {
+      "dtype": "quantized",
+      "backend": "auto",
+      "batch": 8
+    },
+    "name": "sf_bench_mwi5bgrt_4",
+    "load": {
+      "backend": "wasm",
+      "dtype": "q8",
+      "reason": "The device (webgpu) does not support fp16.",
+      "loadMs": 915.5999999940395,
+      "threads": 4
+    },
+    "warmLoad": {
+      "backend": "wasm",
+      "dtype": "q8",
+      "reason": "The device (webgpu) does not support fp16.",
+      "loadMs": 653.1200000047684,
+      "threads": 4
+    },
+    "runs": [
+      {
+        "repeat": 0,
+        "embeddingMs": 538.4450000077486,
+        "writeMs": 392.3062009999994,
+        "refreshMs": 505.32725500001106,
+        "importTotalMs": 1773.7549999952316,
+        "queries": [
+          {
+            "query": "浏览器不支持 GPU 加速怎么办",
+            "ids": [
+              "gpu",
+              "cache",
+              "privacy",
+              "refresh",
+              "batch"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 23.155000001192093,
+            "seekdbMs": 19.005352999956813,
+            "totalMs": 61.45000000298023
+          },
+          {
+            "query": "没有显卡如何运行模型",
+            "ids": [
+              "wasm",
+              "int8",
+              "cache",
+              "index",
+              "gpu"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 26.054999999701977,
+            "seekdbMs": 14.02537599997595,
+            "totalMs": 63.42000000178814
+          },
+          {
+            "query": "如何缩小模型下载体积",
+            "ids": [
+              "int8",
+              "chunk",
+              "cache",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 22.134999997913837,
+            "seekdbMs": 13.484389999997802,
+            "totalMs": 60.95499999821186
+          },
+          {
+            "query": "语义相似度是如何计算的",
+            "ids": [
+              "embedding",
+              "index",
+              "hybrid",
+              "privacy",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 24.939999997615814,
+            "seekdbMs": 12.817152999981772,
+            "totalMs": 54.520000003278255
+          },
+          {
+            "query": "如何同时使用关键词和语义搜索",
+            "ids": [
+              "hybrid",
+              "embedding",
+              "state",
+              "index",
+              "rrf"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 24.945000000298023,
+            "seekdbMs": 13.460336999967694,
+            "totalMs": 55.975000001490116
+          },
+          {
+            "query": "导入后为什么要刷新索引",
+            "ids": [
+              "refresh",
+              "index",
+              "utf8",
+              "state",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 27.09000000357628,
+            "seekdbMs": 14.373596000019461,
+            "totalMs": 61.9649999961257
+          },
+          {
+            "query": "长文档怎么分段",
+            "ids": [
+              "chunk",
+              "metric",
+              "embedding",
+              "refresh",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 25.54500000178814,
+            "seekdbMs": 14.363526000001002,
+            "totalMs": 62.03999999910593
+          },
+          {
+            "query": "怎样提高向量化吞吐量",
+            "ids": [
+              "int8",
+              "fp32",
+              "privacy",
+              "index",
+              "refresh"
+            ],
+            "recall5": 0,
+            "ndcg5": 0,
+            "embeddingMs": 29.234999999403954,
+            "seekdbMs": 15.47699900000589,
+            "totalMs": 66.54000000655651
+          },
+          {
+            "query": "为什么第二次加载模型更快",
+            "ids": [
+              "cache",
+              "int8",
+              "chunk",
+              "wasm",
+              "fp32"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 39.14000000059605,
+            "seekdbMs": 15.42089800001122,
+            "totalMs": 79.86500000208616
+          },
+          {
+            "query": "文档是否需要发送云端 AI",
+            "ids": [
+              "privacy",
+              "refresh",
+              "chunk",
+              "metric",
+              "utf8"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 39.45499999821186,
+            "seekdbMs": 15.614245000004303,
+            "totalMs": 76.88999999314547
+          },
+          {
+            "query": "不同检索分数尺度不同怎么融合",
+            "ids": [
+              "rrf",
+              "hybrid",
+              "embedding",
+              "int8",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 41.09000000357628,
+            "seekdbMs": 18.77801599999657,
+            "totalMs": 83.49499999731779
+          },
+          {
+            "query": "如何防止不同知识库数据串库",
+            "ids": [
+              "state",
+              "privacy",
+              "rrf",
+              "chunk",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 45.51500000059605,
+            "seekdbMs": 20.864791000029072,
+            "totalMs": 93.3449999988079
+          },
+          {
+            "query": "量化对比应该选什么基准",
+            "ids": [
+              "int8",
+              "fp32",
+              "batch",
+              "chunk",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 36.16499999910593,
+            "seekdbMs": 21.304897999973036,
+            "totalMs": 83.8399999961257
+          },
+          {
+            "query": "怎样客观衡量搜索质量",
+            "ids": [
+              "rrf",
+              "metric",
+              "fp32",
+              "int8",
+              "state"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 31.935000002384186,
+            "seekdbMs": 14.354914999974426,
+            "totalMs": 72.27499999850988
+          },
+          {
+            "query": "什么索引能加速向量近邻查询",
+            "ids": [
+              "index",
+              "embedding",
+              "refresh",
+              "privacy",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 31.770000003278255,
+            "seekdbMs": 16.598177999956533,
+            "totalMs": 72.35499999672174
+          },
+          {
+            "query": "导入文本要使用什么编码",
+            "ids": [
+              "utf8",
+              "embedding",
+              "state",
+              "hybrid",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 32.95500000566244,
+            "seekdbMs": 14.302237000025343,
+            "totalMs": 67.8399999961257
+          }
+        ]
+      },
+      {
+        "repeat": 1,
+        "embeddingMs": 562.5049999952316,
+        "writeMs": 375.6410719999694,
+        "refreshMs": 604.6631829999969,
+        "importTotalMs": 1838.8500000014901,
+        "queries": [
+          {
+            "query": "浏览器不支持 GPU 加速怎么办",
+            "ids": [
+              "gpu",
+              "cache",
+              "privacy",
+              "refresh",
+              "batch"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 20.775000005960464,
+            "seekdbMs": 12.360639000020456,
+            "totalMs": 51.025000005960464
+          },
+          {
+            "query": "没有显卡如何运行模型",
+            "ids": [
+              "wasm",
+              "int8",
+              "cache",
+              "index",
+              "gpu"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 19.435000002384186,
+            "seekdbMs": 13.436343000037596,
+            "totalMs": 52.54500000178814
+          },
+          {
+            "query": "如何缩小模型下载体积",
+            "ids": [
+              "int8",
+              "chunk",
+              "cache",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 17.820000000298023,
+            "seekdbMs": 13.232950999983586,
+            "totalMs": 47.939999997615814
+          },
+          {
+            "query": "语义相似度是如何计算的",
+            "ids": [
+              "embedding",
+              "index",
+              "hybrid",
+              "privacy",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 20.305000007152557,
+            "seekdbMs": 12.333880999998655,
+            "totalMs": 49.61499999463558
+          },
+          {
+            "query": "如何同时使用关键词和语义搜索",
+            "ids": [
+              "hybrid",
+              "embedding",
+              "state",
+              "index",
+              "rrf"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 26.07999999821186,
+            "seekdbMs": 17.69704300002195,
+            "totalMs": 64.23499999940395
+          },
+          {
+            "query": "导入后为什么要刷新索引",
+            "ids": [
+              "refresh",
+              "index",
+              "utf8",
+              "state",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 22.649999998509884,
+            "seekdbMs": 11.27250500000082,
+            "totalMs": 52.63499999791384
+          },
+          {
+            "query": "长文档怎么分段",
+            "ids": [
+              "chunk",
+              "metric",
+              "embedding",
+              "refresh",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 20.524999998509884,
+            "seekdbMs": 12.072627000045031,
+            "totalMs": 50.524999998509884
+          },
+          {
+            "query": "怎样提高向量化吞吐量",
+            "ids": [
+              "int8",
+              "fp32",
+              "privacy",
+              "index",
+              "refresh"
+            ],
+            "recall5": 0,
+            "ndcg5": 0,
+            "embeddingMs": 24.015000000596046,
+            "seekdbMs": 13.55036300001666,
+            "totalMs": 55.15500000119209
+          },
+          {
+            "query": "为什么第二次加载模型更快",
+            "ids": [
+              "cache",
+              "int8",
+              "chunk",
+              "wasm",
+              "fp32"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 24.075000002980232,
+            "seekdbMs": 12.184009000018705,
+            "totalMs": 52.98999999463558
+          },
+          {
+            "query": "文档是否需要发送云端 AI",
+            "ids": [
+              "privacy",
+              "refresh",
+              "chunk",
+              "metric",
+              "utf8"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 19.570000000298023,
+            "seekdbMs": 12.850091999978758,
+            "totalMs": 51.21500000357628
+          },
+          {
+            "query": "不同检索分数尺度不同怎么融合",
+            "ids": [
+              "rrf",
+              "hybrid",
+              "embedding",
+              "int8",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 22.345000006258488,
+            "seekdbMs": 10.097776999988127,
+            "totalMs": 50.875
+          },
+          {
+            "query": "如何防止不同知识库数据串库",
+            "ids": [
+              "state",
+              "privacy",
+              "rrf",
+              "chunk",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 23.28999999910593,
+            "seekdbMs": 12.56479199999012,
+            "totalMs": 55.519999995827675
+          },
+          {
+            "query": "量化对比应该选什么基准",
+            "ids": [
+              "int8",
+              "fp32",
+              "batch",
+              "chunk",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 23.100000001490116,
+            "seekdbMs": 12.427118999999948,
+            "totalMs": 52.91499999910593
+          },
+          {
+            "query": "怎样客观衡量搜索质量",
+            "ids": [
+              "rrf",
+              "metric",
+              "fp32",
+              "int8",
+              "state"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 22.975000001490116,
+            "seekdbMs": 10.663589000003412,
+            "totalMs": 50.76500000059605
+          },
+          {
+            "query": "什么索引能加速向量近邻查询",
+            "ids": [
+              "index",
+              "embedding",
+              "refresh",
+              "privacy",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 22.365000002086163,
+            "seekdbMs": 11.265767999982927,
+            "totalMs": 50.604999996721745
+          },
+          {
+            "query": "导入文本要使用什么编码",
+            "ids": [
+              "utf8",
+              "embedding",
+              "state",
+              "hybrid",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 21.975000001490116,
+            "seekdbMs": 10.7925389999873,
+            "totalMs": 50
+          }
+        ]
+      },
+      {
+        "repeat": 2,
+        "embeddingMs": 416.1499999910593,
+        "writeMs": 228.0568670000648,
+        "refreshMs": 704.3421770000132,
+        "importTotalMs": 1558.8549999967217,
+        "queries": [
+          {
+            "query": "浏览器不支持 GPU 加速怎么办",
+            "ids": [
+              "gpu",
+              "cache",
+              "privacy",
+              "refresh",
+              "batch"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 15.509999997913837,
+            "seekdbMs": 7.317498999997042,
+            "totalMs": 39.104999996721745
+          },
+          {
+            "query": "没有显卡如何运行模型",
+            "ids": [
+              "wasm",
+              "int8",
+              "cache",
+              "index",
+              "gpu"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 15.030000001192093,
+            "seekdbMs": 8.37690599996131,
+            "totalMs": 47.980000004172325
+          },
+          {
+            "query": "如何缩小模型下载体积",
+            "ids": [
+              "int8",
+              "chunk",
+              "cache",
+              "fp32",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 15.79500000178814,
+            "seekdbMs": 8.669588000047952,
+            "totalMs": 49.649999998509884
+          },
+          {
+            "query": "语义相似度是如何计算的",
+            "ids": [
+              "embedding",
+              "index",
+              "hybrid",
+              "privacy",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 17.779999993741512,
+            "seekdbMs": 10.320745999924839,
+            "totalMs": 50.04000000655651
+          },
+          {
+            "query": "如何同时使用关键词和语义搜索",
+            "ids": [
+              "hybrid",
+              "embedding",
+              "state",
+              "index",
+              "rrf"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 20.480000004172325,
+            "seekdbMs": 10.897736999904737,
+            "totalMs": 50.060000002384186
+          },
+          {
+            "query": "导入后为什么要刷新索引",
+            "ids": [
+              "refresh",
+              "index",
+              "utf8",
+              "state",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 20.890000000596046,
+            "seekdbMs": 11.389746999950148,
+            "totalMs": 50.18000000715256
+          },
+          {
+            "query": "长文档怎么分段",
+            "ids": [
+              "chunk",
+              "metric",
+              "embedding",
+              "refresh",
+              "privacy"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 20.625,
+            "seekdbMs": 12.604124000063166,
+            "totalMs": 51.399999998509884
+          },
+          {
+            "query": "怎样提高向量化吞吐量",
+            "ids": [
+              "int8",
+              "fp32",
+              "privacy",
+              "index",
+              "refresh"
+            ],
+            "recall5": 0,
+            "ndcg5": 0,
+            "embeddingMs": 18.67000000178814,
+            "seekdbMs": 10.417432000045665,
+            "totalMs": 48.3399999961257
+          },
+          {
+            "query": "为什么第二次加载模型更快",
+            "ids": [
+              "cache",
+              "int8",
+              "chunk",
+              "wasm",
+              "fp32"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 20.71500000357628,
+            "seekdbMs": 10.705336999963038,
+            "totalMs": 50.0350000038743
+          },
+          {
+            "query": "文档是否需要发送云端 AI",
+            "ids": [
+              "privacy",
+              "refresh",
+              "chunk",
+              "metric",
+              "utf8"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 17.410000003874302,
+            "seekdbMs": 9.88319500000216,
+            "totalMs": 50.17999999970198
+          },
+          {
+            "query": "不同检索分数尺度不同怎么融合",
+            "ids": [
+              "rrf",
+              "hybrid",
+              "embedding",
+              "int8",
+              "refresh"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 19.88000000268221,
+            "seekdbMs": 10.924815000034869,
+            "totalMs": 49.86500000208616
+          },
+          {
+            "query": "如何防止不同知识库数据串库",
+            "ids": [
+              "state",
+              "privacy",
+              "rrf",
+              "chunk",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 21.03999999910593,
+            "seekdbMs": 9.875116999959573,
+            "totalMs": 49.729999996721745
+          },
+          {
+            "query": "量化对比应该选什么基准",
+            "ids": [
+              "int8",
+              "fp32",
+              "batch",
+              "chunk",
+              "metric"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 20.115000002086163,
+            "seekdbMs": 10.383774999994785,
+            "totalMs": 50.14000000059605
+          },
+          {
+            "query": "怎样客观衡量搜索质量",
+            "ids": [
+              "rrf",
+              "metric",
+              "fp32",
+              "int8",
+              "state"
+            ],
+            "recall5": 1,
+            "ndcg5": 0.6309297535714575,
+            "embeddingMs": 23.87000000476837,
+            "seekdbMs": 12.010661999927834,
+            "totalMs": 53.3399999961257
+          },
+          {
+            "query": "什么索引能加速向量近邻查询",
+            "ids": [
+              "index",
+              "embedding",
+              "refresh",
+              "privacy",
+              "hybrid"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 25.230000004172325,
+            "seekdbMs": 13.45078400010243,
+            "totalMs": 57.48499999940395
+          },
+          {
+            "query": "导入文本要使用什么编码",
+            "ids": [
+              "utf8",
+              "embedding",
+              "state",
+              "hybrid",
+              "wasm"
+            ],
+            "recall5": 1,
+            "ndcg5": 1,
+            "embeddingMs": 25.075000002980232,
+            "seekdbMs": 14.891508999979123,
+            "totalMs": 61.20499999821186
+          }
+        ]
+      }
+    ]
+  }
+]
