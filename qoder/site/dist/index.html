@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>拾忆 · Recall Coach ｜ 把复习记忆真的放进 PowerContext</title>
+<meta name="description" content="拾忆 · Recall Coach：面向数据库基础复习的学习工作台。薄弱点、掌握变化、复习偏好与复习安排全部写入真实 OceanBase PowerContext，换会话或重启服务后照样读回并决定下一轮选题；判分与选题不依赖任何模型 API。">
+<meta name="color-scheme" content="light">
+<meta property="og:title" content="拾忆 · Recall Coach ｜ 把复习记忆真的放进 PowerContext">
+<meta property="og:description" content="2026 OceanBase PowerContext 生态赛参赛作品：记忆驱动选题、依据可核验、跨重启续接，核心闭环无需模型密钥。">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark">拾忆</span>
+      <span class="brand-sub">Recall Coach</span>
+    </a>
+    <nav class="nav" aria-label="页面导航">
+      <a href="#problem">痛点</a>
+      <a href="#loop">闭环</a>
+      <a href="#memory">记忆层</a>
+      <a href="#evidence">验收结果</a>
+      <a href="#run">三分钟上手</a>
+      <a href="#limits">边界</a>
+    </nav>
+    <div class="topbar-actions">
+      <a class="btn ghost" href="https://github.com/m-xy-boop/powercontext-mxy/tree/qoder-recall-coach/qoder" target="_blank" rel="noopener noreferrer">源码</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">2026 OceanBase PowerContext 生态赛 · 参赛作品</p>
+        <h1>换一次会话、重启一次服务，<br>不用重新交代你的薄弱点。</h1>
+        <p class="lede">
+          拾忆把「你在数据库基础哪一块还没掌握」当作<strong>记忆</strong>存进真实的 PowerContext：
+          每次选题都由读回的记忆折叠、打分、排序得出，每题下面写着它依据哪几条记忆；
+          判分与选题全程不调用任何模型服务。
+        </p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#run">看三分钟怎么跑起来</a>
+          <a class="btn line" href="#evidence">看真实验收结果</a>
+        </div>
+        <ul class="hero-facts" aria-label="关键事实">
+          <li><b>1 个身份 = 1 个 Scope</b><span>四类原子记忆：薄弱点 / 掌握变化 / 复习偏好 / 复习安排</span></li>
+          <li><b>0 个模型密钥</b><span>判分、选题、记忆读写全部离线可复现</span></li>
+          <li><b>24 道原创题</b><span>覆盖 8 个数据库基础知识点（固定内置题库）</span></li>
+        </ul>
+      </div>
+      <div class="hero-shot">
+        <figure class="shot">
+          <span class="frame"><img src="assets/screenshots/03-diagnose-result.png" alt="诊断与复习页面：判分结果与本次写入 PowerContext 的真实记忆回执" width="1440" height="7651" loading="eager"></span>
+
+          <figcaption>真实页面截图：判分后逐条列出写入 PowerContext 的记忆标识 <code>atomic-memory/art_…@1</code> 与回读校验方式。</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="problem">
+    <div class="wrap">
+      <h2>要解决的那点事</h2>
+      <div class="grid four">
+        <article class="card">
+          <h3>重复交代</h3>
+          <p>复习软件记不住上次卡在哪：换个标签页、重启一次进程，就得重新做一遍诊断。</p>
+        </article>
+        <article class="card">
+          <h3>黑盒推荐</h3>
+          <p>「推荐你复习这一题」说不清为什么。拾忆把每一项权重摊开：掌握缺口、连错次数、偏好侧重，都能追到具体记忆条目。</p>
+        </article>
+        <article class="card">
+          <h3>记忆只在本地缓存</h3>
+          <p>浏览器 localStorage 里的进度不是学习记忆。这里的学习状态存在 PowerContext 原子记忆中，本地库只留过程流水。</p>
+        </article>
+        <article class="card">
+          <h3>没有模型就不能做</h3>
+          <p>误以为「个性化」一定要调大模型。本作品用固定题库 + 可解释的掌握度模型 + 真实记忆读写就把闭环跑通了。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="loop">
+    <div class="wrap">
+      <h2>闭环怎么转</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-no">1</span>
+          <div>
+            <h3>选身份，读记忆</h3>
+            <p>身份标识映射到一个 PowerContext Scope（<code>idempotency_key</code> 幂等复用）。服务端逐条读回激活记忆，折叠成 8 个知识点的掌握状态。</p>
+            <p class="without">没有记忆时：<b>基础诊断</b>模式，8 个知识点各 1 题，建立基线。</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-no">2</span>
+          <div>
+            <h3>打分排序出题</h3>
+            <p>优先级分 = 掌握缺口 <code>1−mastery</code>，连错 <code>+0.10×min(连错,3)</code>，偏好侧重 <code>+0.20</code>，无记忆 <code>+0.15</code>，上次已安排且掌握度≥0.75 <code>−0.25</code>，本会话已作答 <code>−0.05</code>。每一项都写进题目下方的「选题依据」。</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-no">3</span>
+          <div>
+            <h3>服务端判分，写回真实记忆</h3>
+            <p>判分在本地服务端完成（不调模型）。每个知识点的掌握变化按作答顺序做 EWMA（α=0.45，阈值 0.55 判薄弱），写入 <code>progress</code>；判为薄弱的再写一条 <code>weakness</code>。写入后立即回读校验，回执带 <code>artifact_id</code>、修订号、状态版本与字节数。</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-no">4</span>
+          <div>
+            <h3>再来一轮：题目顺序随记忆改变</h3>
+            <p>新一轮读回刚才写入的条目，答错的知识点排到最前，并显示「依据记忆：atomic-memory/art_…@1」。关掉标签页、重启服务，用同一身份再进来，顺序一模一样。</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-no">5</span>
+          <div>
+            <h3>可核验、可撤回、可导出</h3>
+            <p>检索走真实 <code>search_memory</code>（未配置嵌入模型时如实显示 <code>mode=text</code>）；<code>prepare_context</code> 生成有界 PreparedContext；按条遗忘或一键清空使用 lifecycle 接口的乐观并发；导出 JSON / Markdown 每条都带记忆标识。</p>
+          </div>
+        </li>
+      </ol>
+
+      <p class="gallery-note">下面每张图都是真实 Chromium 渲染的原图（未合成、未后期修改）；缩略图只显示页面顶部，点击图片可放大查看完整截图。</p>
+      <div class="gallery">
+        <figure class="shot">
+          <span class="frame"><img src="assets/screenshots/01-home.png" alt="概览页：核心闭环、知识点图谱、PowerContext 真实运行状态与最近操作留痕" width="1440" height="2305" loading="lazy"></span>
+
+          <figcaption>概览页：核心闭环说明、8 个知识点、PowerContext 真实运行状态与最近操作留痕。</figcaption>
+        </figure>
+        <figure class="shot">
+          <span class="frame"><img src="assets/screenshots/02-diagnose-answered.png" alt="诊断页面：每题下方写着选题依据，顶栏显示真实连接状态" width="1440" height="4610" loading="lazy"></span>
+
+          <figcaption>诊断作答：每题下方是选题依据，顶栏是 PowerContext 真实连接结果。</figcaption>
+        </figure>
+        <figure class="shot">
+          <span class="frame"><img src="assets/screenshots/04-diagnose-review.png" alt="记忆驱动复习：答错的知识点排到前面并引用具体记忆标识" width="1440" height="3461" loading="lazy"></span>
+
+          <figcaption>记忆驱动复习：薄弱知识点被排到前面，依据里引用具体记忆标识。</figcaption>
+        </figure>
+        <figure class="shot">
+          <span class="frame"><img src="assets/screenshots/05-memory.png" alt="学习记忆页面：四类真实条目、检索、PreparedContext 与遗忘操作" width="1440" height="4001" loading="lazy"></span>
+
+          <figcaption>学习记忆：四类真实条目、全文检索、PreparedContext 与按条遗忘。</figcaption>
+        </figure>
+        <figure class="shot">
+          <span class="frame"><img src="assets/screenshots/07-cross-session.png" alt="重启服务后以同一身份续接：仍是复习模式，薄弱点顺序一致" width="1440" height="3887" loading="lazy"></span>
+
+          <figcaption>跨重启续接：停止并重启 PowerContext 后，同一身份仍是复习模式。</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="memory">
+    <div class="wrap">
+      <h2>PowerContext 在其中承担什么</h2>
+      <p class="section-lede">
+        只使用 <code>powercontext[client]==1.5.1</code> 的公开 Python Client SDK，没有私有接口、没有猜测字段；
+        公开契约留档在仓库 <code>reference/powercontext-1.5.1-openapi.json</code>（由运行中的服务 <code>GET /openapi.json</code> 下载）。
+      </p>
+      <div class="split">
+        <div class="table-wrap">
+          <table class="api">
+            <caption>记忆层用到的公开接口<span class="narrow-only">（窄屏可横向滑动查看完整列）</span></caption>
+            <thead><tr><th>SDK 方法</th><th>真实 HTTP 接口</th><th>在作品里的用途</th></tr></thead>
+            <tbody>
+              <tr><td><code>create_scope()</code> / <code>update_scope()</code></td><td><code>POST /v1/scopes</code> · <code>PUT /v1/scopes/{id}</code></td><td>一个身份一个 Scope，幂等复用</td></tr>
+              <tr><td><code>remember_memory()</code></td><td><code>POST /v1/memory/remember</code></td><td>写 weakness / progress / preference / plan</td></tr>
+              <tr><td><code>get_atomic_memory_state()</code></td><td><code>GET /v1/scopes/{id}/artifacts/atomic-memory/{aid}/state</code></td><td>写入后回读校验，回执标注校验方式</td></tr>
+              <tr><td><code>list_atomic_memories()</code></td><td><code>POST /v1/atomic-memory/list</code></td><td>分页读回激活记忆，供折叠与清单</td></tr>
+              <tr><td><code>search_memory()</code></td><td><code>POST /v1/memory/search</code></td><td>真实检索，未配置嵌入模型时为全文</td></tr>
+              <tr><td><code>prepare_context()</code></td><td><code>POST /v1/context/prepare</code></td><td>生成有界 PreparedContext</td></tr>
+              <tr><td><code>change_atomic_memory_lifecycle()</code></td><td><code>POST /v1/atomic-memory/lifecycle</code></td><td>按 <code>state_version</code> 置为 forgotten</td></tr>
+              <tr><td><code>capture_content_source()</code></td><td><code>POST /v1/sources/content</code></td><td>答题流水作为证据留存</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="capability">
+            <h3>能力如实上报</h3>
+            <p>页面顶栏直接渲染 <code>GET /v1/capabilities</code> 的结果，不美化：</p>
+            <ul>
+              <li><code>search_modes</code> = <code>["auto","fts"]</code>　→　检索结果标注 <code>mode=text</code></li>
+              <li><code>memory_extraction</code> = <code>false</code>　→　不声称「自动抽取记忆」</li>
+              <li><code>context_versions</code> 含 <code>powercontext.prepared-context.v1</code></li>
+              <li><code>source_types</code> = <code>["content"]</code></li>
+            </ul>
+            <p class="note">失败也如实：服务不可达返回 <code>503 powercontext_unavailable</code>；被拒绝的请求带回真实 <code>code</code>、状态码与 <code>X-PowerContext-Request-Id</code>。页面在这种时候不显示任何「已保存」。</p>
+          </div>
+          <div class="capability">
+            <h3>写入的可靠性</h3>
+            <ul>
+              <li><b>重复提交被挡住</b>：同一会话再次提交，服务端持久回放当时的判分与回执，答题流水和记忆条数都不增加。</li>
+              <li><b>部分写入说清楚</b>：批量写入中断时，返回已成功条目的真实回执，并列出还缺哪几条；重试只补缺失部分。</li>
+              <li><b>正文可重放</b>：记忆正文里的时间与序号由「本次提交」固定，重试生成的内容与首次完全一致。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="evidence">
+    <div class="wrap">
+      <h2>真实验收结果</h2>
+      <p class="section-lede">下面每个数字都来自 <code>2026-11-16 18:21</code> 这一次真实执行，留档在仓库
+        <code>evidence/rerun-20261116-fix4/</code>（含逐步日志、指纹 JSON 与浏览器截图）；未虚构用户数、使用次数或提效百分比。</p>
+      <div class="metrics" id="metrics">
+        <div class="metric"><b>29</b><span>自动化测试通过（15 项离线单元 + 14 项真实记忆流程）</span></div>
+        <div class="metric"><b>14</b><span>端到端闭环步骤全部通过（含重复提交保护一步）；重启后同样 14 步续接通过</span></div>
+        <div class="metric"><b>7</b><span>重启前后记忆指纹逐项一致（scope、激活条数、总条数、标识集合、最近安排、优先级前三、偏好）</span></div>
+        <div class="metric"><b>44</b><span>真实 Chromium 页面断言通过，未捕获 JS 错误 0 条</span></div>
+        <div class="metric"><b>0</b><span>模型 API 密钥：判分与选题全部在本地服务端完成</span></div>
+      </div>
+      <div class="evidence-note">
+        <p>验收包含一次<b>真实的服务重启</b>：<code>scripts/acceptance.sh</code> 会停掉并重新拉起 PowerContext 与拾忆应用，
+          再用全新应用实例读回同一 Scope，逐条比对记忆指纹，并跑一遍跨重启闭环。
+          页面层用真实 Chromium 走查四个页面、断言无脚本错误，并实际下载导出的 Markdown 记录。</p>
+        <p>本轮独立审查修掉的四件事：① 同一会话重复提交会二次累计 → 服务端持久幂等 + 账本回放；② 批量写入部分成功却提示「没有写入」→
+          按真实阶段分别提示并返回已完成回执，重试只补缺失；③ 文档与页面不再声称具备公开多用户安全（详见下一节）；
+          ④ 页面提交按钮的启用/禁用条件写反（判分成功后反而可以再点）→ 由浏览器验收断言抓到并改正。</p>
+        <p class="muted">截图来自自动化验收使用的合成身份（本次为 <code>ui-182107</code>），题目为内置原创题库，不含任何真实个人信息或他人学习记录。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="run">
+    <div class="wrap">
+      <h2>三分钟跑起来（本机）</h2>
+      <p class="section-lede">
+        <strong>完整的交互项目需要按运行说明在本机运行</strong>：判分、记忆读写都发生在本地服务与本地 PowerContext 之间，
+        本站只是静态展示，不承载在线演示，也不包含任何学习记录。
+      </p>
+      <div class="terminal">
+        <div class="term-head"><span>bash</span><button class="copy" type="button" data-copy="commands">复制</button></div>
+        <pre id="commands"><code>git clone -b qoder-recall-coach https://github.com/m-xy-boop/powercontext-mxy.git
+cd powercontext-mxy/qoder
+
+# 1) 启动真实 PowerContext Server（SQLite 持久化，仅监听 127.0.0.1:8777）
+scripts/start_powercontext.sh
+
+# 2) 启动拾忆应用（http://127.0.0.1:8642）
+scripts/start_app.sh
+
+# 3) 打开页面：诊断 → 答题 → 写回记忆 → 按新记忆再来一轮
+#    演示顺序见 RUNBOOK.md 第 4 步（约 3 分钟）
+
+# 4) 复现验收：接口核实 + 自动化测试 + 端到端闭环 + 真实重启 + 浏览器走查
+bash scripts/acceptance.sh</code></pre>
+      </div>
+      <ul class="minsteps">
+        <li><b>①</b><span>在 <code>/diagnose</code> 填一个身份标识（如 <code>teacher-wang</code>）→ 首屏 8 题基础诊断。</span></li>
+        <li><b>②</b><span>故意答错两题并提交 → 回执表逐条列出写入的记忆标识与回读校验方式。</span></li>
+        <li><b>③</b><span>点「按新记忆再来一轮」→ 模式变复习，答错的知识点排到最前，依据里写着记忆标识。</span></li>
+        <li><b>④</b><span>重启 PowerContext 再用同一身份进入 → 顺序不变，证明记忆属于服务而不是浏览器。</span></li>
+      </ul>
+      <p class="prewar">环境要求：Python 3.12 + <code>uv</code>（依赖由 <code>uv.lock</code> 锁定）、PowerContext 1.5.1。无需模型 API 密钥。</p>
+    </div>
+  </section>
+
+  <section class="band alt" id="limits">
+    <div class="wrap">
+      <h2>边界与隐私（如实说明）</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>这个展示站有什么</h3>
+          <ul>
+            <li>静态页面与真实截图，来自验收用的<b>合成演示身份</b>（如 <code>ui-*</code>、<code>acceptance-*</code>），不含真实个人信息。</li>
+            <li>可复现的命令与留档文件名，便于自行验证。</li>
+            <li>指向仓库 <code>qoder/</code> 目录的源码链接。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>它不提供什么</h3>
+          <ul>
+            <li>不提供在线作答演示：本机的 <code>/api/*</code> 只监听 <code>127.0.0.1</code>，公开页面无法也不应访问它。</li>
+            <li>不展示任何人的学习记录：本站没有记忆读写、没有用户数据接口。</li>
+            <li>不声称多用户安全：拾忆<b>没有登录与授权</b>，<code>learner_id</code> 只是本机选择 Scope 的短标识，<b>不是凭证</b>。
+              验收证明的是不同标识落在不同 Scope 的<b>数据隔离</b>，不是权限隔离；因此应用只适合本机或受信任内网，
+              公开多用户部署需要先引入认证并由服务端从认证主体派生 Scope 幂等键（要求见仓库 <code>RUNBOOK.md</code> 第 8 步）。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid three">
+        <div class="card quiet">
+          <h3>不做动态 AI 出题</h3>
+          <p>24 道题全部为内置原创题库，也不调用模型服务判分。</p>
+        </div>
+        <div class="card quiet">
+          <h3>不做语义检索的假象</h3>
+          <p>未配置嵌入模型时不做向量检索，页面直接显示 <code>memory_extraction: false</code>。</p>
+        </div>
+        <div class="card quiet">
+          <h3>掌握度模型保持可解释</h3>
+          <p>EWMA + 连错计数，未做知识追踪（DKT 等）那类黑盒模型。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div>
+      <p class="footer-title">拾忆 · Recall Coach</p>
+      <p class="muted">2026 OceanBase PowerContext 生态赛参赛作品 · PowerContext 1.5.1 · Python 3.12 + FastAPI</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/m-xy-boop/powercontext-mxy/tree/qoder-recall-coach/qoder" target="_blank" rel="noopener noreferrer">源码与文档</a>
+      <a href="#run">本机运行说明</a>
+      <a href="#evidence">验收结果</a>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="截图查看" hidden>
+  <button class="lb-close" type="button" aria-label="关闭">×</button>
+  <img alt="" id="lb-img">
+  <p class="lb-caption" id="lb-caption"></p>
+</div>
+
+<noscript><p class="noscript">本页是静态展示：不启用 JavaScript 也能完整阅读，只有截图放大与命令复制需要脚本。</p></noscript>
+<script src="assets/site.js"></script>
+</body>
+</html>

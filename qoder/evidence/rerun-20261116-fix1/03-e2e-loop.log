@@ -1,0 +1,28 @@
+[01] 读取应用与 PowerContext 能力
+       backend       = http://127.0.0.1:8777
+       health        = ready
+       search_modes  = ["auto", "fts"]
+       memory_extraction= False
+       bank          = 24 题 / 8 个知识点
+[02] 建立学习身份（幂等 Scope）
+       scope         = scp_41csht7y67tsx1qa4anekgt1dc
+       title         = 拾忆-acceptance-180849
+       scope_version = 1
+[03] 第一轮复习安排
+       mode          = diagnosis
+       count         = 8
+       topics        = ["idx-btree", "idx-perf", "lock", "mvcc", "recovery", "storage", "tx-acid", "tx-isolation"]
+       plan_memory   = atomic-memory/art_baf40fc308ef4bb5a7059ea238a92741@1
+[04] 第一轮判分并写回真实记忆
+       score         = 6/8
+       wrong         = ["idx-btree-2", "idx-perf-3"]
+       receipts      = [["progress", "atomic-memory/art_8f3e66b890d649c2833d8cae6fc435e7@1", "active/v0", "417B", "get_atomic_memory_state"], ["weakness", "atomic-memory/art_7158dfc345f64eb2bd42cc19c3a42550@1", "active/v0", "481B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_c7db047646804871a21266753b8af3a8@1", "active/v0", "434B", "get_atomic_memory_state"], ["weakness", "atomic-memory/art_8ffd85d78b1d4aa99c2797ff41898862@1", "active/v0", "497B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_b563a48f539c4a29a2a78bd92756402a@1", "active/v0", "413B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_b11ef09efe68400fb2ac8375ed4d7e4a@1", "active/v0", "431B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_3f68e03eecfc4debb935f1d1bd773c23@1", "active/v0", "435B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_dffcf33e908545fab70799c22269170f@1", "active/v0", "440B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_86156ad53c374c8aa9477c72396734bb@1", "active/v0", "418B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_b09b858cf1cf48b1b2e787cf8e2e35f3@1", "active/v0", "451B", "get_atomic_memory_state"]]
+       weak_after    = [["idx-btree", 0.275, 1], ["idx-perf", 0.275, 1]]
+Traceback (most recent call last):
+  File "/home/xy/powercontext-qoder/qoder/scripts/e2e_loop.py", line 339, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/xy/powercontext-qoder/qoder/scripts/e2e_loop.py", line 161, in main
+    newly_written=again["memory_writes"]["newly_written"],
+                  ~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'memory_writes'

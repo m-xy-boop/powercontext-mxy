@@ -1,0 +1,21 @@
+# 生成时间（本机）：2026-11-16T19:08:16+08:00
+# 逐个资源：线上抓取 → 状态/字节/类型 → 与本机 site/dist 同路径文件比 SHA-256
+# 说明：本机经由 HTTPS 代理出网，curl 的 remote_ip 显示为代理地址 127.0.0.1；响应头含平台 x-request-id 与 OSS 头部，证明请求确实到达线上站点。
+assets/site.css -> 200 12797 text/css; charset=utf-8 | SHA-256 一致
+assets/site.js -> 200 3432 application/javascript; charset=utf-8 | SHA-256 一致
+assets/favicon.svg -> 200 375 image/svg+xml | SHA-256 一致
+assets/screenshots/01-home.png -> 200 460479 image/png | SHA-256 一致
+assets/screenshots/02-diagnose-answered.png -> 200 712324 image/png | SHA-256 一致
+assets/screenshots/03-diagnose-result.png -> 200 1336706 image/png | SHA-256 一致
+assets/screenshots/04-diagnose-review.png -> 200 574170 image/png | SHA-256 一致
+assets/screenshots/05-memory.png -> 200 1095808 image/png | SHA-256 一致
+assets/screenshots/07-cross-session.png -> 200 618530 image/png | SHA-256 一致
+
+# 缺页与错误路径检查（不存在的资源应非 200，站点未开放目录清单）
+no-such-page.html -> 404
+assets/nope.png -> 404
+http 升级检查：502 -> http://recall-coach-f3jx2506222.qoder.zone/
+
+# 补充口径
+# - 明文 http:// 请求在本机代理上返回 502，未取得站点响应；因此不声称「HTTP 自动跳转 HTTPS」，已核实的可用入口是 https://recall-coach-f3jx2506222.qoder.zone/。
+# - 匿名性证据：curl 与真实 Chromium 均未携带 Cookie/Authorization，见 10-public-http.txt 与 evidence/site-public/。

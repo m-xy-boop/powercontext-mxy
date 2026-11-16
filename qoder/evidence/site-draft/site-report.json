@@ -1,0 +1,52 @@
+{
+  "url": "http://127.0.0.1:4173/",
+  "checks": 30,
+  "passed": [
+    "页面标题如实描述作品：拾忆 · Recall Coach ｜ 把复习记忆真的放进 PowerContext",
+    "主标题有内容",
+    "6 张截图全部真实解码（损坏清单为空）：[]",
+    "六张约定截图齐备（缺失清单为空）：[]",
+    "内容区块 #problem 有导航入口且非空：{'link': True, 'target': True, 'chars': 256}",
+    "内容区块 #loop 有导航入口且非空：{'link': True, 'target': True, 'chars': 920}",
+    "内容区块 #memory 有导航入口且非空：{'link': True, 'target': True, 'chars': 1299}",
+    "内容区块 #evidence 有导航入口且非空：{'link': True, 'target': True, 'chars': 699}",
+    "内容区块 #run 有导航入口且非空：{'link': True, 'target': True, 'chars': 761}",
+    "内容区块 #limits 有导航入口且非空：{'link': True, 'target': True, 'chars': 515}",
+    "全部锚点都指向真实存在的区块（空白目标清单为空）：[]",
+    "页面未发起本站之外的请求（外部请求清单为空）：[]",
+    "展示页源码不含任何接口调用（fetch/XHR/WebSocket 命中数为 0）：[]",
+    "没有把本机地址做成可点击链接（命中数为 0）：[]",
+    "源码链接指向本仓库 qoder 目录：['https://github.com/m-xy-boop/powercontext-mxy/tree/qoder-recall-coach/qoder']",
+    "页面文字未内嵌真实记忆标识（命中数为 0）：[]",
+    "页面如实说明边界（含「不是凭证」）",
+    "页面如实说明边界（含「本机」）",
+    "页面如实说明边界（含「数据隔离」）",
+    "验收指标区块展示真实结果：真实验收结果 /  / 下面每个数字都来自 2026-11-16 18:21 这一次真实执行，留档在仓库 evidence/rerun-20261116-fix4/（含",
+    "点击截图弹出灯箱并显示同一张图",
+    "完整页面截图在灯箱里可以上下滚动查看",
+    "打开灯箱后焦点落在关闭按钮：{'scrollable': True, 'focus': 'lb-close', 'width': 1400, 'natural': 1440}",
+    "灯箱按接近原始宽度显示（可读），实测 {'scrollable': True, 'focus': 'lb-close', 'width': 1400, 'natural': 1440}",
+    "灯箱可用 Esc 关闭",
+    "命令复制按钮给出反馈：已复制",
+    "窄屏 390px 整页无横向滚动（实测溢出 0px）",
+    "窄屏存在既不换行也不可滑动的溢出元素（清单应为空）：[]",
+    "窄屏下公开接口表是可横向滑动的容器（而不是撑破页面）",
+    "窄屏下显示表格可横向滑动的提示（默认隐藏、断点内可见）"
+  ],
+  "requests": [
+    "http://127.0.0.1:4173/",
+    "http://127.0.0.1:4173/assets/favicon.svg",
+    "http://127.0.0.1:4173/assets/screenshots/01-home.png",
+    "http://127.0.0.1:4173/assets/screenshots/02-diagnose-answered.png",
+    "http://127.0.0.1:4173/assets/screenshots/03-diagnose-result.png",
+    "http://127.0.0.1:4173/assets/screenshots/04-diagnose-review.png",
+    "http://127.0.0.1:4173/assets/screenshots/05-memory.png",
+    "http://127.0.0.1:4173/assets/screenshots/07-cross-session.png",
+    "http://127.0.0.1:4173/assets/site.css",
+    "http://127.0.0.1:4173/assets/site.js"
+  ],
+  "artifacts": [
+    "site-desktop.png",
+    "site-mobile.png"
+  ]
+}

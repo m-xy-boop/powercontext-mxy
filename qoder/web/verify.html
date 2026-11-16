@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>验证说明｜拾忆 · Recall Coach</title>
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body data-page="verify">
+<header class="topbar">
+  <div class="brand"><span class="logo">拾</span><div><strong>拾忆 · Recall Coach</strong><small>PowerContext 学习记忆 · 数据库基础复习</small></div></div>
+  <nav class="nav">
+    <a href="/">概览</a>
+    <a href="/diagnose">诊断与复习</a>
+    <a href="/memory">学习记忆</a>
+    <a href="/verify" class="active">验证说明</a>
+  </nav>
+  <div class="backend" id="backend-pill"><span class="dot"></span><span id="backend-text">正在连接 PowerContext…</span></div>
+</header>
+
+<main class="page">
+  <section class="card">
+    <h2>这台实例的真实运行状态</h2>
+    <p class="muted">下列数值由页面实时调用本机接口读取，不是截图或写死文本。</p>
+    <div id="live-status" class="kv">读取中…</div>
+  </section>
+
+  <section class="split">
+    <div class="card">
+      <h2>公开接口核实结果</h2>
+      <p class="muted small">基础版本：PowerContext 1.5.1（PyPI 发布版），运行 <code>powercontext server run</code> + SQLite 持久化。</p>
+      <ul class="check" id="api-checks">
+        <li><code>POST /v1/scopes</code>：同一 <code>idempotency_key</code> 复用同一 Scope，返回真实 <code>scp_…</code> 标识</li>
+        <li><code>POST /v1/memory/remember</code>：写入原子记忆，返回 <code>atomic-memory/art_…@1</code> 与 <code>changed</code></li>
+        <li><code>POST /v1/atomic-memory/list</code>：按 <code>kind</code> 与 <code>states</code> 分页读回，含 <code>state_version</code></li>
+        <li><code>POST /v1/memory/search</code>：未配置嵌入模型时 <code>mode=text</code>，仅全文检索，如实展示</li>
+        <li><code>POST /v1/context/prepare</code>：返回 <code>powercontext.prepared-context.v1</code> 有界内容与字节数</li>
+        <li><code>POST /v1/atomic-memory/lifecycle</code>：以 <code>state_version</code> 乐观并发把条目置为 <code>forgotten</code></li>
+        <li><code>POST /v1/sources/content</code>：答题流水作为证据留存，返回 <code>content/&lt;source_id&gt;</code></li>
+        <li>写入失败：超长文本被服务端以 <code>422 invalid_request</code> 拒绝，客户端保留真实 <code>X-PowerContext-Request-Id</code></li>
+      </ul>
+      <p class="muted small">完整契约留档：<code>reference/powercontext-1.5.1-openapi.json</code>（由运行中的服务 <code>GET /openapi.json</code> 下载）。</p>
+    </div>
+    <div class="card">
+      <h2>自动化验收覆盖</h2>
+      <ul class="check">
+        <li>跨会话持久性：写入后用全新应用实例重新读取同一 Scope</li>
+        <li>服务重启持久性：停止并重启 PowerContext 后按记忆续接复习（见 RUNBOOK 第 5 步）</li>
+        <li>记忆驱动选题：复习首题必须落在记忆中的薄弱知识点，且携带记忆标识</li>
+        <li>不同身份隔离：两个 Scope 的记忆、检索与选题互不可见（数据层面，非权限层面）</li>
+        <li>写入失败：服务不可达返回 <code>503 powercontext_unavailable</code>，且不留下任何“已保存”假状态</li>
+        <li>重复提交保护：同一会话二次提交由服务端持久回放当时的判分与回执，答题流水与记忆都不增加</li>
+        <li>部分写入如实提示：批量写入中断时返回已写入条目的真实回执，重试只补齐缺失条目</li>
+        <li>遗忘与撤回：<code>forgotten</code> 条目退出召回，历史仍可核验</li>
+        <li>可导出记录：JSON / Markdown 均含真实记忆标识与答题流水</li>
+      </ul>
+      <p class="muted small">复现命令：<code>scripts/acceptance.sh</code>（真实服务 + 真实重启 + pytest），输出留档于 <code>evidence/</code>。</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>能力边界与不做的事</h2>
+    <div class="grid two">
+      <div>
+        <h3>本作品做到</h3>
+        <ul>
+          <li>核心闭环不依赖模型 API：判分、选题、记忆读写全部可离线复现</li>
+          <li>记忆真的影响安排：复习顺序由读回的掌握度、连错次数与偏好计算得出</li>
+          <li>每条依据可追溯：显示 <code>atomic-memory/art_…@修订号</code> 与操作留痕</li>
+          <li>按身份分 Scope 的数据隔离与撤回：支持按条遗忘与一键清空</li>
+        </ul>
+      </div>
+      <div>
+        <h3>本作品没有做</h3>
+        <ul>
+          <li>不使用动态 AI 出题：24 道题全部为原创内置固定题库</li>
+          <li>未配置推理模型时不做语义向量检索，也不假装自动抽取记忆</li>
+          <li>不虚构用户数、使用次数、提效百分比或他人反馈</li>
+          <li>不在演示身份中存放真实个人信息；显示名不写入 PowerContext</li>
+          <li><b>没有登录与授权</b>：身份标识只是本机选择 Scope 的短名，<b>不是凭证</b>。同一台机器（或同一个可达端口）
+            上知道标识的人就能读写同一份记忆，因此本项目只适用于本机或受信任内网，
+            公开多用户部署需要先引入认证并把 Scope 绑定到认证主体（见 RUNBOOK 第 8 步）。</li>
+          <li>不宣称“身份隔离 = 权限隔离”：验收证明的是不同标识落在不同 Scope、数据互相读不到</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <a class="btn primary" href="/diagnose">现在自己走一遍闭环</a>
+      <a class="btn ghost" href="/memory">检查记忆与检索</a>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>操作留痕（最近 15 条真实调用）</h2>
+    <div class="table-wrap">
+      <table class="ops">
+        <thead><tr><th>时间</th><th>操作</th><th>记忆标识 / 结果</th></tr></thead>
+        <tbody id="ops-body"><tr><td colspan="3" class="muted">加载中…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="foot"><span>拾忆 · Recall Coach</span><span class="muted">源码、安装启动说明、验证样例与开发记录均随仓库提供，便于核验。</span></footer>
+<script src="/static/app.js"></script>
+</body>
+</html>

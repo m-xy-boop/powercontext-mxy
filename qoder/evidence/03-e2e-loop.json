@@ -1,0 +1,284 @@
+{
+  "started_at": "2026-11-16T06:02:11.237041+00:00",
+  "base_url": "http://127.0.0.1:8642",
+  "learner_id": "acceptance-140157",
+  "steps": [
+    {
+      "step": 1,
+      "label": "读取应用与 PowerContext 能力",
+      "backend": "http://127.0.0.1:8777",
+      "health": "ready",
+      "search_modes": [
+        "auto",
+        "fts"
+      ],
+      "memory_extraction": false,
+      "bank": "24 题 / 8 个知识点"
+    },
+    {
+      "step": 2,
+      "label": "建立学习身份（幂等 Scope）",
+      "scope": "scp_6yh4ywxypgyzjtj1atk2p953cc",
+      "title": "拾忆-acceptance-140157",
+      "scope_version": 1
+    },
+    {
+      "step": 3,
+      "label": "第一轮复习安排",
+      "mode": "diagnosis",
+      "count": 8,
+      "topics": [
+        "idx-btree",
+        "idx-perf",
+        "lock",
+        "mvcc",
+        "recovery",
+        "storage",
+        "tx-acid",
+        "tx-isolation"
+      ],
+      "plan_memory": "atomic-memory/art_bb604be7a2d54243bc51195a71e8d015@1"
+    },
+    {
+      "step": 4,
+      "label": "第一轮判分并写回真实记忆",
+      "score": "6/8",
+      "wrong": [
+        "idx-btree-2",
+        "idx-perf-3"
+      ],
+      "receipts": [
+        [
+          "progress",
+          "atomic-memory/art_81cfaaa4b2e94fe8a7af90278d450a8d@1",
+          "active/v0",
+          "417B",
+          "get_atomic_memory_state"
+        ],
+        [
+          "weakness",
+          "atomic-memory/art_87201fa5923c45b99f42cc93e19054a4@1",
+          "active/v0",
+          "481B",
+          "get_atomic_memory_state"
+        ],
+        [
+          "progress",
+          "atomic-memory/art_db17061dffce49e583e5c64d36eae463@1",
+          "active/v0",
+          "434B",
+          "get_atomic_memory_state"
+        ],
+        [
+          "weakness",
+          "atomic-memory/art_3805376d365b408b9b585d6a3301d802@1",
+          "active/v0",
+          "497B",
+          "get_atomic_memory_state"
+        ],
+        [
+          "progress",
+          "atomic-memory/art_e6cdda3bde2d4b5584f4b86e2ceafa4f@1",
+          "active/v0",
+          "413B",
+          "get_atomic_memory_state"
+        ],
+        [
+          "progress",
+          "atomic-memory/art_ec8759ff24b84a14b7f90e3992d3242a@1",
+          "active/v0",
+          "431B",
+          "get_atomic_memory_state"
+        ],
+        [
+          "progress",
+          "atomic-memory/art_0ce6ca662032492dae5083fee847626c@1",
+          "active/v0",
+          "435B",
+          "get_atomic_memory_state"
+        ],
+        [
+          "progress",
+          "atomic-memory/art_88802631ff094dafabca7807ebbc6d2f@1",
+          "active/v0",
+          "440B",
+          "get_atomic_memory_state"
+        ],
+        [
+          "progress",
+          "atomic-memory/art_a1aaa888643a4a0fbeed1b8e22f484e5@1",
+          "active/v0",
+          "418B",
+          "get_atomic_memory_state"
+        ],
+        [
+          "progress",
+          "atomic-memory/art_a6265617ea6640149bfb7d6709e92ebc@1",
+          "active/v0",
+          "451B",
+          "get_atomic_memory_state"
+        ]
+      ],
+      "weak_after": [
+        [
+          "idx-btree",
+          0.275,
+          1
+        ],
+        [
+          "idx-perf",
+          0.275,
+          1
+        ]
+      ]
+    },
+    {
+      "step": 5,
+      "label": "读回该身份记忆概览",
+      "entry_count": 11,
+      "topics_covered": 8,
+      "weak": [
+        "idx-btree",
+        "idx-perf"
+      ],
+      "last_plan": "atomic-memory/art_bb604be7a2d54243bc51195a71e8d015@1"
+    },
+    {
+      "step": 6,
+      "label": "第二轮安排（记忆驱动选题）",
+      "mode": "review",
+      "topics": [
+        "idx-btree",
+        "idx-perf",
+        "lock",
+        "mvcc",
+        "recovery"
+      ],
+      "weak_covered": [
+        "idx-btree",
+        "idx-perf"
+      ],
+      "first_topic": "idx-btree",
+      "first_reasons": [
+        "当前掌握度 0.28，缺口 0.72",
+        "连续答错 1 次，加权 0.10"
+      ],
+      "cited_memories": [
+        "atomic-memory/art_0ce6ca662032492dae5083fee847626c@1",
+        "atomic-memory/art_3805376d365b408b9b585d6a3301d802@1",
+        "atomic-memory/art_81cfaaa4b2e94fe8a7af90278d450a8d@1",
+        "atomic-memory/art_87201fa5923c45b99f42cc93e19054a4@1",
+        "atomic-memory/art_db17061dffce49e583e5c64d36eae463@1",
+        "atomic-memory/art_e6cdda3bde2d4b5584f4b86e2ceafa4f@1"
+      ]
+    },
+    {
+      "step": 7,
+      "label": "全部答对后记忆更新",
+      "score": "5/5",
+      "receipt_count": 5,
+      "mastery_before": {
+        "idx-btree": 0.275,
+        "idx-perf": 0.275
+      },
+      "mastery_after": {
+        "idx-btree": 0.601,
+        "idx-perf": 0.601
+      },
+      "improved": [
+        "idx-btree",
+        "idx-perf"
+      ]
+    },
+    {
+      "step": 8,
+      "label": "写入复习偏好并再次安排",
+      "text": "复习偏好：每次 3 题，侧重 索引结构；备注：e2e：先补最薄弱的一块",
+      "memory": "atomic-memory/art_a79dae79e1ee41548ead2737f44660d4@1",
+      "third_count": 3,
+      "third_topics": [
+        "idx-btree",
+        "idx-perf",
+        "storage"
+      ],
+      "focus_included": true
+    },
+    {
+      "step": 9,
+      "label": "真实检索记忆（无嵌入模型时为全文模式）",
+      "mode": "text",
+      "hits": [
+        [
+          "weakness",
+          "atomic-memory/art_87201fa5923c45b99f42cc93e19054a4@1",
+          0.01639,
+          [
+            "text"
+          ]
+        ],
+        [
+          "weakness",
+          "atomic-memory/art_3805376d365b408b9b585d6a3301d802@1",
+          0.01613,
+          [
+            "text"
+          ]
+        ]
+      ]
+    },
+    {
+      "step": 10,
+      "label": "PreparedContext 有界上下文",
+      "schema": "powercontext.prepared-context.v1",
+      "status": "ready",
+      "content_bytes": 836,
+      "has_marker": true
+    },
+    {
+      "step": 11,
+      "label": "导出学习过程记录",
+      "memories": 19,
+      "attempts": 13,
+      "md_sections": [
+        "## 知识点掌握情况（由 PowerContext 记忆折叠得到）",
+        "## 复习偏好",
+        "## 最近一次复习安排（记忆中的 plan 条目）",
+        "## 学习记忆（PowerContext 原子记忆条目）",
+        "## 答题流水（本地过程记录，仅用于导出）"
+      ],
+      "first_cite": "atomic-memory/art_0ce6ca662032492dae5083fee847626c@1"
+    },
+    {
+      "step": 12,
+      "label": "按条遗忘薄弱记忆",
+      "forgotten": "art_3805376d365b408b9b585d6a3301d802",
+      "state": "forgotten",
+      "state_version": 1,
+      "active_left": 1
+    },
+    {
+      "step": 13,
+      "label": "历史可核验与操作留痕",
+      "active_and_forgotten": 19,
+      "forgotten_total": 1,
+      "log_path": "/home/xy/powercontext-qoder/qoder/var/log/powercontext-operations.jsonl",
+      "last_operations": [
+        "forget_atomic_memory",
+        "prepare_context",
+        "search_memory",
+        "remember_memory",
+        "remember_memory"
+      ]
+    }
+  ],
+  "powercontext": {
+    "base_url": "http://127.0.0.1:8777",
+    "scope_id": "scp_6yh4ywxypgyzjtj1atk2p953cc",
+    "search_modes": [
+      "auto",
+      "fts"
+    ],
+    "memory_extraction": false
+  },
+  "finished_at": "2026-11-16T06:02:12.968307+00:00"
+}

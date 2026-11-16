@@ -1,0 +1,101 @@
+
+=== 0. 从当前代码重启真实服务（先停旧进程，验收必须跑在待验代码上） ===
+已停止拾忆应用（PID 65688）
+已停止 PowerContext Server（PID 65245）
+已启动 PowerContext Server，PID 298895，日志 var/log/powercontext-server.log
+就绪：http://127.0.0.1:8777（1.5.1）
+拾忆 · Recall Coach 已就绪：http://127.0.0.1:8642（PID 299458，后端 http://127.0.0.1:8777）
+页面：/ 概览 · /diagnose 诊断与复习 · /memory 学习记忆 · /verify 验证说明
+
+=== 1. 公开接口核实（直接调用 PowerContext Client SDK） ===
+目标服务：http://127.0.0.1:8777
+
+[1] GET /v1/capabilities
+  search_modes               ["auto", "fts"]
+  memory_extraction          False
+  artifact_families          ["memory", "atomic-memory", "topic-memory", "experience", "skill", "handoff", "profile", "prompt"]
+  source_types               ["content"]
+  context_versions           ["powercontext.prepared-context.v1"]
+
+[2] POST /v1/scopes（幂等）
+  scope_id                   scp_2rj0eb9cya2kda908b87dy9bef
+  version / 重复创建复用           6 / True
+
+[3] POST /v1/scopes/{id}（update_scope 乐观并发）
+  version 递增                 6 → 7
+
+[4] POST /v1/memory/remember + 回读校验
+  changed / kind / state     True / weakness / active
+  artifact                   atomic-memory/art_03845588795f4a4382460b46cb9300a9@1
+  state_version / text 字节    0 / 105
+  get_atomic_memory_state    1 / active（与写入返回一致：True）
+
+[5] POST /v1/atomic-memory/list
+  active weakness 条数         1
+  next_cursor                None
+
+[6] POST /v1/memory/search
+  mode                       text
+  hits                       [["weakness", "art_03845588795f", 0.01639, ["text"]]]
+
+[7] POST /v1/context/prepare
+  schema / status            powercontext.prepared-context.v1 / ready
+  content_bytes              684
+  含真实标记头                     True
+
+[8] POST /v1/sources/content（证据留存）
+  source_ref                 content/probe-attempts
+  status / position          accepted / 2
+
+[9] POST /v1/atomic-memory/lifecycle（遗忘）
+  state / state_version      forgotten / 0 → 1
+  遗忘后 active 条数              0
+
+[10] 服务端拒绝超长文本时保留真实错误信息
+  status_code / code         422 / invalid_request
+  server_message             The request violates the API contract.
+  X-PowerContext-Request-Id  b8cf8dafa4c73fbf
+
+公开接口核实完成：以上每一项都是运行中的 PowerContext 真实返回值。
+
+=== 2. 自动化测试（离线单元 + 真实记忆流程） ===
+.............................                                            [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /home/xy/powercontext-qoder/qoder/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+29 passed, 1 warning in 14.62s
+
+=== 3. 端到端闭环（诊断→写记忆→复习→纠正→偏好→检索→导出→遗忘） ===
+FAIL: 重复提交又写入了新的记忆条目
+[01] 读取应用与 PowerContext 能力
+       backend       = http://127.0.0.1:8777
+       health        = ready
+       search_modes  = ["auto", "fts"]
+       memory_extraction= False
+       bank          = 24 题 / 8 个知识点
+[02] 建立学习身份（幂等 Scope）
+       scope         = scp_4xk9atnw9qawh8mv4bywafvj4j
+       title         = 拾忆-acceptance-181015
+       scope_version = 1
+[03] 第一轮复习安排
+       mode          = diagnosis
+       count         = 8
+       topics        = ["idx-btree", "idx-perf", "lock", "mvcc", "recovery", "storage", "tx-acid", "tx-isolation"]
+       plan_memory   = atomic-memory/art_ef020ab86a98469c84b7aeafd34cec75@1
+[04] 第一轮判分并写回真实记忆
+       score         = 6/8
+       wrong         = ["idx-btree-2", "idx-perf-3"]
+       receipts      = [["progress", "atomic-memory/art_6dd64fdd25db48229f23751046fe2900@1", "active/v0", "410B", "get_atomic_memory_state"], ["weakness", "atomic-memory/art_608f3c61796e48f7911d4ebd222dc4a1@1", "active/v0", "474B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_eabdbf4a31594c37b147fcf9c3232ef1@1", "active/v0", "427B", "get_atomic_memory_state"], ["weakness", "atomic-memory/art_1f5ae7d77a3b4715bf395e00fff833a5@1", "active/v0", "490B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_fd3c0fb258994953b2226053ebbe32ac@1", "active/v0", "406B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_a4610efdce5d43a1b7f048ab0f7fb72a@1", "active/v0", "424B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_40bc8bebef8e4c9f861c2fed180ec40c@1", "active/v0", "428B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_d9bbb2752e5144e8873ff92dd034ba24@1", "active/v0", "433B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_6acf0384a328486f9f496dca73f14660@1", "active/v0", "411B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_2b855b0eb8ba454d910ff72d402256e4@1", "active/v0", "444B", "get_atomic_memory_state"]]
+       weak_after    = [["idx-btree", 0.275, 1], ["idx-perf", 0.275, 1]]
+[05] 重复提交同一会话（持久幂等保护）
+       replayed      = True
+       recorded_at   = 2026-11-16T10:11:04+00:00
+       kept_choice   = A
+       resent_choice = B
+       newly_written = 10
+       reused_from_ledger= 0
+       memory_delta  = 11
+       receipts      = 10

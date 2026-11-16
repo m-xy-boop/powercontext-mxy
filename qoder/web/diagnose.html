@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>诊断与复习｜拾忆 · Recall Coach</title>
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body data-page="diagnose">
+<header class="topbar">
+  <div class="brand"><span class="logo">拾</span><div><strong>拾忆 · Recall Coach</strong><small>PowerContext 学习记忆 · 数据库基础复习</small></div></div>
+  <nav class="nav">
+    <a href="/">概览</a>
+    <a href="/diagnose" class="active">诊断与复习</a>
+    <a href="/memory">学习记忆</a>
+    <a href="/verify">验证说明</a>
+  </nav>
+  <div class="backend" id="backend-pill"><span class="dot"></span><span id="backend-text">正在连接 PowerContext…</span></div>
+</header>
+
+<main class="page">
+  <section class="card identity" id="identity-card">
+    <h2>1. 选择学习身份</h2>
+    <p class="muted">身份决定 PowerContext Scope：不同身份的记忆落在不同 Scope、互相读不到；显示名只保存在本机，不写入记忆。
+      <b>注意</b>：这是数据隔离而不是权限控制——本页没有登录，身份标识不是凭证，本机任何人输入同一标识就会读写同一份记忆，
+      请勿在公开多用户环境下使用（要求见 RUNBOOK 第 8 步）。</p>
+    <div class="row">
+      <label>身份标识<input id="learner-id" placeholder="例如 teacher-wang" autocomplete="off" spellcheck="false"></label>
+      <label>显示名称<input id="display-name" placeholder="例如 王老师" autocomplete="off"></label>
+      <button class="btn primary" id="enter">进入</button>
+    </div>
+    <div class="row wrap" id="known-learners"></div>
+    <div id="learner-state" class="state"></div>
+  </section>
+
+  <section class="card hidden" id="plan-card">
+    <div class="plan-head">
+      <h2>2. <span id="plan-title">本次安排</span></h2>
+      <div class="badges"><span class="badge" id="plan-mode">—</span><span class="badge" id="plan-count">—</span></div>
+    </div>
+    <p id="plan-summary" class="lead"></p>
+    <div id="basis" class="basis"></div>
+    <div id="quiz"></div>
+    <div class="row end">
+      <button class="btn ghost" id="reload-plan">换一批（重新读取记忆）</button>
+      <button class="btn primary" id="submit">提交答卷并写入记忆</button>
+    </div>
+    <div id="submit-state" class="state"></div>
+  </section>
+
+  <section class="card hidden" id="result-card">
+    <h2>3. 判分结果与记忆写入回执</h2>
+    <div id="result-summary" class="result-summary"></div>
+    <div id="result-list"></div>
+    <h3>写入 PowerContext 的记忆标识</h3>
+    <div class="table-wrap">
+      <table class="receipts">
+        <thead><tr><th>类型</th><th>记忆标识</th><th>状态</th><th>字节</th><th>校验方式</th></tr></thead>
+        <tbody id="receipt-body"></tbody>
+      </table>
+    </div>
+    <h3>更新后的复习优先级</h3>
+    <div id="ranking-after"></div>
+    <div class="row end">
+      <a class="btn ghost" href="/memory">查看学习记忆</a>
+      <button class="btn primary" id="next-round">按新记忆再来一轮</button>
+    </div>
+  </section>
+</main>
+
+<footer class="foot"><span>拾忆 · Recall Coach</span><span class="muted">题目为内置原创题库，判分在服务端完成；学习记忆写入真实 PowerContext。</span></footer>
+<script src="/static/app.js"></script>
+</body>
+</html>

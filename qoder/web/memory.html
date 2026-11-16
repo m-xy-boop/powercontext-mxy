@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>学习记忆｜拾忆 · Recall Coach</title>
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body data-page="memory">
+<header class="topbar">
+  <div class="brand"><span class="logo">拾</span><div><strong>拾忆 · Recall Coach</strong><small>PowerContext 学习记忆 · 数据库基础复习</small></div></div>
+  <nav class="nav">
+    <a href="/">概览</a>
+    <a href="/diagnose">诊断与复习</a>
+    <a href="/memory" class="active">学习记忆</a>
+    <a href="/verify">验证说明</a>
+  </nav>
+  <div class="backend" id="backend-pill"><span class="dot"></span><span id="backend-text">正在连接 PowerContext…</span></div>
+</header>
+
+<main class="page">
+  <section class="card">
+    <div class="plan-head">
+      <h2>当前身份的 PowerContext 记忆</h2>
+      <div class="badges"><span class="badge" id="scope-badge">未选择身份</span></div>
+    </div>
+    <div class="row wrap" id="learner-picker"></div>
+    <div id="memory-state" class="state"></div>
+    <div class="grid three" id="memory-stats"></div>
+  </section>
+
+  <section class="card">
+    <h3>复习偏好（写入记忆）</h3>
+    <div class="row wrap">
+      <label>每次题量<input id="pref-count" type="number" min="1" max="12" value="5"></label>
+      <label>侧重知识点<select id="pref-focus" multiple size="4"></select></label>
+      <label>备注<input id="pref-note" maxlength="80" placeholder="例如：睡前 15 分钟，先补事务"></label>
+    </div>
+    <div class="row end">
+      <button class="btn primary" id="save-preference">保存偏好并写入 PowerContext</button>
+    </div>
+    <div id="pref-state" class="state"></div>
+  </section>
+
+  <section class="split">
+    <div class="card">
+      <h3>真实全文检索记忆</h3>
+      <div class="row">
+        <label>查询词<input id="search-query" placeholder="例如：索引结构 薄弱点"></label>
+        <button class="btn ghost" id="run-search">检索</button>
+      </div>
+      <div id="search-result" class="mono-block">尚未检索。检索直接调用 PowerContext <code>/v1/memory/search</code>。</div>
+    </div>
+    <div class="card">
+      <h3>PreparedContext（供下一轮复习注入的有界上下文）</h3>
+      <div class="row">
+        <label>上下文查询词<input id="prepare-query" placeholder="例如：事务隔离级别"></label>
+        <button class="btn ghost" id="run-prepare">生成</button>
+      </div>
+      <div id="prepare-result" class="mono-block">尚未生成。调用 <code>/v1/context/prepare</code>，返回内容标注为不可信历史数据。</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="plan-head">
+      <h3>记忆条目清单</h3>
+      <div class="row">
+        <label>类型<select id="filter-kind">
+          <option value="">全部</option>
+          <option value="weakness">薄弱点 weakness</option>
+          <option value="progress">掌握变化 progress</option>
+          <option value="preference">复习偏好 preference</option>
+          <option value="plan">复习安排 plan</option>
+        </select></label>
+        <label>状态<select id="filter-state">
+          <option value="active">激活（参与选题）</option>
+          <option value="forgotten">已遗忘</option>
+          <option value="all">全部状态</option>
+        </select></label>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="memories">
+        <thead><tr><th>kind</th><th>记忆内容</th><th>记忆标识</th><th>状态</th><th>操作</th></tr></thead>
+        <tbody id="memory-body"><tr><td colspan="5" class="muted">请选择学习身份。</td></tr></tbody>
+      </table>
+    </div>
+    <div class="row end">
+      <a class="btn ghost" id="export-json" href="#" download>导出 JSON 记录</a>
+      <a class="btn ghost" id="export-md" href="#" download>导出 Markdown 记录</a>
+      <button class="btn danger" id="forget-all">清空该身份的全部记忆</button>
+    </div>
+    <div id="danger-state" class="state"></div>
+  </section>
+</main>
+
+<footer class="foot"><span>拾忆 · Recall Coach</span><span class="muted">本页所有条目均来自 PowerContext 实时读取，未做任何本地模拟。</span></footer>
+<script src="/static/app.js"></script>
+</body>
+</html>

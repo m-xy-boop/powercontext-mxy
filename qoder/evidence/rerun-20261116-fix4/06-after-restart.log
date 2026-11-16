@@ -1,0 +1,8 @@
+  scope_id       一致
+  active_entries 一致
+  all_entries    一致
+  artifact_ids   一致
+  last_plan      一致
+  ranking_head   一致
+  preference     一致
+重启后同一 Scope（scp_19ftvqw81ry1zx8nx32vhc1wk5）的 19 条记忆逐条指纹一致

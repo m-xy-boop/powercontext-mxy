@@ -1,0 +1,315 @@
+
+=== 0. 从当前代码重启真实服务（先停旧进程，验收必须跑在待验代码上） ===
+已停止拾忆应用（PID 299458）
+已停止 PowerContext Server（PID 298895）
+已启动 PowerContext Server，PID 303854，日志 var/log/powercontext-server.log
+就绪：http://127.0.0.1:8777（1.5.1）
+拾忆 · Recall Coach 已就绪：http://127.0.0.1:8642（PID 304419，后端 http://127.0.0.1:8777）
+页面：/ 概览 · /diagnose 诊断与复习 · /memory 学习记忆 · /verify 验证说明
+
+=== 1. 公开接口核实（直接调用 PowerContext Client SDK） ===
+目标服务：http://127.0.0.1:8777
+
+[1] GET /v1/capabilities
+  search_modes               ["auto", "fts"]
+  memory_extraction          False
+  artifact_families          ["memory", "atomic-memory", "topic-memory", "experience", "skill", "handoff", "profile", "prompt"]
+  source_types               ["content"]
+  context_versions           ["powercontext.prepared-context.v1"]
+
+[2] POST /v1/scopes（幂等）
+  scope_id                   scp_2rj0eb9cya2kda908b87dy9bef
+  version / 重复创建复用           7 / True
+
+[3] POST /v1/scopes/{id}（update_scope 乐观并发）
+  version 递增                 7 → 8
+
+[4] POST /v1/memory/remember + 回读校验
+  changed / kind / state     True / weakness / active
+  artifact                   atomic-memory/art_074dc19ff33745fda231a4b0e9093721@1
+  state_version / text 字节    0 / 105
+  get_atomic_memory_state    1 / active（与写入返回一致：True）
+
+[5] POST /v1/atomic-memory/list
+  active weakness 条数         1
+  next_cursor                None
+
+[6] POST /v1/memory/search
+  mode                       text
+  hits                       [["weakness", "art_074dc19ff337", 0.01639, ["text"]]]
+
+[7] POST /v1/context/prepare
+  schema / status            powercontext.prepared-context.v1 / ready
+  content_bytes              684
+  含真实标记头                     True
+
+[8] POST /v1/sources/content（证据留存）
+  source_ref                 content/probe-attempts
+  status / position          accepted / 2
+
+[9] POST /v1/atomic-memory/lifecycle（遗忘）
+  state / state_version      forgotten / 0 → 1
+  遗忘后 active 条数              0
+
+[10] 服务端拒绝超长文本时保留真实错误信息
+  status_code / code         422 / invalid_request
+  server_message             The request violates the API contract.
+  X-PowerContext-Request-Id  1ebb23e844528a7d
+
+公开接口核实完成：以上每一项都是运行中的 PowerContext 真实返回值。
+
+=== 2. 自动化测试（离线单元 + 真实记忆流程） ===
+.............................                                            [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /home/xy/powercontext-qoder/qoder/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+29 passed, 1 warning in 15.52s
+
+=== 3. 端到端闭环（诊断→写记忆→复习→纠正→偏好→检索→导出→遗忘） ===
+[01] 读取应用与 PowerContext 能力
+       backend       = http://127.0.0.1:8777
+       health        = ready
+       search_modes  = ["auto", "fts"]
+       memory_extraction= False
+       bank          = 24 题 / 8 个知识点
+[02] 建立学习身份（幂等 Scope）
+       scope         = scp_63zhqp7cqv616ndhssa4e3rc84
+       title         = 拾忆-acceptance-181437
+       scope_version = 1
+[03] 第一轮复习安排
+       mode          = diagnosis
+       count         = 8
+       topics        = ["idx-btree", "idx-perf", "lock", "mvcc", "recovery", "storage", "tx-acid", "tx-isolation"]
+       plan_memory   = atomic-memory/art_0c95cc50923948b1a19713226ddb260f@1
+[04] 第一轮判分并写回真实记忆
+       score         = 6/8
+       wrong         = ["idx-btree-2", "idx-perf-3"]
+       receipts      = [["progress", "atomic-memory/art_f8bebb10872940df801bd93720283edc@1", "active/v0", "410B", "get_atomic_memory_state"], ["weakness", "atomic-memory/art_f435bec798174b3585643053dcaaf891@1", "active/v0", "474B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_7b8bad9bce8e4414955929d174859e2c@1", "active/v0", "427B", "get_atomic_memory_state"], ["weakness", "atomic-memory/art_79c4aff350004483b0ee1cc66d388504@1", "active/v0", "490B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_844783344bc8484c8417d8acbd04718c@1", "active/v0", "406B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_52cbef2442d04d0ab09aa9174b5dd9ba@1", "active/v0", "424B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_4127df0d514f4f459092568677007c9b@1", "active/v0", "428B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_17d7db7481fb4acd9642c93a23a895d9@1", "active/v0", "433B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_10c85bcfe962488b83b213435f438125@1", "active/v0", "411B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_86668f9fd64c4fef9253a2ae92e716fc@1", "active/v0", "444B", "get_atomic_memory_state"]]
+       weak_after    = [["idx-btree", 0.275, 1], ["idx-perf", 0.275, 1]]
+[05] 重复提交同一会话（持久幂等保护）
+       replayed      = True
+       recorded_at   = 2026-11-16T10:15:27+00:00
+       kept_choice   = A
+       resent_choice = B
+       new_memories_this_request= 0
+       original_batch_written= 10
+       memory_delta  = 11
+       receipts      = 10
+[06] 读回该身份记忆概览
+       entry_count   = 11
+       topics_covered= 8
+       weak          = ["idx-btree", "idx-perf"]
+       last_plan     = atomic-memory/art_0c95cc50923948b1a19713226ddb260f@1
+[07] 第二轮安排（记忆驱动选题）
+       mode          = review
+       topics        = ["idx-btree", "idx-perf", "lock", "mvcc", "recovery"]
+       weak_covered  = ["idx-btree", "idx-perf"]
+       first_topic   = idx-btree
+       first_reasons = ["当前掌握度 0.28，缺口 0.72", "连续答错 1 次，加权 0.10"]
+       cited_memories= ["atomic-memory/art_4127df0d514f4f459092568677007c9b@1", "atomic-memory/art_52cbef2442d04d0ab09aa9174b5dd9ba@1", "atomic-memory/art_79c4aff350004483b0ee1cc66d388504@1", "atomic-memory/art_7b8bad9bce8e4414955929d174859e2c@1", "atomic-memory/art_844783344bc8484c8417d8acbd04718c@1", "atomic-memory/art_f435bec798174b3585643053dcaaf891@1"]
+[08] 全部答对后记忆更新
+       score         = 5/5
+       receipt_count = 5
+       mastery_before= {"idx-btree": 0.275, "idx-perf": 0.275}
+       mastery_after = {"idx-btree": 0.601, "idx-perf": 0.601}
+       improved      = ["idx-btree", "idx-perf"]
+[09] 写入复习偏好并再次安排
+       text          = 复习偏好：每次 3 题，侧重 索引结构；备注：e2e：先补最薄弱的一块
+       memory        = atomic-memory/art_39a17871148a4e3b9e2ba79ea55d7afd@1
+       third_count   = 3
+       third_topics  = ["idx-btree", "idx-perf", "storage"]
+       focus_included= True
+[10] 真实检索记忆（无嵌入模型时为全文模式）
+       mode          = text
+       hits          = [["weakness", "atomic-memory/art_f435bec798174b3585643053dcaaf891@1", 0.01639, ["text"]], ["weakness", "atomic-memory/art_79c4aff350004483b0ee1cc66d388504@1", 0.01613, ["text"]]]
+[11] PreparedContext 有界上下文
+       schema        = powercontext.prepared-context.v1
+       status        = ready
+       content_bytes = 836
+       has_marker    = True
+[12] 导出学习过程记录
+       memories      = 19
+       attempts      = 13
+       md_sections   = ["## 知识点掌握情况（由 PowerContext 记忆折叠得到）", "## 复习偏好", "## 最近一次复习安排（记忆中的 plan 条目）", "## 学习记忆（PowerContext 原子记忆条目）", "## 答题流水（本地过程记录，仅用于导出）"]
+       first_cite    = atomic-memory/art_043789f0326b4b8a9d75d96b32a64778@1
+[13] 按条遗忘薄弱记忆
+       forgotten     = art_79c4aff350004483b0ee1cc66d388504
+       state         = forgotten
+       state_version = 1
+       active_left   = 1
+[14] 历史可核验与操作留痕
+       active_and_forgotten= 19
+       forgotten_total= 1
+       log_path      = /home/xy/powercontext-qoder/qoder/var/log/powercontext-operations.jsonl
+       last_operations= ["forget_atomic_memory", "prepare_context", "search_memory", "remember_memory", "remember_memory"]
+
+结果已写入 evidence/rerun-20261116-fix3/03-e2e-loop.json
+
+端到端闭环通过：每次选题都读回真实记忆，每次判分都写回真实记忆，遗忘与导出均可核验。
+
+=== 4. 记录重启前的记忆指纹 ===
+Scope scp_63zhqp7cqv616ndhssa4e3rc84
+记忆条目：激活 18 / 全部 19
+最近安排：art_2a394622334041b69a75d43d15675f80
+优先级前三：[('idx-btree', 0.601, False), ('idx-perf', 0.601, False), ('storage', 0.725, False)]
+偏好：3 题，侧重 ['idx-btree']
+
+=== 5. 停止并重启 PowerContext（真实重启，验证记忆跨重启存活） ===
+已停止拾忆应用（PID 304419）
+已停止 PowerContext Server（PID 303854）
+已启动 PowerContext Server，PID 304875，日志 var/log/powercontext-server.log
+就绪：http://127.0.0.1:8777（1.5.1）
+拾忆 · Recall Coach 已就绪：http://127.0.0.1:8642（PID 305541，后端 http://127.0.0.1:8777）
+页面：/ 概览 · /diagnose 诊断与复习 · /memory 学习记忆 · /verify 验证说明
+
+=== 6. 重启后读回同一 Scope 并逐条比对指纹 ===
+  scope_id       一致
+  active_entries 一致
+  all_entries    一致
+  artifact_ids   一致
+  last_plan      一致
+  ranking_head   一致
+  preference     一致
+重启后同一 Scope（scp_63zhqp7cqv616ndhssa4e3rc84）的 19 条记忆逐条指纹一致
+
+=== 7. 重启后继续闭环（全新应用实例 + 已重启的记忆服务） ===
+[01] 读取应用与 PowerContext 能力
+       backend       = http://127.0.0.1:8777
+       health        = ready
+       search_modes  = ["auto", "fts"]
+       memory_extraction= False
+       bank          = 24 题 / 8 个知识点
+[02] 复用已存在的身份（重启服务后）
+       learner       = acceptance-181437
+[03] 第一轮复习安排
+       mode          = review
+       count         = 3
+       topics        = ["idx-btree", "idx-perf", "storage"]
+       plan_memory   = atomic-memory/art_02c544054d49495fb063b4e17479b9c2@1
+[04] 第一轮判分并写回真实记忆
+       score         = 1/3
+       wrong         = ["idx-btree-2", "idx-perf-3"]
+       receipts      = [["progress", "atomic-memory/art_45c17581a20a4aa99a5674d9d132b94b@1", "active/v0", "409B", "get_atomic_memory_state"], ["weakness", "atomic-memory/art_c0c3b778893e4592a642aa24c93f6170@1", "active/v0", "473B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_3dc90c1c8dc44624b998e1d8b1a84a90@1", "active/v0", "426B", "get_atomic_memory_state"], ["weakness", "atomic-memory/art_ad520e5b5f794a738f2f83499e91fb55@1", "active/v0", "489B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_0fb2e4523d414873853d6a3e3eaf1348@1", "active/v0", "433B", "get_atomic_memory_state"]]
+       weak_after    = [["idx-btree", 0.331, 1], ["idx-perf", 0.331, 1]]
+[05] 重复提交同一会话（持久幂等保护）
+       replayed      = True
+       recorded_at   = 2026-11-16T10:16:03+00:00
+       kept_choice   = A
+       resent_choice = B
+       new_memories_this_request= 0
+       original_batch_written= 5
+       memory_delta  = 6
+       receipts      = 5
+[06] 读回该身份记忆概览
+       entry_count   = 24
+       topics_covered= 8
+       weak          = ["idx-btree", "idx-perf"]
+       last_plan     = atomic-memory/art_02c544054d49495fb063b4e17479b9c2@1
+[07] 第二轮安排（记忆驱动选题）
+       mode          = review
+       topics        = ["idx-btree", "idx-perf", "tx-acid"]
+       weak_covered  = ["idx-btree", "idx-perf"]
+       first_topic   = idx-btree
+       first_reasons = ["当前掌握度 0.33，缺口 0.67", "连续答错 1 次，加权 0.10", "记忆中的复习偏好把该知识点列为侧重"]
+       cited_memories= ["atomic-memory/art_10c85bcfe962488b83b213435f438125@1", "atomic-memory/art_3dc90c1c8dc44624b998e1d8b1a84a90@1", "atomic-memory/art_45c17581a20a4aa99a5674d9d132b94b@1", "atomic-memory/art_7b8bad9bce8e4414955929d174859e2c@1", "atomic-memory/art_ad520e5b5f794a738f2f83499e91fb55@1", "atomic-memory/art_c0c3b778893e4592a642aa24c93f6170@1"]
+[08] 全部答对后记忆更新
+       score         = 3/3
+       receipt_count = 3
+       mastery_before= {"idx-btree": 0.331, "idx-perf": 0.331}
+       mastery_after = {"idx-btree": 0.632, "idx-perf": 0.632}
+       improved      = ["idx-btree", "idx-perf"]
+[09] 写入复习偏好并再次安排
+       text          = 复习偏好：每次 3 题，侧重 索引结构；备注：e2e：先补最薄弱的一块
+       memory        = atomic-memory/art_d08fb9a7c4dd4880bab78a3ace89c1a6@1
+       third_count   = 3
+       third_topics  = ["idx-btree", "idx-perf", "tx-isolation"]
+       focus_included= True
+[10] 真实检索记忆（无嵌入模型时为全文模式）
+       mode          = text
+       hits          = [["weakness", "atomic-memory/art_c0c3b778893e4592a642aa24c93f6170@1", 0.01639, ["text"]], ["weakness", "atomic-memory/art_f435bec798174b3585643053dcaaf891@1", 0.01613, ["text"]], ["weakness", "atomic-memory/art_ad520e5b5f794a738f2f83499e91fb55@1", 0.01587, ["text"]]]
+[11] PreparedContext 有界上下文
+       schema        = powercontext.prepared-context.v1
+       status        = ready
+       content_bytes = 1309
+       has_marker    = True
+[12] 导出学习过程记录
+       memories      = 31
+       attempts      = 19
+       md_sections   = ["## 知识点掌握情况（由 PowerContext 记忆折叠得到）", "## 复习偏好", "## 最近一次复习安排（记忆中的 plan 条目）", "## 学习记忆（PowerContext 原子记忆条目）", "## 答题流水（本地过程记录，仅用于导出）"]
+       first_cite    = atomic-memory/art_02c544054d49495fb063b4e17479b9c2@1
+[13] 按条遗忘薄弱记忆
+       forgotten     = art_ad520e5b5f794a738f2f83499e91fb55
+       state         = forgotten
+       state_version = 1
+       active_left   = 2
+[14] 历史可核验与操作留痕
+       active_and_forgotten= 31
+       forgotten_total= 2
+       log_path      = /home/xy/powercontext-qoder/qoder/var/log/powercontext-operations.jsonl
+       last_operations= ["forget_atomic_memory", "prepare_context", "search_memory", "remember_memory", "remember_memory"]
+
+结果已写入 evidence/rerun-20261116-fix3/07-e2e-after-restart.json
+
+端到端闭环通过：每次选题都读回真实记忆，每次判分都写回真实记忆，遗忘与导出均可核验。
+
+=== 8. 真实浏览器页面验收 ===
+  FAIL  已完成判分的会话不允许再次点击提交
+使用浏览器：/home/xy/.cache/ms-playwright/chromium-1194/chrome-linux/chrome
+
+[1/4] 概览页 /
+  PASS  知识点图谱渲染 8 个模块（应为 8）
+  PASS  顶栏状态显示真实连接结果：PowerContext 已就绪 · http://127.0.0.1:8777 · 检索模式 auto/fts
+  PASS  运行状态卡片显示真实 PowerContext 地址
+  PASS  运行状态卡片显示真实检索能力（fts）
+  PASS  如实标注未配置模型抽取
+  PASS  操作留痕表格渲染 8 行
+
+[2/4] 诊断与复习 /diagnose
+  PASS  无记忆时首屏为诊断模式：基础诊断 · 无历史记忆
+  PASS  诊断覆盖 8 个知识点（应为 8 题）
+  PASS  选题依据表渲染 8 行候选知识点
+  PASS  每题都给出了选题依据
+  PASS  页面显示 plan 记忆写入的真实标识
+  PASS  已作答 8 题
+  PASS  判分后写入 14 条记忆并展示回执
+  PASS  结果区显示真实判分（含错题）
+  PASS  回执显示写入后的回读校验方式
+  PASS  展示更新后的 8 个知识点优先级
+  PASS  提交后按钮显示已完成状态：本轮已判分并写入记忆
+  PASS  绕过按钮重复提交被识别为回放：{'status': 200, 'before': 15, 'after': 15, 'replay': True, 'newMemories': 0, 'keptChoice': 'A'}
+  PASS  重复提交改变了记忆条数：{'status': 200, 'before': 15, 'after': 15, 'replay': True, 'newMemories': 0, 'keptChoice': 'A'}
+  PASS  重复提交又写入了记忆：{'status': 200, 'before': 15, 'after': 15, 'replay': True, 'newMemories': 0, 'keptChoice': 'A'}
+  PASS  回放返回的是当时留存的作答与判分
+  PASS  第二轮模式：记忆驱动复习
+  PASS  第二轮有 5 题在页面上给出“依据记忆”标识
+
+[3/4] 学习记忆 /memory
+  PASS  页面显示真实 Scope：Scope scp_6v0vnann9q3br2cshrqsn67rx0
+  PASS  记忆清单渲染 16 条真实条目
+  PASS  清单展示 atomic-memory/art_… 标识
+  PASS  统计卡片来自记忆折叠：掌握记忆覆盖 8 / 8 已在 PowerContext 中留下掌握记忆的知识点 薄弱知识点 6 索引结构、索引与执行计划、多版本并发控制、
+  PASS  检索结果为真实模式（未配置嵌入模型时为全文 text）
+  PASS  检索命中已有记忆：mode=text（PowerContext 真实检索模式）　命中 6 条　25ms
+  PASS  PreparedContext 返回真实 schema 与有界内容
+  PASS  按 kind=weakness 过滤后 6 条
+  PASS  偏好写入回执：复习偏好：每次 6 题，侧重 隔离级别与并发异常；备注：页面验收：先补隔离级别 → atomic-memory/art_ee483bd561fd4c2fb8dba7449c909d
+  PASS  激活记忆提供按条遗忘入口
+  PASS  遗忘回执显示真实状态：已遗忘 art_19004d9b876e4d0f992efd91ef92b74b：state=forgotten，state_version=1，changed=true
+  PASS  遗忘后历史仍可见（17 → 17 条）
+  PASS  页面导出的 Markdown 含真实记忆章节
+  PASS  导出内容引用真实记忆标识
+
+[4/4] 验证说明 /verify
+  PASS  验证页读取真实健康状态
+  PASS  验证页如实标注模型能力
+  PASS  操作留痕渲染 396 行
+
+[+] 重新打开页面（新浏览器上下文）验证记忆续接
+  PASS  全新浏览器上下文用同一身份进入时为复习模式：记忆驱动复习
+  PASS  续接安排的依据指向已存在的记忆条目
+  PASS  页面没有未捕获的 JS 错误（0 条）
+
+通过 43 项断言，失败 1 项；截图与报告见 evidence/rerun-20261116-fix3/screenshots

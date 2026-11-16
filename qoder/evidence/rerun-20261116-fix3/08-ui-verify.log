@@ -1,0 +1,57 @@
+  FAIL  已完成判分的会话不允许再次点击提交
+使用浏览器：/home/xy/.cache/ms-playwright/chromium-1194/chrome-linux/chrome
+
+[1/4] 概览页 /
+  PASS  知识点图谱渲染 8 个模块（应为 8）
+  PASS  顶栏状态显示真实连接结果：PowerContext 已就绪 · http://127.0.0.1:8777 · 检索模式 auto/fts
+  PASS  运行状态卡片显示真实 PowerContext 地址
+  PASS  运行状态卡片显示真实检索能力（fts）
+  PASS  如实标注未配置模型抽取
+  PASS  操作留痕表格渲染 8 行
+
+[2/4] 诊断与复习 /diagnose
+  PASS  无记忆时首屏为诊断模式：基础诊断 · 无历史记忆
+  PASS  诊断覆盖 8 个知识点（应为 8 题）
+  PASS  选题依据表渲染 8 行候选知识点
+  PASS  每题都给出了选题依据
+  PASS  页面显示 plan 记忆写入的真实标识
+  PASS  已作答 8 题
+  PASS  判分后写入 14 条记忆并展示回执
+  PASS  结果区显示真实判分（含错题）
+  PASS  回执显示写入后的回读校验方式
+  PASS  展示更新后的 8 个知识点优先级
+  PASS  提交后按钮显示已完成状态：本轮已判分并写入记忆
+  PASS  绕过按钮重复提交被识别为回放：{'status': 200, 'before': 15, 'after': 15, 'replay': True, 'newMemories': 0, 'keptChoice': 'A'}
+  PASS  重复提交改变了记忆条数：{'status': 200, 'before': 15, 'after': 15, 'replay': True, 'newMemories': 0, 'keptChoice': 'A'}
+  PASS  重复提交又写入了记忆：{'status': 200, 'before': 15, 'after': 15, 'replay': True, 'newMemories': 0, 'keptChoice': 'A'}
+  PASS  回放返回的是当时留存的作答与判分
+  PASS  第二轮模式：记忆驱动复习
+  PASS  第二轮有 5 题在页面上给出“依据记忆”标识
+
+[3/4] 学习记忆 /memory
+  PASS  页面显示真实 Scope：Scope scp_6v0vnann9q3br2cshrqsn67rx0
+  PASS  记忆清单渲染 16 条真实条目
+  PASS  清单展示 atomic-memory/art_… 标识
+  PASS  统计卡片来自记忆折叠：掌握记忆覆盖 8 / 8 已在 PowerContext 中留下掌握记忆的知识点 薄弱知识点 6 索引结构、索引与执行计划、多版本并发控制、
+  PASS  检索结果为真实模式（未配置嵌入模型时为全文 text）
+  PASS  检索命中已有记忆：mode=text（PowerContext 真实检索模式）　命中 6 条　25ms
+  PASS  PreparedContext 返回真实 schema 与有界内容
+  PASS  按 kind=weakness 过滤后 6 条
+  PASS  偏好写入回执：复习偏好：每次 6 题，侧重 隔离级别与并发异常；备注：页面验收：先补隔离级别 → atomic-memory/art_ee483bd561fd4c2fb8dba7449c909d
+  PASS  激活记忆提供按条遗忘入口
+  PASS  遗忘回执显示真实状态：已遗忘 art_19004d9b876e4d0f992efd91ef92b74b：state=forgotten，state_version=1，changed=true
+  PASS  遗忘后历史仍可见（17 → 17 条）
+  PASS  页面导出的 Markdown 含真实记忆章节
+  PASS  导出内容引用真实记忆标识
+
+[4/4] 验证说明 /verify
+  PASS  验证页读取真实健康状态
+  PASS  验证页如实标注模型能力
+  PASS  操作留痕渲染 396 行
+
+[+] 重新打开页面（新浏览器上下文）验证记忆续接
+  PASS  全新浏览器上下文用同一身份进入时为复习模式：记忆驱动复习
+  PASS  续接安排的依据指向已存在的记忆条目
+  PASS  页面没有未捕获的 JS 错误（0 条）
+
+通过 43 项断言，失败 1 项；截图与报告见 evidence/rerun-20261116-fix3/screenshots

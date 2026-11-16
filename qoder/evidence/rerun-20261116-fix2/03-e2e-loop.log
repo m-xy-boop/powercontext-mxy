@@ -1,0 +1,30 @@
+FAIL: 重复提交又写入了新的记忆条目
+[01] 读取应用与 PowerContext 能力
+       backend       = http://127.0.0.1:8777
+       health        = ready
+       search_modes  = ["auto", "fts"]
+       memory_extraction= False
+       bank          = 24 题 / 8 个知识点
+[02] 建立学习身份（幂等 Scope）
+       scope         = scp_4xk9atnw9qawh8mv4bywafvj4j
+       title         = 拾忆-acceptance-181015
+       scope_version = 1
+[03] 第一轮复习安排
+       mode          = diagnosis
+       count         = 8
+       topics        = ["idx-btree", "idx-perf", "lock", "mvcc", "recovery", "storage", "tx-acid", "tx-isolation"]
+       plan_memory   = atomic-memory/art_ef020ab86a98469c84b7aeafd34cec75@1
+[04] 第一轮判分并写回真实记忆
+       score         = 6/8
+       wrong         = ["idx-btree-2", "idx-perf-3"]
+       receipts      = [["progress", "atomic-memory/art_6dd64fdd25db48229f23751046fe2900@1", "active/v0", "410B", "get_atomic_memory_state"], ["weakness", "atomic-memory/art_608f3c61796e48f7911d4ebd222dc4a1@1", "active/v0", "474B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_eabdbf4a31594c37b147fcf9c3232ef1@1", "active/v0", "427B", "get_atomic_memory_state"], ["weakness", "atomic-memory/art_1f5ae7d77a3b4715bf395e00fff833a5@1", "active/v0", "490B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_fd3c0fb258994953b2226053ebbe32ac@1", "active/v0", "406B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_a4610efdce5d43a1b7f048ab0f7fb72a@1", "active/v0", "424B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_40bc8bebef8e4c9f861c2fed180ec40c@1", "active/v0", "428B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_d9bbb2752e5144e8873ff92dd034ba24@1", "active/v0", "433B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_6acf0384a328486f9f496dca73f14660@1", "active/v0", "411B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_2b855b0eb8ba454d910ff72d402256e4@1", "active/v0", "444B", "get_atomic_memory_state"]]
+       weak_after    = [["idx-btree", 0.275, 1], ["idx-perf", 0.275, 1]]
+[05] 重复提交同一会话（持久幂等保护）
+       replayed      = True
+       recorded_at   = 2026-11-16T10:11:04+00:00
+       kept_choice   = A
+       resent_choice = B
+       newly_written = 10
+       reused_from_ledger= 0
+       memory_delta  = 11
+       receipts      = 10

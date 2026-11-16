@@ -1,0 +1,81 @@
+{
+  "scope_id": "scp_63zhqp7cqv616ndhssa4e3rc84",
+  "active_entries": 18,
+  "all_entries": 19,
+  "artifact_ids": [
+    "art_043789f0326b4b8a9d75d96b32a64778",
+    "art_0c95cc50923948b1a19713226ddb260f",
+    "art_10c85bcfe962488b83b213435f438125",
+    "art_17d7db7481fb4acd9642c93a23a895d9",
+    "art_2a394622334041b69a75d43d15675f80",
+    "art_2ab37ee7be504e5eb5b9e1db094b5383",
+    "art_39a17871148a4e3b9e2ba79ea55d7afd",
+    "art_4127df0d514f4f459092568677007c9b",
+    "art_52cbef2442d04d0ab09aa9174b5dd9ba",
+    "art_79c4aff350004483b0ee1cc66d388504",
+    "art_7b8bad9bce8e4414955929d174859e2c",
+    "art_844783344bc8484c8417d8acbd04718c",
+    "art_86668f9fd64c4fef9253a2ae92e716fc",
+    "art_b3fad0f22c4840f0a529d8c2ed527814",
+    "art_b54f7f731b7f4817955b70534e96304e",
+    "art_e1ee4f1703674df18299f10eefc69e30",
+    "art_f435bec798174b3585643053dcaaf891",
+    "art_f8bebb10872940df801bd93720283edc",
+    "art_ffa56e46b30d4f78b5a7fd9ae892f122"
+  ],
+  "last_plan": {
+    "session_id": "ses_20261116101529175868_accept",
+    "topics": [
+      "idx-btree",
+      "idx-perf",
+      "storage"
+    ],
+    "question_ids": [
+      "idx-btree-3",
+      "idx-perf-1",
+      "storage-3"
+    ],
+    "at": "2026-11-16T10:15:29.177721+00:00",
+    "mode": "review",
+    "artifact": {
+      "family": "atomic-memory",
+      "artifact_id": "art_2a394622334041b69a75d43d15675f80",
+      "revision": 1,
+      "kind": "plan",
+      "state_version": 0
+    }
+  },
+  "ranking_head": [
+    [
+      "idx-btree",
+      0.601,
+      false
+    ],
+    [
+      "idx-perf",
+      0.601,
+      false
+    ],
+    [
+      "storage",
+      0.725,
+      false
+    ]
+  ],
+  "preference": {
+    "daily_questions": 3,
+    "focus_topics": [
+      "idx-btree"
+    ],
+    "note": "e2e：先补最薄弱的一块",
+    "evidence": [
+      {
+        "family": "atomic-memory",
+        "artifact_id": "art_39a17871148a4e3b9e2ba79ea55d7afd",
+        "revision": 1,
+        "kind": "preference",
+        "state_version": 0
+      }
+    ]
+  }
+}

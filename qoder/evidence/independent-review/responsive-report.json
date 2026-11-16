@@ -1,0 +1,122 @@
+[
+  {
+    "page": "home",
+    "width": 390,
+    "http_status": 200,
+    "layout": {
+      "scroll": 390,
+      "width": 390
+    },
+    "js_errors": []
+  },
+  {
+    "page": "diagnose",
+    "width": 390,
+    "http_status": 200,
+    "layout": {
+      "scroll": 390,
+      "width": 390
+    },
+    "js_errors": []
+  },
+  {
+    "page": "memory",
+    "width": 390,
+    "http_status": 200,
+    "layout": {
+      "scroll": 431,
+      "width": 390
+    },
+    "js_errors": []
+  },
+  {
+    "page": "verify",
+    "width": 390,
+    "http_status": 200,
+    "layout": {
+      "scroll": 390,
+      "width": 390
+    },
+    "js_errors": []
+  },
+  {
+    "page": "home",
+    "width": 768,
+    "http_status": 200,
+    "layout": {
+      "scroll": 768,
+      "width": 768
+    },
+    "js_errors": []
+  },
+  {
+    "page": "diagnose",
+    "width": 768,
+    "http_status": 200,
+    "layout": {
+      "scroll": 768,
+      "width": 768
+    },
+    "js_errors": []
+  },
+  {
+    "page": "memory",
+    "width": 768,
+    "http_status": 200,
+    "layout": {
+      "scroll": 768,
+      "width": 768
+    },
+    "js_errors": []
+  },
+  {
+    "page": "verify",
+    "width": 768,
+    "http_status": 200,
+    "layout": {
+      "scroll": 768,
+      "width": 768
+    },
+    "js_errors": []
+  },
+  {
+    "page": "home",
+    "width": 1440,
+    "http_status": 200,
+    "layout": {
+      "scroll": 1440,
+      "width": 1440
+    },
+    "js_errors": []
+  },
+  {
+    "page": "diagnose",
+    "width": 1440,
+    "http_status": 200,
+    "layout": {
+      "scroll": 1440,
+      "width": 1440
+    },
+    "js_errors": []
+  },
+  {
+    "page": "memory",
+    "width": 1440,
+    "http_status": 200,
+    "layout": {
+      "scroll": 1440,
+      "width": 1440
+    },
+    "js_errors": []
+  },
+  {
+    "page": "verify",
+    "width": 1440,
+    "http_status": 200,
+    "layout": {
+      "scroll": 1440,
+      "width": 1440
+    },
+    "js_errors": []
+  }
+]

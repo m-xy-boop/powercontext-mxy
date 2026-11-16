@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>拾忆 · Recall Coach｜基于 PowerContext 的数据库基础复习工作台</title>
+<meta name="description" content="拾忆把数据库基础练习中的薄弱点、掌握变化与复习偏好写入真实 PowerContext 记忆，跨会话按记忆安排复习。">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body data-page="home">
+<header class="topbar">
+  <div class="brand"><span class="logo">拾</span><div><strong>拾忆 · Recall Coach</strong><small>PowerContext 学习记忆 · 数据库基础复习</small></div></div>
+  <nav class="nav">
+    <a href="/" class="active">概览</a>
+    <a href="/diagnose">诊断与复习</a>
+    <a href="/memory">学习记忆</a>
+    <a href="/verify">验证说明</a>
+  </nav>
+  <div class="backend" id="backend-pill"><span class="dot"></span><span id="backend-text">正在连接 PowerContext…</span></div>
+</header>
+
+<main class="page">
+  <section class="hero">
+    <div>
+      <p class="kicker">2026 OceanBase PowerContext 生态赛 · 作品</p>
+      <h1>换一次会话，不用重新交代你的薄弱点</h1>
+      <p class="lead">拾忆把「哪里不会、掌握度如何变化、想怎么复习」写进真实 PowerContext 记忆。重开应用或换一个新会话时，先读记忆，再按记忆安排题目，并给出可核验的依据与记忆标识。</p>
+      <div class="cta">
+        <a class="btn primary" href="/diagnose">开始诊断</a>
+        <a class="btn ghost" href="/memory">查看我的学习记忆</a>
+      </div>
+    </div>
+    <aside class="flow">
+      <h2>核心闭环</h2>
+      <ol>
+        <li><b>选择身份</b>进入诊断，回答事务、索引等原创题目</li>
+        <li><b>提交答案</b>服务端判分，形成知识点掌握情况</li>
+        <li><b>写入记忆</b>薄弱点与掌握变化写入 PowerContext，返回记忆标识</li>
+        <li><b>新会话读取</b>以相同身份读回记忆，优先安排薄弱点并说明依据</li>
+        <li><b>再次答题</b>更新记忆，导出可核验的学习过程记录</li>
+      </ol>
+    </aside>
+  </section>
+
+  <section class="grid three">
+    <article class="card">
+      <h3>真实记忆，不是本地缓存</h3>
+      <p id="stat-memory">学习记忆存放在 PowerContext 原子记忆中，通过公开 Python Client SDK 读写；页面上每条依据都能对应到 <code>atomic-memory/art_…@修订号</code>。</p>
+    </article>
+    <article class="card">
+      <h3>固定内置题库</h3>
+      <p id="stat-bank">题库为原创内置内容，答题与判分不调用任何模型服务，因此核心闭环无需模型 API 密钥。</p>
+    </article>
+    <article class="card">
+      <h3>隔离与可撤回</h3>
+      <p>每个学习身份独占一个 PowerContext Scope；支持按条遗忘与一键清空，遗忘条目退出召回但历史仍可核验。</p>
+      <p class="muted small">这是<b>数据层面</b>的隔离：本作品没有登录与授权，身份标识不是凭证，
+        只适合本机或受信任内网使用（详见 RUNBOOK 第 8 步）。</p>
+    </article>
+  </section>
+
+  <section class="split">
+    <div class="card">
+      <h2>知识点图谱</h2>
+      <p class="muted">内置 8 个知识点、24 道原创题，覆盖事务、隔离级别、MVCC、索引、锁、恢复与存储引擎。</p>
+      <div class="modules" id="modules">加载知识点…</div>
+    </div>
+    <div class="card">
+      <h2>PowerContext 运行状态</h2>
+      <div id="backend-detail" class="kv">读取中…</div>
+      <p class="muted small">能力由 <code>GET /v1/capabilities</code> 如实上报：未配置推理模型时，全文检索可用、自动抽取不可用。</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>最近 8 条真实记忆操作</h2>
+    <p class="muted small">数据来自本机操作留痕文件 <code>var/log/powercontext-operations.jsonl</code>，每次调用公开 SDK 方法都会落一行。</p>
+    <div class="table-wrap">
+      <table class="ops">
+        <thead><tr><th>时间</th><th>操作</th><th>记忆标识 / 结果</th></tr></thead>
+        <tbody id="ops-body"><tr><td colspan="3" class="muted">加载中…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>拾忆 · Recall Coach</span>
+  <span class="muted">题库为原创固定内容，不声称动态 AI 出题；记忆读写全部走真实 PowerContext 服务。</span>
+</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>

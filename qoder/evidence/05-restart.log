@@ -1,0 +1,6 @@
+已停止拾忆应用（PID 63422）
+已停止 PowerContext Server（PID 62998）
+已启动 PowerContext Server，PID 65245，日志 var/log/powercontext-server.log
+就绪：http://127.0.0.1:8777（1.5.1）
+拾忆 · Recall Coach 已就绪：http://127.0.0.1:8642（PID 65688，后端 http://127.0.0.1:8777）
+页面：/ 概览 · /diagnose 诊断与复习 · /memory 学习记忆 · /verify 验证说明

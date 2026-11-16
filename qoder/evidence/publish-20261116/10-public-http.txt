@@ -1,0 +1,39 @@
+# 生成时间（本机）：2026-11-16T19:08:01+08:00
+# 命令：curl -sS -D - -o 10-body.html -w '...' -L https://recall-coach-f3jx2506222.qoder.zone/  （无 Cookie、无自定义请求头）
+
+HTTP/1.1 200 Connection established
+
+HTTP/2 200 
+date: Mon, 16 Nov 2026 11:08:01 GMT
+content-type: text/html; charset=utf-8
+vary: Accept-Encoding,Origin
+x-oss-request-id: 6AFAE4114DFAC936376FFF51
+etag: W/"qsites-wm-44daed3a7b9e5137102f5efe9b08c367-IjI2ODZCODU0NzgwMkMzQUQxMkU0QjMyRjE4NjY1Q0UwIg"
+x-oss-object-type: Normal
+x-oss-hash-crc64ecma: 16616448305968407774
+x-oss-storage-class: Standard
+cache-control: no-cache
+x-oss-server-time: 9
+req-cost-time: 26
+req-arrive-time: 1794827281954
+resp-start-time: 1794827281981
+x-envoy-upstream-service-time: 10
+x-request-id: 2ca79880-9960-4f35-8481-a98192751844
+
+http_code=200 size_download=77861 remote_ip=127.0.0.1 ssl_verify_result=0 num_redirects=0 url_effective=https://recall-coach-f3jx2506222.qoder.zone/
+
+# 正文与本机输出目录比对
+c07218f517ee108a74bab7332ce8fde1f100d6f4a37bee43a567db6e4cef29ed  10-body.html
+acd1a51188ee439ddc9682203a37fb3e6a1f5d4a69dc9c8a6a2f06d9601713d9  /home/xy/powercontext-qoder/qoder/site/dist/index.html
+77861 10-body.html
+20819 /home/xy/powercontext-qoder/qoder/site/dist/index.html
+98680 total
+
+# diff（本机 dist → 线上正文），应只有平台注入的水印脚本一处 hunk
+334c334,388
+hunk 数：1
+注入脚本行数：55
+
+# 与之前一次抓取（site-public-index.html）逐字节一致性
+c07218f517ee108a74bab7332ce8fde1f100d6f4a37bee43a567db6e4cef29ed  site-public-index.html
+c07218f517ee108a74bab7332ce8fde1f100d6f4a37bee43a567db6e4cef29ed  10-body.html

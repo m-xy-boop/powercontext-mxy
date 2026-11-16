@@ -1,0 +1,305 @@
+{
+  "schema": "recall-coach.bank.v1",
+  "license": "本项目原创题目，仅供本次比赛作品使用",
+  "note": "固定内置题库，不依赖任何外部模型服务，不声称动态 AI 出题。",
+  "modules": [
+    {"id": "tx-acid", "name": "事务与ACID", "summary": "原子性、一致性、隔离性、持久化的含义与边界"},
+    {"id": "tx-isolation", "name": "隔离级别与并发异常", "summary": "脏读、不可重复读、幻读与四种标准隔离级别"},
+    {"id": "mvcc", "name": "多版本并发控制", "summary": "快照读、当前读、ReadView 与回滚版本链"},
+    {"id": "idx-btree", "name": "索引结构", "summary": "B+树特性、聚簇与二级索引、回表、最左前缀"},
+    {"id": "idx-perf", "name": "索引与执行计划", "summary": "选择性、覆盖索引、索引失效场景与代价"},
+    {"id": "lock", "name": "锁与死锁", "summary": "行锁、间隙锁、锁等待与死锁处理"},
+    {"id": "recovery", "name": "日志与崩溃恢复", "summary": "redo/undo 日志、WAL、检查点与恢复流程"},
+    {"id": "storage", "name": "存储引擎与分布式", "summary": "LSM 树、读写放大、分区与租户资源隔离"}
+  ],
+  "questions": [
+    {
+      "id": "tx-acid-1", "module": "tx-acid", "difficulty": 1,
+      "stem": "事务执行到一半时进程崩溃，已经修改的数据在重启后要么全部生效、要么全部不生效。这主要体现了 ACID 中的哪一项？",
+      "options": [
+        {"key": "A", "text": "原子性（Atomicity）"},
+        {"key": "B", "text": "一致性（Consistency）"},
+        {"key": "C", "text": "隔离性（Isolation）"},
+        {"key": "D", "text": "持久性（Durability）"}
+      ],
+      "answer": "A",
+      "explain": "原子性要求事务是不可分割的工作单元，提交前失败必须整体回滚。持久性说的是已提交事务在掉电后不丢失，二者常被混淆。"
+    },
+    {
+      "id": "tx-acid-2", "module": "tx-acid", "difficulty": 2,
+      "stem": "关于持久性（Durability），下列说法最准确的是？",
+      "options": [
+        {"key": "A", "text": "只要数据页写入了缓冲池，事务就永久安全"},
+        {"key": "B", "text": "事务返回提交成功后，其修改在故障后仍能通过日志恢复出来"},
+        {"key": "C", "text": "持久性只由操作系统的文件缓存保证，与数据库无关"},
+        {"key": "D", "text": "持久性与提交协议无关，只取决于磁盘速度"}
+      ],
+      "answer": "B",
+      "explain": "提交的语义是重做日志已按提交协议落盘，数据页可以稍后刷盘。缓冲池未落盘、仅靠页缓存都不能算持久。"
+    },
+    {
+      "id": "tx-acid-3", "module": "tx-acid", "difficulty": 3,
+      "stem": "某转账业务要求账户总额不变，开发者在应用层加了校验，但数据库仍出现了总额为负的中间状态被别的会话读到。对“一致性”最合理的理解是？",
+      "options": [
+        {"key": "A", "text": "一致性由数据库自动保证，无需业务参与"},
+        {"key": "B", "text": "一致性指事务前后数据满足业务约束，需要约束、触发器或业务逻辑共同保证"},
+        {"key": "C", "text": "只要提高隔离级别就一定能保证业务约束"},
+        {"key": "D", "text": "一致性等同于日志的顺序写入"}
+      ],
+      "answer": "B",
+      "explain": "一致性是业务层面的正确约束，数据库只能提供机制（约束、原子性、隔离），无法凭空知道业务规则。"
+    },
+    {
+      "id": "tx-isolation-1", "module": "tx-isolation", "difficulty": 1,
+      "stem": "一个事务读到另一个尚未提交事务修改的数据，随后对方回滚，导致本事务读到的是“不存在”的值。这种异常称为？",
+      "options": [
+        {"key": "A", "text": "幻读"},
+        {"key": "B", "text": "脏读"},
+        {"key": "C", "text": "不可重复读"},
+        {"key": "D", "text": "丢失更新"}
+      ],
+      "answer": "B",
+      "explain": "读到未提交数据即脏读。读已提交隔离级别正是为消除脏读而设。"
+    },
+    {
+      "id": "tx-isolation-2", "module": "tx-isolation", "difficulty": 2,
+      "stem": "关于“不可重复读”和“幻读”，区别描述正确的是？",
+      "options": [
+        {"key": "A", "text": "前者指同一行内容变了，后者指满足条件的新行出现了"},
+        {"key": "B", "text": "两者完全等价，只是不同厂商的叫法"},
+        {"key": "C", "text": "前者只发生在删除语句，后者只发生在更新语句"},
+        {"key": "D", "text": "只要使用索引就不会出现任何一种"}
+      ],
+      "answer": "A",
+      "explain": "不可重复读关注已存在行被修改，幻读关注范围查询命中集合的行数变化，二者需要不同的控制手段。"
+    },
+    {
+      "id": "tx-isolation-3", "module": "tx-isolation", "difficulty": 3,
+      "stem": "标准 SQL 隔离级别中，能够同时避免脏读、不可重复读和幻读的是？",
+      "options": [
+        {"key": "A", "text": "READ COMMITTED"},
+        {"key": "B", "text": "REPEATABLE READ"},
+        {"key": "C", "text": "SERIALIZABLE"},
+        {"key": "D", "text": "READ UNCOMMITTED"}
+      ],
+      "answer": "C",
+      "explain": "可串行化通过锁范围或谓词冲突避免三种异常；可重复读在标准定义下不保证消除幻读，具体实现另有增强。"
+    },
+    {
+      "id": "mvcc-1", "module": "mvcc", "difficulty": 1,
+      "stem": "MVCC 让普通 SELECT 不加锁也能读到一致视图，其核心依赖是什么？",
+      "options": [
+        {"key": "A", "text": "行数据的历史版本与事务可见性判断"},
+        {"key": "B", "text": "把所有查询都路由到只读副本"},
+        {"key": "C", "text": "对全表加共享锁"},
+        {"key": "D", "text": "关闭事务日志"}
+      ],
+      "answer": "A",
+      "explain": "版本链（或类似机制）配合快照可见性规则，使读请求挑选出自己视图可见的版本。"
+    },
+    {
+      "id": "mvcc-2", "module": "mvcc", "difficulty": 2,
+      "stem": "在依赖快照读的引擎里，同一事务先 SELECT 看到旧值，随后执行 UPDATE 再 SELECT 却看到自己刚写入的新值。最合理的解释是？",
+      "options": [
+        {"key": "A", "text": "快照读被禁用，全部改为串行执行"},
+        {"key": "B", "text": "UPDATE 是当前读，读最新已提交版本并加锁，之后的读取反映了自身修改"},
+        {"key": "C", "text": "MVCC 版本链按主键哈希随机挑选版本"},
+        {"key": "D", "text": "日志未刷盘导致数据回退"}
+      ],
+      "answer": "B",
+      "explain": "写操作与 SELECT ... FOR UPDATE 属于当前读，语义上必须看到最新状态，不能停留在旧快照。"
+    },
+    {
+      "id": "mvcc-3", "module": "mvcc", "difficulty": 3,
+      "stem": "长事务大量使用 MVCC 快照读，最可能带来的直接代价是？",
+      "options": [
+        {"key": "A", "text": "索引树深度自动增加"},
+        {"key": "B", "text": "历史版本无法回收，回滚段或版本链膨胀，扫描成本上升"},
+        {"key": "C", "text": "redo 日志停止写入"},
+        {"key": "D", "text": "隔离级别自动降级"}
+      ],
+      "answer": "B",
+      "explain": "只要仍有快照需要，旧版本就不能清理， purge 滞后会让扫描更长、空间增长。"
+    },
+    {
+      "id": "idx-btree-1", "module": "idx-btree", "difficulty": 1,
+      "stem": "B+ 树索引相比二叉搜索树更适合数据库主键索引，最主要的原因是？",
+      "options": [
+        {"key": "A", "text": "B+ 树每个节点只有一个键，比较次数最少"},
+        {"key": "B", "text": "节点扇出大、树高低且叶子有序串联，范围扫描代价低"},
+        {"key": "C", "text": "B+ 树不需要维护平衡"},
+        {"key": "D", "text": "B+ 树只能存整数键"}
+      ],
+      "answer": "B",
+      "explain": "高扇出把随机 IO 次数压到很少，叶子层双向链表让有序范围扫描成为顺序读。"
+    },
+    {
+      "id": "idx-btree-2", "module": "idx-btree", "difficulty": 2,
+      "stem": "联合索引 (a, b, c) 存在时，下列哪个查询条件最可能无法充分利用该索引的最左前缀？",
+      "options": [
+        {"key": "A", "text": "WHERE a = 1 AND b = 2"},
+        {"key": "B", "text": "WHERE a = 1"},
+        {"key": "C", "text": "WHERE c = 3"},
+        {"key": "D", "text": "WHERE a = 1 AND b = 2 AND c = 3"}
+      ],
+      "answer": "C",
+      "explain": "缺少最左列 a 时索引有序性无法定位，通常只能扫描或借助其他索引。"
+    },
+    {
+      "id": "idx-btree-3", "module": "idx-btree", "difficulty": 3,
+      "stem": "二级索引命中后还要按主键把整行取回来，这一步通常称为回表。下列做法中真正能消除回表的是？",
+      "options": [
+        {"key": "A", "text": "把缓冲区调大"},
+        {"key": "B", "text": "让查询所需的列全部包含在索引中，形成覆盖索引"},
+        {"key": "C", "text": "把表改成堆表组织"},
+        {"key": "D", "text": "对所有列都建单独索引"}
+      ],
+      "answer": "B",
+      "explain": "覆盖索引使索引本身携带全部投影列，无需再按主键取行。其他索引单建仍会回表。"
+    },
+    {
+      "id": "idx-perf-1", "module": "idx-perf", "difficulty": 1,
+      "stem": "在 col 上建有索引，下列哪个写法最可能导致该列索引失效？",
+      "options": [
+        {"key": "A", "text": "WHERE col = 10"},
+        {"key": "B", "text": "WHERE col BETWEEN 10 AND 20"},
+        {"key": "C", "text": "WHERE YEAR(col) = 2026"},
+        {"key": "D", "text": "WHERE col IN (1, 2, 3)"}
+      ],
+      "answer": "C",
+      "explain": "对索引列施加函数破坏其有序性，优化器只能退化为全表扫描；应改写为范围条件。"
+    },
+    {
+      "id": "idx-perf-2", "module": "idx-perf", "difficulty": 2,
+      "stem": "某列只有“男/女/未知”三种取值，数据量千万级。为它单独建索引的合理判断是？",
+      "options": [
+        {"key": "A", "text": "选择性太差，等值查询命中比例过高，索引通常不划算"},
+        {"key": "B", "text": "选择性极高，一定能显著提速"},
+        {"key": "C", "text": "索引性能与列取值个数无关"},
+        {"key": "D", "text": "只要建了索引优化器必然使用"}
+      ],
+      "answer": "A",
+      "explain": "低基数列过滤后仍需大量回表，代价高于顺序扫描；这类列更适合作为联合索引的次级列。"
+    },
+    {
+      "id": "idx-perf-3", "module": "idx-perf", "difficulty": 3,
+      "stem": "阅读执行计划时发现预估行数是 10，实际返回 100 万行，随后走了嵌套循环连接导致很慢。根本原因是？",
+      "options": [
+        {"key": "A", "text": "索引数量太多"},
+        {"key": "B", "text": "统计信息陈旧导致基数估计失真，优化器选错连接方式"},
+        {"key": "C", "text": "事务隔离级别过低"},
+        {"key": "D", "text": "客户端网络带宽不足"}
+      ],
+      "answer": "B",
+      "explain": "优化器依赖统计信息估算基数，估计错误会连锁选错物理算子；应先收集统计信息再评估改写。"
+    },
+    {
+      "id": "lock-1", "module": "lock", "difficulty": 1,
+      "stem": "两个事务以相反顺序更新同一对行，最可能出现的现象是？",
+      "options": [
+        {"key": "A", "text": "死锁：互相等待对方持有的行锁"},
+        {"key": "B", "text": "脏读：读到未提交数据"},
+        {"key": "C", "text": "索引失效"},
+        {"key": "D", "text": "日志顺序错乱"}
+      ],
+      "answer": "A",
+      "explain": "加锁顺序不一致是死锁的经典成因，统一顺序或缩小事务范围是常规缓解手段。"
+    },
+    {
+      "id": "lock-2", "module": "lock", "difficulty": 2,
+      "stem": "在支持间隙锁的实现中，区间范围扫描的更新会锁住命中行之间的空隙，主要目的是？",
+      "options": [
+        {"key": "A", "text": "减少内存占用"},
+        {"key": "B", "text": "阻止其他事务在空隙插入新行，从而抑制幻读"},
+        {"key": "C", "text": "让日志可以并行刷盘"},
+        {"key": "D", "text": "提高索引树的扇出"}
+      ],
+      "answer": "B",
+      "explain": "间隙锁把“不存在的行”也纳入保护范围，代价是并发插入受限。"
+    },
+    {
+      "id": "lock-3", "module": "lock", "difficulty": 3,
+      "stem": "线上出现大量锁等待，运维想第一时间定位“谁挡住谁”，最应该看的是？",
+      "options": [
+        {"key": "A", "text": "表的字符集"},
+        {"key": "B", "text": "锁等待图与会话持有的事务信息，找到持有锁的长事务"},
+        {"key": "C", "text": "备份文件大小"},
+        {"key": "D", "text": "缓冲区命中率"}
+      ],
+      "answer": "B",
+      "explain": "锁等待本质是事务持有关系问题，必须从等待链和事务视角定位源头，而非调参数。"
+    },
+    {
+      "id": "recovery-1", "module": "recovery", "difficulty": 1,
+      "stem": "WAL（Write-Ahead Logging）的核心要求是？",
+      "options": [
+        {"key": "A", "text": "数据页必须先于日志落盘"},
+        {"key": "B", "text": "日志记录必须在对应数据页写盘之前持久化"},
+        {"key": "C", "text": "日志只在检查点时写一次"},
+        {"key": "D", "text": "日志与数据必须写在同一页面"}
+      ],
+      "answer": "B",
+      "explain": "先写日志保证即使数据页未落盘，也能凭日志重做出已提交修改。"
+    },
+    {
+      "id": "recovery-2", "module": "recovery", "difficulty": 2,
+      "stem": "崩溃恢复阶段，redo 与 undo 各自的作用通常是？",
+      "options": [
+        {"key": "A", "text": "redo 重做已提交修改，undo 回滚未完成事务的修改"},
+        {"key": "B", "text": "redo 用于回滚，undo 用于重做"},
+        {"key": "C", "text": "两者都只处理索引，不处理数据"},
+        {"key": "D", "text": "只要 redo 就足以恢复所有状态"}
+      ],
+      "answer": "A",
+      "explain": "恢复=向前重放已提交、向后清理未提交，缺少 undo 会让半成品修改留在库里。"
+    },
+    {
+      "id": "recovery-3", "module": "recovery", "difficulty": 3,
+      "stem": "引入检查点（checkpoint）最主要的收益是？",
+      "options": [
+        {"key": "A", "text": "让事务提交不再需要写日志"},
+        {"key": "B", "text": "缩短恢复时需要扫描的重做日志范围"},
+        {"key": "C", "text": "消除所有锁等待"},
+        {"key": "D", "text": "让索引自动保持有序"}
+      ],
+      "answer": "B",
+      "explain": "检查点把脏页推进去并记录恢复起点，重启时只需从检查点之后重放，恢复时间可控。"
+    },
+    {
+      "id": "storage-1", "module": "storage", "difficulty": 1,
+      "stem": "LSM 树型存储引擎的典型特征是？",
+      "options": [
+        {"key": "A", "text": "更新就地改写磁盘页，写入放大为零"},
+        {"key": "B", "text": "内存表顺序冻结后与磁盘分层文件合并，写入友好但需要后台合并"},
+        {"key": "C", "text": "完全不支持范围查询"},
+        {"key": "D", "text": "不需要任何预写日志"}
+      ],
+      "answer": "B",
+      "explain": "LSM 以顺序写换随机写性能，代价是 compaction 与读放大。"
+    },
+    {
+      "id": "storage-2", "module": "storage", "difficulty": 2,
+      "stem": "LSM 引擎中“读放大”指的是？",
+      "options": [
+        {"key": "A", "text": "一次逻辑读需要访问多个数据文件或内存表才能确认结果"},
+        {"key": "B", "text": "读取缓冲区命中率大于 1"},
+        {"key": "C", "text": "网络包被重复发送"},
+        {"key": "D", "text": "索引列重复出现在联合索引里"}
+      ],
+      "answer": "A",
+      "explain": "同一键可能分布在 memtable 与多层 SSTable 中，需要逐层查找，布隆过滤器可缓解。"
+    },
+    {
+      "id": "storage-3", "module": "storage", "difficulty": 3,
+      "stem": "在原生分布式数据库中，把一张大表按主键哈希拆成多个分区，主要收益与代价组合最准确的描述是？",
+      "options": [
+        {"key": "A", "text": "收益是彻底消除跨机访问，代价是无法扩容"},
+        {"key": "B", "text": "收益是并行读写与容量水平扩展，代价是跨分区事务与聚合需要额外协调"},
+        {"key": "C", "text": "收益是自动让所有查询走覆盖索引"},
+        {"key": "D", "text": "分区只是命名习惯，对执行没有影响"}
+      ],
+      "answer": "B",
+      "explain": "分区把数据分散到多副本多节点，扩展性与并行度提升，同时引入分布式协调成本。"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+目标服务：http://127.0.0.1:8777
+
+[1] GET /v1/capabilities
+  search_modes               ["auto", "fts"]
+  memory_extraction          False
+  artifact_families          ["memory", "atomic-memory", "topic-memory", "experience", "skill", "handoff", "profile", "prompt"]
+  source_types               ["content"]
+  context_versions           ["powercontext.prepared-context.v1"]
+
+[2] POST /v1/scopes（幂等）
+  scope_id                   scp_2rj0eb9cya2kda908b87dy9bef
+  version / 重复创建复用           4 / True
+
+[3] POST /v1/scopes/{id}（update_scope 乐观并发）
+  version 递增                 4 → 5
+
+[4] POST /v1/memory/remember + 回读校验
+  changed / kind / state     True / weakness / active
+  artifact                   atomic-memory/art_f272e8413fcd4db3b1da8e9623613779@1
+  state_version / text 字节    0 / 105
+  get_atomic_memory_state    1 / active（与写入返回一致：True）
+
+[5] POST /v1/atomic-memory/list
+  active weakness 条数         1
+  next_cursor                None
+
+[6] POST /v1/memory/search
+  mode                       text
+  hits                       [["weakness", "art_f272e8413fcd", 0.01639, ["text"]]]
+
+[7] POST /v1/context/prepare
+  schema / status            powercontext.prepared-context.v1 / ready
+  content_bytes              684
+  含真实标记头                     True
+
+[8] POST /v1/sources/content（证据留存）
+  source_ref                 content/probe-attempts
+  status / position          accepted / 2
+
+[9] POST /v1/atomic-memory/lifecycle（遗忘）
+  state / state_version      forgotten / 0 → 1
+  遗忘后 active 条数              0
+
+[10] 服务端拒绝超长文本时保留真实错误信息
+  status_code / code         422 / invalid_request
+  server_message             The request violates the API contract.
+  X-PowerContext-Request-Id  7a78acaca873da36
+
+公开接口核实完成：以上每一项都是运行中的 PowerContext 真实返回值。

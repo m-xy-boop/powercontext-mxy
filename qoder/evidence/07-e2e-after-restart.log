@@ -1,0 +1,69 @@
+[01] 读取应用与 PowerContext 能力
+       backend       = http://127.0.0.1:8777
+       health        = ready
+       search_modes  = ["auto", "fts"]
+       memory_extraction= False
+       bank          = 24 题 / 8 个知识点
+[02] 复用已存在的身份（重启服务后）
+       learner       = acceptance-140157
+[03] 第一轮复习安排
+       mode          = review
+       count         = 3
+       topics        = ["idx-btree", "idx-perf", "storage"]
+       plan_memory   = atomic-memory/art_9f7541942e4c46c4bcbc8f7c3111b5e8@1
+[04] 第一轮判分并写回真实记忆
+       score         = 1/3
+       wrong         = ["idx-btree-2", "idx-perf-3"]
+       receipts      = [["progress", "atomic-memory/art_2dd9873ccd364800a832ff837208e1c7@1", "active/v0", "416B", "get_atomic_memory_state"], ["weakness", "atomic-memory/art_a3c231741da24b73ad7a907cba8e3cf7@1", "active/v0", "480B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_f1f9f16dcd1d4039b6128da48a473a41@1", "active/v0", "433B", "get_atomic_memory_state"], ["weakness", "atomic-memory/art_291af585cbcd473180c6867742ebfeda@1", "active/v0", "496B", "get_atomic_memory_state"], ["progress", "atomic-memory/art_eeee6212ca9a407398c5330b4476e138@1", "active/v0", "440B", "get_atomic_memory_state"]]
+       weak_after    = [["idx-btree", 0.331, 1], ["idx-perf", 0.331, 1]]
+[05] 读回该身份记忆概览
+       entry_count   = 24
+       topics_covered= 8
+       weak          = ["idx-btree", "idx-perf"]
+       last_plan     = atomic-memory/art_9f7541942e4c46c4bcbc8f7c3111b5e8@1
+[06] 第二轮安排（记忆驱动选题）
+       mode          = review
+       topics        = ["idx-btree", "idx-perf", "tx-acid"]
+       weak_covered  = ["idx-btree", "idx-perf"]
+       first_topic   = idx-btree
+       first_reasons = ["当前掌握度 0.33，缺口 0.67", "连续答错 1 次，加权 0.10", "记忆中的复习偏好把该知识点列为侧重"]
+       cited_memories= ["atomic-memory/art_291af585cbcd473180c6867742ebfeda@1", "atomic-memory/art_2dd9873ccd364800a832ff837208e1c7@1", "atomic-memory/art_78f92bd4959f40c59d76e09df513c5ca@1", "atomic-memory/art_81cfaaa4b2e94fe8a7af90278d450a8d@1", "atomic-memory/art_87201fa5923c45b99f42cc93e19054a4@1", "atomic-memory/art_a1aaa888643a4a0fbeed1b8e22f484e5@1"]
+[07] 全部答对后记忆更新
+       score         = 3/3
+       receipt_count = 3
+       mastery_before= {"idx-btree": 0.331, "idx-perf": 0.331}
+       mastery_after = {"idx-btree": 0.632, "idx-perf": 0.632}
+       improved      = ["idx-btree", "idx-perf"]
+[08] 写入复习偏好并再次安排
+       text          = 复习偏好：每次 3 题，侧重 索引结构；备注：e2e：先补最薄弱的一块
+       memory        = atomic-memory/art_bc1a28315c56454186d7a3f3906eaea1@1
+       third_count   = 3
+       third_topics  = ["idx-btree", "idx-perf", "tx-isolation"]
+       focus_included= True
+[09] 真实检索记忆（无嵌入模型时为全文模式）
+       mode          = text
+       hits          = [["weakness", "atomic-memory/art_87201fa5923c45b99f42cc93e19054a4@1", 0.01639, ["text"]], ["weakness", "atomic-memory/art_a3c231741da24b73ad7a907cba8e3cf7@1", 0.01613, ["text"]], ["weakness", "atomic-memory/art_291af585cbcd473180c6867742ebfeda@1", 0.01587, ["text"]]]
+[10] PreparedContext 有界上下文
+       schema        = powercontext.prepared-context.v1
+       status        = ready
+       content_bytes = 1309
+       has_marker    = True
+[11] 导出学习过程记录
+       memories      = 31
+       attempts      = 19
+       md_sections   = ["## 知识点掌握情况（由 PowerContext 记忆折叠得到）", "## 复习偏好", "## 最近一次复习安排（记忆中的 plan 条目）", "## 学习记忆（PowerContext 原子记忆条目）", "## 答题流水（本地过程记录，仅用于导出）"]
+       first_cite    = atomic-memory/art_094c4d043805467fb25bddab74678781@1
+[12] 按条遗忘薄弱记忆
+       forgotten     = art_291af585cbcd473180c6867742ebfeda
+       state         = forgotten
+       state_version = 1
+       active_left   = 2
+[13] 历史可核验与操作留痕
+       active_and_forgotten= 31
+       forgotten_total= 2
+       log_path      = /home/xy/powercontext-qoder/qoder/var/log/powercontext-operations.jsonl
+       last_operations= ["forget_atomic_memory", "prepare_context", "search_memory", "remember_memory", "remember_memory"]
+
+结果已写入 evidence/07-e2e-after-restart.json
+
+端到端闭环通过：每次选题都读回真实记忆，每次判分都写回真实记忆，遗忘与导出均可核验。

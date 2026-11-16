@@ -1,0 +1,29 @@
+[project]
+name = "recall-coach"
+version = "1.0.0"
+description = "拾忆 · Recall Coach —— 基于 OceanBase PowerContext 的数据库基础复习工作台"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi>=0.115,<1",
+    "httpx>=0.28,<1",
+    "powercontext[client]==1.5.1",
+    "pydantic>=2.10,<3",
+    "uvicorn>=0.34,<1",
+]
+
+[dependency-groups]
+dev = [
+    "playwright==1.55.0",
+    "pytest>=8.3,<9",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[[tool.uv.index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
+
+[tool.uv]
+package = false
